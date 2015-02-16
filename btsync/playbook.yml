@@ -1,0 +1,26 @@
+---
+- hosts: btsync
+  handlers:
+  - name: restart btsync
+    service: name=btsync state=restarted
+  tasks:
+  - user: name=btsync shell=/bin/false
+  - template:
+    src=btsyncrc.j2
+    dest=/etc/btsyncrc
+    owner=btsync
+    group=btsync
+    mode=400
+  - copy: src={{ item.src }} dest={{ item.dest }}
+    with_items:
+    - { src: btsync.conf, dest: /etc/init }
+    - { src: btsync_{{ arch }}, dest: /usr/local/sbin/btsync }
+    notify:
+    - restart btsync
+  - file:
+      name=/var/log/btsync
+      state=directory
+      owner=btsync
+      group=btsync
+      mode=700
+  - service: name=btsync state=started enabled=yes

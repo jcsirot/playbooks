@@ -1,0 +1,5 @@
+---
+- assert:
+    that: "NAME != ''"
+- file: name=/home/git/{{ NAME }}.git state=directory owner=git group=git
+- shell: sudo -u git -- git init --bare chdir=/home/git/{{ NAME }}.git

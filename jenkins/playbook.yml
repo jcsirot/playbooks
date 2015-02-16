@@ -1,0 +1,30 @@
+---
+- hosts: jenkins
+  tasks:
+  # install jenkins
+  - shell: wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
+  - copy:
+    src=jenkins.list
+    dest=/etc/apt/sources.list.d/
+  - apt:
+    name=jenkins
+    state=present
+    update_cache=yes
+  # copy jenkins keys
+  - file:
+    name=/var/lib/jenkins/.ssh
+    state=directory
+    mode=700
+    owner=jenkins
+    group=jenkins
+  - copy:
+    src={{ item.src }}
+    dest=/var/lib/jenkins/.ssh/{{ item.dest }}
+    with_items:
+    - { src: {{ private_key_path }}, dest: id_rsa }
+    - { src: {{ public_key_path }}, dest: id_rsa.pub }
+  # start service
+  - service:
+    name=jenkins
+    state=started
+    enabled=yes

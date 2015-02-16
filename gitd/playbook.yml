@@ -1,0 +1,32 @@
+---
+- hosts: gitd
+  tasks:
+  # install git
+  - apt:
+    name=git
+    state=present
+  # copy upstart service manifest
+  - copy:
+    src=gitd.conf
+    dest=/etc/init/gitd.conf
+  # add git user for ssh access
+  - user:
+    name=git
+    shell=/usr/bin/git-shell
+  # copy authorized_keys for passwordless login
+  - file:
+    name=/home/git/.ssh
+    state=directory
+    mode=700
+    owner=git
+    group=git
+  - copy:
+    src={{ authorized_keys_path }}
+    dest=/home/git/.ssh/authorized_keys
+    owner=git
+    group=git
+  # start service
+  - service:
+    name=gitd
+    state=started
+    enabled=yes
