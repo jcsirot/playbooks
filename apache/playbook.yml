@@ -1,6 +1,13 @@
 ---
 - hosts: httpd
   tasks:
-  - apt: name=apache2 state=present
-  - copy: src={{ index_path }} dest=/var/www/html/index.html
-  - service: name=apache2 state=started enabled=yes
+  - apt:
+      name=apache2
+      state=present
+  - copy:
+      src={{ index_path }}
+      dest=/var/www/html/index.html
+  - service:
+      name=apache2
+      state=started
+      enabled=yes
