@@ -21,8 +21,8 @@
       src={{ item.src }}
       dest=/var/lib/jenkins/.ssh/{{ item.dest }}
     with_items:
-    - { src: {{ private_key_path }}, dest: id_rsa }
-    - { src: {{ public_key_path }}, dest: id_rsa.pub }
+    - { src: "{{ private_key_path }}", dest: id_rsa }
+    - { src: "{{ public_key_path }}", dest: id_rsa.pub }
   # start service
   - service:
       name=jenkins
