@@ -1,4 +1,4 @@
-A collection of playbooks for current services.
+A collection of playbooks for usual services.
 
 Usage:
 
