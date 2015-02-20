@@ -3,13 +3,13 @@
   tasks:
   # install jenkins
   - shell: wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
-  - copy:
-      src=jenkins.list
-      dest=/etc/apt/sources.list.d/
+  - apt_repository:
+      repo='deb http://pkg.jenkins-ci.org/debian binary/'
+      state=present
+      update_cache=yes
   - apt:
       name=jenkins
       state=present
-      update_cache=yes
   # copy jenkins keys
   - file:
       name=/var/lib/jenkins/.ssh

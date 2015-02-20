@@ -8,7 +8,3 @@
     command: pstree
     register: stdout
   - debug: var=stdout.stdout_lines
-  - name: -- list repositories --
-    command: ls /home/git
-    register: stdout
-  - debug: var=stdout.stdout_lines
