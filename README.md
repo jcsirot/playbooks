@@ -1,4 +1,7 @@
-A collection of playbooks for usual services.
+
+OVERVIEW
+
+A collection of playbooks for some usual services.
 
 Usage:
 
@@ -6,4 +9,12 @@ Usage:
 	- include <service>/playbook.yml
 	…
 
-Beware! to keep things simple the subdirs are not roles.
+Beware! to keep things simple the subdirs *are not roles*.
+
+SERVICES
+
+  * apache
+  * btsync
+  * docker
+  * gitd
+  * jenkins

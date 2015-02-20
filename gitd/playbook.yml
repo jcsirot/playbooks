@@ -1,5 +1,6 @@
 ---
 - hosts: gitd
+  when: ansible_os_family == "Debian"
   tasks:
   # install git
   - apt:

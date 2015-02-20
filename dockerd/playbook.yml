@@ -1,0 +1,7 @@
+---
+- hosts: docker
+  when: ansible_os_family == "Debian"
+  tasks:
+  - apt:
+      name=docker.io
+      state=present
