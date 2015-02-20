@@ -1,19 +1,15 @@
 ---
 - hosts: debian:&jenkins
-  handlers:
-  - name: update apt
-    command: apt-get update
   tasks:
   # install jenkins
   - shell: wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
   - copy:
       src=jenkins.list
       dest=/etc/apt/sources.list.d/
-    notify:
-    - update apt
   - apt:
       name=jenkins
       state=present
+      update_cache=yes
   # copy jenkins keys
   - file:
       name=/var/lib/jenkins/.ssh
