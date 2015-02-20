@@ -1,6 +1,5 @@
 ---
-- hosts: docker
-  when: ansible_os_family == "Debian"
+- hosts: debian:&dockerd
   tasks:
   - apt:
       name=docker.io

@@ -1,6 +1,5 @@
 ---
-- hosts: btsync
-  when: ansible_os_family == "Debian"
+- hosts: debian:&btsync
   handlers:
   - name: restart btsync
     service:

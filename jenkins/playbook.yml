@@ -1,6 +1,5 @@
 ---
-- hosts: jenkins
-  when: ansible_os_family == "Debian"
+- hosts: debian:&jenkins
   handlers:
   - name: update apt
     command: apt-get update

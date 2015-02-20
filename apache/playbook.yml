@@ -1,6 +1,5 @@
 ---
-- hosts: httpd
-  when: ansible_os_family == "Debian"
+- hosts: debian:&apache
   tasks:
   - apt:
       name=apache2
