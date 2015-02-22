@@ -8,12 +8,3 @@ Usage:
 	- include <service>/playbook.yml [vars]
 
 Beware! to keep things simple the subdirs *are not roles*.
-
-SERVICES
-
-  * apache
-  * btsync
-  * docker
-  * gitd
-  * jenkins
-  * pypiserver

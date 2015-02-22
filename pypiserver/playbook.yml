@@ -1,5 +1,10 @@
 ---
 - hosts: ubuntu:&pypiserver
+  handlers:
+  - name: reload pypiserver
+    service:
+      name=pypiserver
+      state=reloaded
   tasks:
   - apt:
       name=python-pip
@@ -7,9 +12,14 @@
   - pip:
       name=pypiserver
       state=present
+  - user:
+      name=pypi
+      shell=/bin/false
   - copy:
       src=pypiserver.conf
       dest=/etc/init
+    notify:
+    - reload pypiserver
   - service:
       name=pypiserver
       state=started

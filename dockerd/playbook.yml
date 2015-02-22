@@ -1,6 +1,0 @@
----
-- hosts: ubuntu:&dockerd
-  tasks:
-  - apt:
-      name=docker.io
-      state=present
