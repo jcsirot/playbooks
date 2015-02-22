@@ -2,7 +2,7 @@
 - hosts: ubuntu:&pypiserver
   tasks:
   - apt:
-      name=pip
+      name=python-pip
       state=present
   - pip:
       name=pypiserver
