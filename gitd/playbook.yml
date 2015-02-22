@@ -1,5 +1,5 @@
 ---
-- hosts: debian:&gitd
+- hosts: ubuntu:&gitd
   tasks:
   # install git
   - apt:

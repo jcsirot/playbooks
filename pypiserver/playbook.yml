@@ -1,6 +1,9 @@
 ---
-- hosts: pypiserver
+- hosts: ubuntu:&pypiserver
   tasks:
+  - apt:
+      name=pip
+      state=present
   - pip:
       name=pypiserver
       state=present

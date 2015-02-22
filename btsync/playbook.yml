@@ -1,5 +1,5 @@
 ---
-- hosts: debian:&btsync
+- hosts: ubuntu:&btsync
   handlers:
   - name: restart btsync
     service:

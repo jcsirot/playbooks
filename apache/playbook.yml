@@ -1,5 +1,5 @@
 ---
-- hosts: debian:&apache
+- hosts: ubuntu:&apache
   tasks:
   - apt:
       name=apache2

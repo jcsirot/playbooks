@@ -1,5 +1,5 @@
 ---
-- hosts: debian:&dockerd
+- hosts: ubuntu:&dockerd
   tasks:
   - apt:
       name=docker.io

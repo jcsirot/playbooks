@@ -1,4 +1,4 @@
-- hosts: debian:&status
+- hosts: ubuntu:&status
   tasks:
   - name: -- list users --
     command: w
