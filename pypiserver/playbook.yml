@@ -1,0 +1,12 @@
+---
+- hosts: pypiserver
+  tasks:
+  - pip:
+      name=pypiserver
+      state=present
+  - copy:
+      src=pypiserver.conf
+      dest=/etc/init
+  - service:
+      name=pypiserver
+      state=started
