@@ -15,6 +15,11 @@
   - user:
       name=pypi
       shell=/bin/false
+  - file:
+      name=/home/pypi/packages
+      state=directory
+      owner=pypi
+      group=pypi
   - copy:
       src=pypiserver.conf
       dest=/etc/init
