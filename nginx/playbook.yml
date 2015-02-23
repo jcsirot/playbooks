@@ -1,5 +1,10 @@
 ---
 - hosts: ubuntu:&nginx
+  handlers:
+  - name: reload nginx
+    service:
+      name=nginx
+      state=reloaded
   tasks:
   - apt:
       name=nginx
@@ -7,9 +12,13 @@
   - copy:
       src={{ index_path }}
       dest=/var/www/html/index.html
+    notify:
+    - reload nginx
   - copy:
       src={{ default_path }}
       dest=/etc/nginx/sites-enabled/
+    notify:
+    - reload nginx
   - service:
       name=nginx
       state=started
