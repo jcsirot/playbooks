@@ -25,6 +25,12 @@
       dest=/etc/init
     notify:
     - reload pypiserver
+  - copy:
+      src={{ htaccess_path }}
+      dest=/home/pypi
+      owner=pypi
+      group=pypi
+      mode=700
   - service:
       name=pypiserver
       state=started
