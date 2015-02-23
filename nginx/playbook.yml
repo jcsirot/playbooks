@@ -1,0 +1,10 @@
+---
+- hosts: ubuntu:&nginx
+  tasks:
+  - apt:
+      name=nginx
+      state=present
+  - service:
+      name=nginx
+      state=started
+      enabled=yes

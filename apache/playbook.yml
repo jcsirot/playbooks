@@ -11,3 +11,10 @@
       name=apache2
       state=started
       enabled=yes
+
+- hosts: ubuntu:&noapache
+  tasks:
+  - apt:
+      name=apache2
+      state=absent
+      purge=yes
