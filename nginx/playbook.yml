@@ -4,6 +4,12 @@
   - apt:
       name=nginx
       state=present
+  - copy:
+      src={{ index_path }}
+      dest=/var/www/html/index.html
+  - copy:
+      src={{ default_path }}
+      dest=/etc/nginx/sites-enabled/
   - service:
       name=nginx
       state=started
