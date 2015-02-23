@@ -9,12 +9,12 @@
   - apt:
       name=nginx
       state=present
-  - copy:
-      src={{ index_path }}
-      dest=/var/www/html/index.html
-    notify:
-    - reload nginx
-  - copy:
+  - name: copy website content
+    copy:
+      src={{ htmlpath }}
+      dest=/var/www/
+  - name: copy nginx default conf
+    copy:
       src={{ default_path }}
       dest=/etc/nginx/sites-enabled/
     notify:

@@ -5,8 +5,8 @@
       name=apache2
       state=present
   - copy:
-      src={{ index_path }}
-      dest=/var/www/html/index.html
+      src={{ htmlpath }}
+      dest=/var/www/
   - service:
       name=apache2
       state=started
