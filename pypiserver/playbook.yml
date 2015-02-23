@@ -1,17 +1,20 @@
 ---
 - hosts: ubuntu:&pypiserver
   handlers:
-  - name: reload pypiserver
+  - name: restart pypiserver
     service:
       name=pypiserver
-      state=reloaded
+      state=restarted
   tasks:
   - apt:
       name=python-pip
       state=present
   - pip:
-      name=pypiserver
+      name={{ item }}
       state=present
+    with_items:
+    - pypiserver
+    - passlib
   - user:
       name=pypi
       shell=/bin/false
@@ -24,13 +27,15 @@
       src=pypiserver.conf
       dest=/etc/init
     notify:
-    - reload pypiserver
+    - restart pypiserver
   - copy:
       src={{ htaccess_path }}
       dest=/home/pypi
       owner=pypi
       group=pypi
       mode=700
+    notify:
+    - restart pypiserver
   - service:
       name=pypiserver
       state=started
