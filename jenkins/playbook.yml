@@ -2,7 +2,9 @@
 - hosts: debian:ubuntu:&jenkins
   tasks:
   # install jenkins
-  - shell: wget -q -O - http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key | apt-key add -
+  - apt_key:
+      url=http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key
+      state=present
   - apt_repository:
       repo='deb http://pkg.jenkins-ci.org/debian-stable binary/'
       state=present
