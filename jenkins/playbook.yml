@@ -1,5 +1,5 @@
 ---
-- hosts: ubuntu:&jenkins
+- hosts: (debian:|ubuntu):&jenkins
   tasks:
   # install jenkins
   - shell: wget -q -O - http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key | apt-key add -
