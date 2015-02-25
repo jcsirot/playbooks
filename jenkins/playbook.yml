@@ -31,7 +31,7 @@
     - { src: "{{ private_key_path }}", dest: id_rsa }
     - { src: "{{ public_key_path }}", dest: id_rsa.pub }
   - template:
-      src=jenkins/jenkins.j2
+      src=jenkins.j2
       dest=/etc/default/jenkins
       mode=644
     notify:
