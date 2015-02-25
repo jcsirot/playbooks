@@ -12,4 +12,4 @@
       url=https://get.docker.com/
       dest=/root/install_docker.sh
       mode=700
-  - command: /home/root/install_docker.sh
+  - command: /root/install_docker.sh
