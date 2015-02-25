@@ -1,12 +1,10 @@
 ---
-- hosts: debian:ubuntu:&jenkins
-  handlers:
-  - name: restart jenkins
-    service:
-      name=jenkins
-      state=restarted
+
+########################
+# setup LTS repository #
+########################
+- hosts: debian:ubuntu:&jenkinslts
   tasks:
-  # install jenkins
   - apt_key:
       url=http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key
       state=present
@@ -14,9 +12,40 @@
       repo='deb http://pkg.jenkins-ci.org/debian-stable binary/'
       state=present
       update_cache=yes
+
+#############################
+# setup standard repository #
+#############################
+- hosts: debian:ubuntu:&jenkins
+  tasks:
+  - apt_key:
+      url=http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
+      state=present
+  - apt_repository:
+      repo='deb http://pkg.jenkins-ci.org/debian binary/'
+      state=present
+      update_cache=yes
+
+###################
+# install service #
+###################
+- hosts: debian:ubuntu:&jenkins:jenkinslts
+  handlers:
+  - name: restart jenkins
+    service:
+      name=jenkins
+      state=restarted
+  tasks:
+  # install jenkins
   - apt:
       name=jenkins
       state=present
+  - template:
+      src=jenkins.j2
+      dest=/etc/default/jenkins
+      mode=644
+    notify:
+    - restart jenkins
   # copy jenkins keys
   - file:
       name=/var/lib/jenkins/.ssh
@@ -27,12 +56,6 @@
   - copy:
       src={{ keypath }}/
       dest=/var/lib/jenkins/.ssh/
-  - template:
-      src=jenkins.j2
-      dest=/etc/default/jenkins
-      mode=644
-    notify:
-    - restart jenkins
   # start service
   - service:
       name=jenkins
