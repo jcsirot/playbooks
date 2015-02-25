@@ -7,7 +7,7 @@ NAME=jenkins
 JAVA=/usr/bin/java
 
 # arguments to pass to java
-JAVA_ARGS="-Djava.awt.headless=true -Xmx{{ memory|default(256m) }} -Djava.net.preferIPv4Stack=true"
+JAVA_ARGS="-Djava.awt.headless=true -Xmx{{ memory|default('256m') }} -Djava.net.preferIPv4Stack=true"
 
 PIDFILE=/var/run/jenkins/jenkins.pid
 
