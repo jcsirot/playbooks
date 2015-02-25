@@ -1,0 +1,15 @@
+---
+- hosts: debian:&docker
+  tasks:
+#  - apt_repository:
+#      repo='deb http://http.debian.net/debian wheezy-backports main'
+#      state=present
+#      update_cache=yes
+#  - apt:
+#      name=linux-image-amd64
+#      state=present
+  - get_url:
+      url=https://get.docker.com/
+      dest=/home/root/install_docker.sh
+      mode=700
+  - command: /home/root/install_docker.sh
