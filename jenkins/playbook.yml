@@ -1,5 +1,10 @@
 ---
 - hosts: debian:ubuntu:&jenkins
+  handlers:
+  - name: restart jenkins
+    service:
+      name=jenkins
+      state=restarted
   tasks:
   # install jenkins
   - apt_key:
@@ -25,6 +30,12 @@
     with_items:
     - { src: "{{ private_key_path }}", dest: id_rsa }
     - { src: "{{ public_key_path }}", dest: id_rsa.pub }
+  - template:
+      src=jenkins/jenkins.j2
+      dest=/etc/default/jenkins
+      mode=644
+    notify:
+    - restart jenkins
   # start service
   - service:
       name=jenkins
