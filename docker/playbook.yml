@@ -10,6 +10,6 @@
 #      state=present
   - get_url:
       url=https://get.docker.com/
-      dest=/home/root/install_docker.sh
+      dest=/root/install_docker.sh
       mode=700
   - command: /home/root/install_docker.sh
