@@ -14,7 +14,7 @@
       update_cache=yes
 
 #############################
-# setup standard repository #
+# setup DEV repository #
 #############################
 - hosts: debian:ubuntu:&jenkins
   tasks:
@@ -54,7 +54,7 @@
       owner=jenkins
       group=jenkins
   - copy:
-      src={{ keypath }}/
+      src={{ sshpath }}/
       dest=/var/lib/jenkins/.ssh/
   # start service
   - service:

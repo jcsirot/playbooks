@@ -2,35 +2,48 @@
 OVERVIEW
 --------
 
-A collection of playbooks for usual services.
-Only tested on \[ubuntu\] or \[debian\] so far, make sure to put the host in the right group.
+A collection of simple playbooks for common services.
 
-  * apache (or noapache to remove)
-    * `htmlpath`, path to the local directory used to populate the remote html directory
+PLAYBOOKS
+---------
+
+  * ubuntu / __apache__ (or __noapache__ to remove)
+    * `htmlpath`: local path to the directory used to populate the remote /var/www/html directory
   * btsync
     * `device_name`
     * `login`
     * `password`
     * `arch`
-  * docker
-    * …
-  * gitd
-    * …
-  * jenkins
-    * `memory`
-    * `keypath`
+  * debian / __docker__
+  * ubuntu / __gitd__
+    * `authorized_keys_path`: local path to authorized_keys file setup for the remote ssh git user
+  * ubuntu|debian / __jenkins__
+    * `memory`: set how much memory the JVM can use, default 256m
+    * `sshpath`
     * `listen_port`
     * `listen_address`
-  * nginx
-    * …
-  * pypiserver
-    * …
+  * ubuntu / __nginx__
+    * `htmlpath`: local path to the directory used to populate the remote /var/www/html directory
+    * `default_path`: local path to the default file copied to /etc/nginx/sites-enabled/default.
+  * ubuntu / __pypiserver__
+    * `htaccess_path`: local path to the htaccess file
 
 USAGE
 -----
 
 Beware! to keep things simple the subdirs *are not roles*, just regular includes.
 
-	[...]
+First, add this repository as a submodule:
+
+	$ git submodule add $this
+
+In your main playbook, for each service you're interested in, add:
+
 	- include <service>/playbook.yml [options]
-	[...]
+
+In your inventory, put your hosts in the appropriate groups, e.g.:
+
+	[ubuntu]
+	foo
+	[jenkins]
+	foo
