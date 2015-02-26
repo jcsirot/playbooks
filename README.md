@@ -1,11 +1,6 @@
-
-OVERVIEW
---------
-
 A collection of simple playbooks for common services.
 
 PLAYBOOKS
----------
 
   * ubuntu / __apache__ (or __noapache__ to remove)
     * `htmlpath`: local path to the directory used to populate the remote /var/www/html directory
@@ -29,21 +24,20 @@ PLAYBOOKS
     * `htaccess_path`: local path to the htaccess file
 
 USAGE
------
 
 Beware! to keep things simple the subdirs *are not roles*, just regular includes.
 
-First, add this repository as a submodule:
+  1. First, add this repository as a submodule:
 
-	$ git submodule add $this
+		$ git submodule add $this
 
-In your main playbook, for each service you're interested in, add:
+  2. In your main playbook, for each service you're interested in, add:
 
-	- include <service>/playbook.yml [options]
+		- include <service>/playbook.yml [options]
 
-In your inventory, put your hosts in the appropriate groups, e.g.:
+  3. In your inventory, put your hosts in the appropriate groups, e.g.:
 
-	[ubuntu]
-	foo
-	[jenkins]
-	foo
+		[ubuntu]
+		foo
+		[jenkins]
+		foo
