@@ -1,6 +1,6 @@
 A collection of simple playbooks for common services.
 
-PLAYBOOKS
+### PLAYBOOKS ###
 
   * ubuntu / __apache__ (or __noapache__ to remove)
     * `htmlpath`: local path to the directory used to populate the remote /var/www/html directory
@@ -23,7 +23,7 @@ PLAYBOOKS
   * ubuntu / __pypiserver__
     * `htaccess_path`: local path to the htaccess file
 
-USAGE
+### USAGE ###
 
 Beware! to keep things simple the subdirs *are not roles*, just regular includes.
 
