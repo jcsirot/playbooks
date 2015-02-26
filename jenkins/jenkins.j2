@@ -7,7 +7,7 @@ NAME=jenkins
 JAVA=/usr/bin/java
 
 # arguments to pass to java
-JAVA_ARGS="-Djava.awt.headless=true -Xmx{{ memory|default('256m') }} -Djava.net.preferIPv4Stack=true"
+JAVA_ARGS="-Djava.awt.headless=true -Xmx{{ jenkins_memory|default('256m') }} -Djava.net.preferIPv4Stack=true"
 
 PIDFILE=/var/run/jenkins/jenkins.pid
 
@@ -52,8 +52,8 @@ MAXOPENFILES=8192
 # UMASK=027
 
 # port for HTTP connector (default 8080; disable with -1)
-HTTP_PORT={{ listen_port|default(8080) }}
-HTTP_HOST={{ listen_address|default('0.0.0.0') }}
+HTTP_PORT={{ jenkins_listen_port|default(8080) }}
+HTTP_HOST={{ jenkins_listen_address|default('0.0.0.0') }}
 
 # port for AJP connector (disabled by default)
 AJP_PORT=-1

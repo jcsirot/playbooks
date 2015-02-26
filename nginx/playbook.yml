@@ -11,11 +11,11 @@
       state=present
   - name: copy website content
     copy:
-      src={{ htmlpath }}
+      src={{ nginx_htmlpath }}
       dest=/var/www/
   - name: copy nginx default conf
     copy:
-      src={{ default_path }}
+      src={{ nginx_default_path }}
       dest=/etc/nginx/sites-enabled/
     notify:
     - reload nginx

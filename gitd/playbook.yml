@@ -21,7 +21,7 @@
       owner=git
       group=git
   - copy:
-      src={{ authorized_keys_path }}
+      src={{ gitd_authorized_keys_path }}
       dest=/home/git/.ssh/authorized_keys
       owner=git
       group=git

@@ -20,7 +20,7 @@
        dest={{ item.dest }}
     with_items:
     - { src: btsync.conf, dest: /etc/init }
-    - { src: btsync_{{ arch }}, dest: /usr/local/sbin/btsync }
+    - { src: btsync_{{ btsync_arch }}, dest: /usr/local/sbin/btsync }
     notify:
     - restart btsync
   - file:

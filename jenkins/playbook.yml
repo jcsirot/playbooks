@@ -54,7 +54,7 @@
       owner=jenkins
       group=jenkins
   - copy:
-      src={{ sshpath }}/
+      src={{ jenkins_sshpath }}/
       dest=/var/lib/jenkins/.ssh/
   # start service
   - service:

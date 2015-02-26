@@ -29,7 +29,7 @@
     notify:
     - restart pypiserver
   - copy:
-      src={{ htaccess_path }}
+      src={{ pypiserver_htaccess_path }}
       dest=/home/pypi
       owner=pypi
       group=pypi
