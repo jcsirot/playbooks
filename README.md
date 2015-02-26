@@ -33,7 +33,7 @@ Beware! to keep things simple the subdirs *are not roles*, just regular includes
 
   2. In your main playbook, for each service you're interested in, add:
 
-		- include <service>/playbook.yml [options]
+		- include <service>/playbook.yml [key=value]…
 
   3. In your inventory, put your hosts in the appropriate groups, e.g.:
 
