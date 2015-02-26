@@ -12,7 +12,7 @@ A collection of simple playbooks for common services.
   * debian / __docker__
   * ubuntu / __gitd__
     * `gitd_authorized_keys_path`: local path to authorized_keys file setup for the remote ssh git user
-  * ubuntu|debian / __jenkins__
+  * ubuntu|debian / __jenkins__|__jenkinslts__
     * `jenkins_memory`: set how much memory the JVM can use, defaults to 256m
     * `jenkins_sshpath`: local path used to populate used the remote ~jenkins/.ssh directory
     * `jenkins_listen_port`: set the port to bind, defaults to 8080
