@@ -14,14 +14,16 @@ A collection of simple playbooks for common services.
     * `gitd_authorized_keys_path`: local path to authorized_keys file setup for the remote ssh git user
   * ubuntu|debian / __jenkins__
     * `jenkins_memory`: set how much memory the JVM can use, defaults to 256m
-    * `jenkins_sshpath`: local path to copy to the remote ~jenkins/.ssh directory
+    * `jenkins_sshpath`: local path used to populate used the remote ~jenkins/.ssh directory
     * `jenkins_listen_port`: set the port to bind, defaults to 8080
-    * `jenkins_listen_address`: set the interface to bind, defaults to 0.0.0.0
+    * `jenkins_listen_address`: set the address to bind, defaults to 0.0.0.0
   * ubuntu / __nginx__
     * `nginx_htmlpath`: local path used to populate the remote /var/www/html directory
     * `nginx_default_path`: local path to the default file copied to /etc/nginx/sites-enabled/default.
   * ubuntu / __pypiserver__
     * `pypiserver_htaccess_path`: local path to the htaccess file
+    * `pypiserver_listen_port`: set the port to bind, defaults to 8081
+    * `pypiserver_listen_address`: set the address to bind, defaults to 127.0.0.1
 
 ### USAGE ###
 

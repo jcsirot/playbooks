@@ -23,9 +23,9 @@
       state=directory
       owner=pypi
       group=pypi
-  - copy:
-      src=pypiserver.conf
-      dest=/etc/init
+  - template:
+      src=pypiserver.j2
+      dest=/etc/init/pypiserver.conf
     notify:
     - restart pypiserver
   - copy:
