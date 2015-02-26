@@ -4,7 +4,7 @@ A collection of simple playbooks for common services.
 
   * ubuntu / __apache__ (or __noapache__ to remove)
     * `htmlpath`: local path to the directory used to populate the remote /var/www/html directory
-  * btsync
+  * ubuntu / btsync
     * `device_name`: btsync service name
     * `login`: web interface login
     * `password`: web interface password
