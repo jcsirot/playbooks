@@ -29,7 +29,7 @@
 ###################
 # install service #
 ###################
-- hosts: debian:ubuntu:&jenkins*
+- hosts: (debian:ubuntu):&(jenkins:jenkinslts)
   handlers:
   - name: restart jenkins
     service:
