@@ -2,7 +2,7 @@
 - hosts: debian:&nexus
   tasks:
   - get_url:
-      url=http://www.sonatype.org/nexus/thank-you-for-downloading/?dl=tgz
+      url=http://www.sonatype.org/downloads/nexus-latest-bundle.tar.gz
       dest=/root/nexus.tgz
   - unarchive:
       copy=no
