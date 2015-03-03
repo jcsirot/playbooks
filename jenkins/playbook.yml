@@ -36,7 +36,7 @@
       name=jenkins
       state=restarted
   tasks:
-  # pre-install JRE7
+  # pre-install JRE7 to bypass JRE6
   - apt:
       name=openjdk-7-jre-headless
       state=present
