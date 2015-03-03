@@ -8,6 +8,8 @@
       copy=no
       src=/root/nexus.tgz
       dest=/root/
-
+  - apt:
+      name=openjdk-7-jre
+      state=present
 
 # doc: http://books.sonatype.com/nexus-book/reference/install.html
