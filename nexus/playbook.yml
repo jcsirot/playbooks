@@ -6,18 +6,18 @@
       state=present
       shell=/bin/bash
   - get_url:
-      url=http://download.sonatype.com/nexus/oss/nexus-2.11.1-03-bundle.tar.gz
+      url=http://download.sonatype.com/nexus/oss/nexus-2.11.1-01-bundle.tar.gz
       dest=/home/nexus/
     sudo: yes
     sudo_user: nexus
   - unarchive:
       copy=no
-      src=/home/nexus/nexus-2.11.1-03-bundle.tar.gz
+      src=/home/nexus/nexus-2.11.1-01-bundle.tar.gz
       dest=/home/nexus/
     sudo: yes
     sudo_user: nexus
   - file:
-      src=/home/nexus/nexus-2.11.1-03/bin/nexus
+      src=/home/nexus/nexus-2.11.1-01/bin/nexus
       dest=/etc/init.d/nexus
       state=link
   - apt:
