@@ -10,6 +10,8 @@ A collection of simple playbooks for common services.
     * `btsync_password`: web interface password
     * `btsync_arch`: ia32 | x64
   * debian / __docker__
+    * `docker_listen_address`, defaults to 0.0.0.0
+    * `docker_listen_port`, defaults to 4243
   * ubuntu / __gitd__
     * `gitd_authorized_keys_path`: local path to authorized_keys file setup for the remote ssh git user
   * ubuntu|debian / __jenkins__|__jenkinslts__

@@ -1,0 +1,6 @@
+---
+- hosts: debian:&nexus
+  tasks:
+  - get_url:
+      url=http://www.sonatype.org/nexus/thank-you-for-downloading/?dl=tgz
+      dest=/root/
