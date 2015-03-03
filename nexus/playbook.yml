@@ -8,3 +8,6 @@
       copy=no
       src=/root/nexus.tgz
       dest=/root/
+
+
+# doc: http://books.sonatype.com/nexus-book/reference/install.html

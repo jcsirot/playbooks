@@ -53,7 +53,7 @@ MAXOPENFILES=8192
 
 # port for HTTP connector (default 8080; disable with -1)
 HTTP_PORT={{ jenkins_listen_port|default(8080) }}
-HTTP_HOST={{ jenkins_listen_address|default('0.0.0.0') }}
+HTTP_HOST={{ jenkins_listen_address|default('127.0.0.1') }}
 
 # port for AJP connector (disabled by default)
 AJP_PORT=-1
