@@ -26,5 +26,7 @@
   - service:
       name=nexus
       state=started
+    sudo: yes
+    sudo_user: nexus
 
 # doc: http://books.sonatype.com/nexus-book/reference/install.html
