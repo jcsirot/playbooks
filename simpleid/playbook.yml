@@ -4,12 +4,7 @@
   - get_url:
       url=http://downloads.sourceforge.net/simpleid/simpleid-0.9.1.tar.gz
       dest=/root/
-  - file:
-      path={{ simpleid_htmlpath }}
-      state=directory
-      owner=www-data
-      group=www-data
   - unarchive:
       copy=no
       src=/root/simpleid-0.9.1.tar.gz
-      dest={{ simpleid_htmlpath }}/
+      dest={{ simpleid_wwwpath }}/
