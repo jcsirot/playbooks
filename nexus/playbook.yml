@@ -1,13 +1,20 @@
 ---
 - hosts: debian:&nexus
   tasks:
+  - user:
+      name=nexus
+      state=present
   - get_url:
       url=http://www.sonatype.org/downloads/nexus-latest-bundle.tar.gz
-      dest=/root/nexus.tgz
+      dest=/home/nexus/nexus.tgz
+    sudo: yes
+    sudo_user: nexus
   - unarchive:
       copy=no
-      src=/root/nexus.tgz
-      dest=/root/
+      src=/home/nexus/nexus.tgz
+      dest=/home/nexus/
+    sudo: yes
+    sudo_user: nexus
   - apt:
       name=openjdk-7-jre
       state=present
