@@ -39,3 +39,4 @@
   - service:
       name=pypiserver
       state=started
+      enabled=yes

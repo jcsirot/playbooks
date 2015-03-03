@@ -26,6 +26,7 @@
   - service:
       name=nexus
       state=started
+      enabled=yes
     sudo: yes
     sudo_user: nexus
 
