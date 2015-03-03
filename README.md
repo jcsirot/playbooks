@@ -3,7 +3,6 @@ A collection of simple playbooks for common services.
 ### PLAYBOOKS ###
 
   * ubuntu / __apache__ (or __noapache__ to remove)
-    * `apache_htmlpath`: local path used to populate the remote /var/www/html directory
   * ubuntu / btsync
     * `btsync_device_name`: btsync service name
     * `btsync_login`: web interface login
@@ -22,7 +21,6 @@ A collection of simple playbooks for common services.
     * `jenkins_listen_port`: set the port to bind, defaults to 8080
     * `jenkins_listen_address`: set the address to bind, defaults to 127.0.0.1
   * ubuntu / __nginx__
-    * `nginx_htmlpath`: local path used to populate the remote /var/www/html directory
     * `nginx_default_path`: local path to the default file copied to /etc/nginx/sites-enabled/default.
   * ubuntu / __pypiserver__
     * `pypiserver_htaccess_path`: local path to the htaccess file

@@ -4,9 +4,6 @@
   - apt:
       name=apache2
       state=present
-  - copy:
-      src={{ apache_htmlpath }}
-      dest=/var/www/
   - service:
       name=apache2
       state=started

@@ -9,10 +9,6 @@
   - apt:
       name=nginx
       state=present
-  - name: copy website content
-    copy:
-      src={{ nginx_htmlpath }}
-      dest=/var/www/
   - name: copy nginx default conf
     copy:
       src={{ nginx_default_path }}
