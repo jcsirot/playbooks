@@ -8,3 +8,13 @@
       copy=no
       src=/root/simpleid-0.9.1.tar.gz
       dest={{ simpleid_wwwpath }}/
+  - apt:
+      name={{ item }}
+      state=present
+    with_items:
+    - php5-common
+    - php5-cli
+    - php5-fpm
+  - service:
+      name=php5-fpm
+      state=started
