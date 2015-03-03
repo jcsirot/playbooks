@@ -3,4 +3,8 @@
   tasks:
   - get_url:
       url=http://www.sonatype.org/nexus/thank-you-for-downloading/?dl=tgz
-      dest=/root/
+      dest=/root/nexus.tgz
+  - unarchive:
+      copy=no
+      src=/root/nexus.tgz
+      dest=/root/nexus
