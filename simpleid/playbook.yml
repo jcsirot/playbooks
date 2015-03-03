@@ -1,0 +1,10 @@
+---
+- hosts: ubuntu:&simpleid
+  tasks:
+  - get_url:
+      url=http://downloads.sourceforge.net/simpleid/simpleid-0.9.1.tar.gz
+      dest=/root/
+  - unarchive:
+      copy=no
+      src=/root/simpleid-0.9.1.tar.gz
+      dest={{ simpleid_htmlpath }}/
