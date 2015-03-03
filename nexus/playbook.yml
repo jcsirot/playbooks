@@ -29,6 +29,6 @@
       state=started
       enabled=yes
     sudo: yes
-    sudo_user: nexus
+    sudo_user: nexus # you can now access nexus at <listen_address>:<listen_port>/nexus
 
 # doc: http://books.sonatype.com/nexus-book/reference/install.html
