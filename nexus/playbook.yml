@@ -4,14 +4,15 @@
   - user:
       name=nexus
       state=present
+      shell=/bin/bash
   - get_url:
-      url=http://www.sonatype.org/downloads/nexus-latest-bundle.tar.gz
-      dest=/home/nexus/nexus.tgz
+      url=http://www.sonatype.org/downloads/nexus-2.11.2-03.tar.gz
+      dest=/home/nexus/nexus-2.11.2-03.tgz
     sudo: yes
     sudo_user: nexus
   - unarchive:
       copy=no
-      src=/home/nexus/nexus.tgz
+      src=/home/nexus/nexus-2.11.2-03.tgz
       dest=/home/nexus/
     sudo: yes
     sudo_user: nexus
