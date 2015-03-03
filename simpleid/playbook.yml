@@ -5,7 +5,7 @@
       url=http://downloads.sourceforge.net/simpleid/simpleid-0.9.1.tar.gz
       dest=/root/
   - file:
-      path={{ simple_htmlpath }}
+      path={{ simpleid_htmlpath }}
       type=directory
       owner=www-data
       group=www-data
