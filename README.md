@@ -26,6 +26,9 @@ A collection of simple playbooks for common services.
     * `pypiserver_htaccess_path`: local path to the htaccess file
     * `pypiserver_listen_port`: set the port to bind, defaults to 8080
     * `pypiserver_listen_address`: set the address to bind, defaults to 127.0.0.1
+  * ubuntu / __simpleid__
+    * `simpleid_base_url`
+    * `simpleid_wwwpath`
 
 ### USAGE ###
 

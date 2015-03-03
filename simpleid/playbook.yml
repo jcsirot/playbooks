@@ -8,6 +8,9 @@
       copy=no
       src=/root/simpleid-0.9.1.tar.gz
       dest={{ simpleid_wwwpath }}/
+  - template:
+      src=config.php.j2
+      dest={{ simpleid_wwwpath }}/simpleid/www
   - apt:
       name=php5-fpm
       state=present
