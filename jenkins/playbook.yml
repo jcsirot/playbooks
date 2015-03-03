@@ -43,7 +43,7 @@
   # install jenkins
   - apt:
       name=jenkins
-      state=latest
+      state=present
   - template:
       src=jenkins.j2
       dest=/etc/default/jenkins
