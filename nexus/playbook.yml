@@ -7,4 +7,4 @@
   - unarchive:
       copy=no
       src=/root/nexus.tgz
-      dest=/root/nexus
+      dest=/root/
