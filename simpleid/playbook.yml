@@ -20,7 +20,7 @@
       src=config.php.j2
       dest=/var/cache/simpleid/www/config.php
   - copy:
-      src={{ simplid_identities_path }}/
+      src={{ simpleid_identities_path }}/
       dest=/var/cache/simpleid/identities/
       owner=www-data
       group=www-data
