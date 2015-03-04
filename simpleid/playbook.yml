@@ -25,7 +25,7 @@
       owner=www-data
       group=www-data
   - file:
-      src=/var/log/simpleid
+      dest=/var/log/simpleid
       state=directory
       owner=www-data
       group=www-data
