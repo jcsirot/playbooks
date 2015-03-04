@@ -48,3 +48,7 @@ Beware! to keep things simple the subdirs *are not roles*, just regular includes
 		foo
 		[jenkins]
 		foo key=value…
+
+### TODO LIST ####
+
+Add a htaccess generator taking a file listing user:pass records in input.

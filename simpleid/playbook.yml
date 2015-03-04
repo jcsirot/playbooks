@@ -24,6 +24,12 @@
       dest=/var/cache/simpleid/identities/
       owner=www-data
       group=www-data
+  - file:
+      src=/var/log/simpleid
+      state=directory
+      owner=www-data
+      group=www-data
+      mode=755
   - apt:
       name=php5-fpm
       state=present
