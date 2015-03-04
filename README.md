@@ -3,7 +3,7 @@ A collection of simple playbooks for common services.
 ### PLAYBOOKS ###
 
   * ubuntu / __apache__ (or __noapache__ to remove)
-  * ubuntu / btsync
+  * ubuntu / __btsync__
     * `btsync_device_name`: btsync service name
     * `btsync_login`: web interface login
     * `btsync_password`: web interface password
@@ -20,6 +20,7 @@ A collection of simple playbooks for common services.
     * `jenkins_sshpath`: local path used to populate used the remote ~jenkins/.ssh directory
     * `jenkins_listen_port`: set the port to bind, defaults to 8080
     * `jenkins_listen_address`: set the address to bind, defaults to 127.0.0.1
+  * debian / __nexus__
   * ubuntu / __nginx__
     * `nginx_default_path`: local path to the default file copied to /etc/nginx/sites-enabled/default
     * `nginx_tls_path`: local path to the directory containing the certificates
@@ -37,16 +38,14 @@ Beware! to keep things simple the subdirs *are not roles*, just regular includes
 
   1. First, add this repository as a submodule:
 
-		$ git submodule add $this
+		vendor$ git submodule add $this
 
-  2. In your main playbook, for each service you're interested in, add:
+  2. In your main playbook, add:
 
-		- include <service>/playbook.yml key=value…
+		- include vendor/playbooks/playbook.yml
 
-  3. In your inventory, put your hosts in the appropriate groups, e.g.:
+  3. In your inventory, put your hosts in the appropriate service groups and set the configuration keys e.g.:
 
-		[ubuntu]
-		foo
 		[jenkins]
 		foo key=value…
 
