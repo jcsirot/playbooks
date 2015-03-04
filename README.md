@@ -48,7 +48,7 @@ Beware! to keep things simple the subdirs *are not roles*
   3. In your inventory, put your hosts in the appropriate service groups and set the configuration keys e.g.:
 
 		[jenkins]
-		foo key=value…
+		foo jenkins_memory=3G jenkins_listen_port=9999
 
 NOTE: each playbook is defined for a subset of platforms (e.g. ubuntu);
 and therefore expect the host to be in the platform group.
