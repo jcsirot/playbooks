@@ -12,5 +12,5 @@
 - name: put nodes into their O/S group
   hosts: all
   tasks:
-  - group_by: key={{ ansible_os_family|lower }}
-  - debug: msg="{{ ansible_os_family|lower }}"
+  - group_by: key={{ ansible_distribution|lower }}
+  - debug: msg="{{ ansible_distribution|lower }}"
