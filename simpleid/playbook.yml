@@ -8,7 +8,10 @@
       copy=no
       src=/root/simpleid-0.9.1.tar.gz
       dest=/var/cache
+  - file:
+      dest=/var/cache/simpleid
       owner=www-data
+      group=www-data
   - file:
       src=/var/cache/simpleid/www
       dest=/var/www/simpleid
@@ -16,6 +19,11 @@
   - template:
       src=config.php.j2
       dest=/var/cache/simpleid/www/config.php
+  - copy:
+      src={{ simplid_identities_path }}/
+      dest=/var/cache/simpleid/identities/
+      owner=www-data
+      group=www-data
   - apt:
       name=php5-fpm
       state=present

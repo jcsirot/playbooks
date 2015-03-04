@@ -28,6 +28,7 @@ A collection of simple playbooks for common services.
     * `pypiserver_listen_address`: set the address to bind, defaults to 127.0.0.1
   * ubuntu / __simpleid__
     * `simpleid_base_url`: simpleid site URL
+    * `simpleid_identities_path`: path to identity files
 
 ### USAGE ###
 
