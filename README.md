@@ -50,6 +50,10 @@ Beware! to keep things simple the subdirs *are not roles*
 		[jenkins]
 		foo key=value…
 
+NOTE: each playbook is defined for a subset of platforms (e.g. ubuntu);
+and therefore expect the host to be in the platform group.
+This is handled automatically by detecting each host platform and dynamically putting it into that group.
+
 ### TODO LIST ####
 
-Add a htaccess generator taking a file listing user:pass records in input.
+For pypiserver: add a htaccess generator taking a file listing user:pass records in input.
