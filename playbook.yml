@@ -9,6 +9,7 @@
 - include: pypiserver/playbook.yml
 - include: simpleid/playbook.yml
 
-- hosts: all
+- name: put nodes into their O/S group
+  hosts: all
   tasks:
   - group_by: key=os_{{ ansible_os_family|lower }}
