@@ -15,6 +15,9 @@
       dest=/etc/nginx/sites-enabled/
     notify:
     - reload nginx
+  - copy:
+      src={{ nginx_tls_path }}/
+      dest=/etc/nginx/tls
   - service:
       name=nginx
       state=started
