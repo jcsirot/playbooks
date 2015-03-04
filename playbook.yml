@@ -1,4 +1,10 @@
 ---
+- name: put nodes into their O/S group
+  hosts: all
+  tasks:
+  - group_by: key={{ ansible_distribution|lower }}
+  - debug: msg="{{ ansible_distribution|lower }}"
+
 - include: apache/playbook.yml
 - include: btsync/playbook.yml
 - include: docker/playbook.yml
@@ -8,9 +14,3 @@
 - include: nginx/playbook.yml
 - include: pypiserver/playbook.yml
 - include: simpleid/playbook.yml
-
-- name: put nodes into their O/S group
-  hosts: all
-  tasks:
-  - group_by: key={{ ansible_distribution|lower }}
-  - debug: msg="{{ ansible_distribution|lower }}"
