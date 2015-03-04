@@ -60,10 +60,10 @@
   - copy:
       src={{ jenkins_sshpath }}/
       dest=/var/lib/jenkins/.ssh/
-  # copy missing artifacts for the openid plugin
+  # copy patched plugins
   - copy:
-      src=openid4java/
-      dest=/var/lib/jenkins/plugins/openid4java/WEB-INF/lib
+      src=plugins/
+      dest=/var/lib/jenkins/plugins/
     notify:
     - restart jenkins # FIXME: necessary?
   # start service
