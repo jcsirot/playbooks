@@ -7,13 +7,19 @@
   - unarchive:
       copy=no
       src=/root/simpleid-0.9.1.tar.gz
-      dest={{ simpleid_wwwpath }}/
+      dest=/var/cache
+      owner=www-data
+  - file:
+      src=/var/cache/simpleid/www
+      dest=/var/www/simpleid
+      state=link
   - template:
       src=config.php.j2
-      dest={{ simpleid_wwwpath }}/simpleid/www/config.php
+      dest=/var/cache/simpleid/www/config.php
   - apt:
       name=php5-fpm
       state=present
   - service:
       name=php5-fpm
       state=started
+      enabled=yes
