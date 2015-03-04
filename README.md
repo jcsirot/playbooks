@@ -1,5 +1,8 @@
 A collection of simple playbooks for common services.
 
+Beware! to keep things simple the subdirs *are not roles*
+(as defined [here](http://docs.ansible.com/playbooks_roles.html#roles).
+
 ### PLAYBOOKS ###
 
   * ubuntu / __apache__ (or __noapache__ to remove)
@@ -33,8 +36,6 @@ A collection of simple playbooks for common services.
     * `simpleid_identities_path`: path to identity files
 
 ### USAGE ###
-
-Beware! to keep things simple the subdirs *are not roles*, just regular includes.
 
   1. First, add this repository as a submodule:
 
