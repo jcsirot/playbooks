@@ -1,7 +1,7 @@
 A collection of simple playbooks for common services.
 
 Beware! to keep things simple the subdirs *are not roles*
-(as defined [here](http://docs.ansible.com/playbooks_roles.html#roles).
+(as defined [here](http://docs.ansible.com/playbooks_roles.html#roles).)
 
 ### PLAYBOOKS ###
 
