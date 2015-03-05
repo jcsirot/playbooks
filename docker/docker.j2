@@ -5,7 +5,7 @@
 
 # Use DOCKER_OPTS to modify the daemon startup options.
 #DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
-{% if docker_remote or docker_listen_address or docker_listen_address %}
+{% if (docker_remote is defined and docker_remote) or docker_listen_address or docker_listen_address %}
 DOCKER_OPTS="-H tcp://{{ docker_listen_address|default("127.0.0.1") }}:{{ docker_listen_port|default(4243) }} -H unix:///var/run/docker.sock"
 {% endif %}
 
