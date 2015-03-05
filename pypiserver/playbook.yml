@@ -1,5 +1,5 @@
 ---
-- hosts: ubuntu:&pypiserver
+- hosts: debian:ubuntu:&pypiserver
   handlers:
   - name: restart pypiserver
     service:
