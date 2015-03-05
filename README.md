@@ -16,7 +16,6 @@ Beware! to keep things simple the subdirs *are not roles*
   * debian / __docker__
     * `docker_listen_address`, defaults to 127.0.0.1
     * `docker_listen_port`, defaults to 4243
-    * `docker_remote`, set to True to enable docker remote API and use `docker_listen_*` keys.
   * ubuntu / __gitd__
     * `gitd_authorized_keys_path`: local path to authorized_keys file setup for the remote ssh git user
   * ubuntu|debian / __jenkins__|__jenkinslts__
