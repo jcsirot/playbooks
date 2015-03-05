@@ -1,20 +1,54 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          pypiserver
+# Required-Start:    $local_fs $network $named $time $syslog
+# Required-Stop:     $local_fs $network $named $time $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Description:       %(description)s
+### END INIT INFO
 
-# https://gist.github.com/krisztianfekete/8915425
+PIDFILE="/var/run/pypiserver.pid"
+DAEMON="/usr/local/bin/pypi-server"
+ARGV="--interface {{ pypiserver_listen_address|default('127.0.0.1') }} --port {{ pypiserver_listen_port|default(8080) }} --passwords /home/pypi/htaccess --overwrite --disable-fallback /home/pypi/packages"
+UID="pypi"
 
-description "PyPI (Python Package Index) Server"
+status() {
+	if start-stop-daemon --status --pidfile $PIDFILE; then
+		echo "service is running" >&2
+	else
+		echo "service is not running" >&2
+	fi
+}
 
-setuid pypi
-setgid pypi
+start() {
+	start-stop-daemon\
+		--start\
+		--pidfile $PIDFILE\
+		--make-pidfile\
+		--chuid $UID\
+		--background\
+		--exec $DAEMON -- $ARGV
+}
 
-start on startup
-stop on shutdown
+stop() {
+	start-stop-daemon --stop --pidfile $PIDFILE
+}
 
-exec /usr/local/bin/pypi-server\
-	--interface {{ pypiserver_listen_address|default('127.0.0.1') }}\
-	--port {{ pypiserver_listen_port|default(8080) }}\
-	--passwords /home/pypi/htaccess\
-	--overwrite\
-	--disable-fallback\
-	/home/pypi/packages
-
-respawn
+case "$1" in
+	status)
+		status
+		;;
+	start)
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		stop
+		start
+		;;
+	*)
+		echo "Usage: $0 {status|start|stop|restart}"
+esac

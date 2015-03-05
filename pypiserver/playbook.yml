@@ -24,8 +24,18 @@
       owner=pypi
       group=pypi
   - template:
-      src=pypiserver.j2
+      src=pypiserver.conf.j2
       dest=/etc/init/pypiserver.conf
+    when:
+    - ansible_distribution == "Ubuntu"
+    notify:
+    - restart pypiserver
+  - template:
+      src=pypiserver.j2
+      dest=/etc/init.d/pypiserver
+      mode=755
+    when:
+    - ansible_distribution == "Debian"
     notify:
     - restart pypiserver
   - copy:
