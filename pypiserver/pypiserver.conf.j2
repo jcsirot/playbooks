@@ -1,0 +1,20 @@
+
+# https://gist.github.com/krisztianfekete/8915425
+
+description "PyPI (Python Package Index) Server"
+
+setuid pypi
+setgid pypi
+
+start on startup
+stop on shutdown
+
+exec /usr/local/bin/pypi-server\
+	--interface {{ pypiserver_listen_address|default('127.0.0.1') }}\
+	--port {{ pypiserver_listen_port|default(8080) }}\
+	--passwords /home/pypi/htaccess\
+	--overwrite\
+	--disable-fallback\
+	/home/pypi/packages
+
+respawn
