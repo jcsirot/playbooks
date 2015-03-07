@@ -26,7 +26,7 @@ Beware! to keep things simple the subdirs *are not roles*
   * debian / __nexus__
   * ubuntu / __nginx__
     * `nginx_default_path`: local path to the default file copied to /etc/nginx/sites-enabled/default
-    * `nginx_tls_path`: local path to the directory containing the certificates
+    * `nginx_crt_path`: local path to the directory containing the certificates
   * ubuntu / __pypiserver__
     * `pypiserver_htaccess_path`: local path to the htaccess file
     * `pypiserver_listen_port`: set the port to bind, defaults to 8080

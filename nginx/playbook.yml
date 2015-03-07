@@ -16,8 +16,8 @@
     notify:
     - reload nginx
   - copy:
-      src={{ nginx_tls_path }}/
-      dest=/etc/nginx/tls
+      src={{ nginx_crt_path }}/
+      dest=/etc/nginx/crt
   - service:
       name=nginx
       state=started
