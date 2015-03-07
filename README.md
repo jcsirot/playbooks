@@ -27,7 +27,7 @@ Beware! to keep things simple the subdirs *are not roles*
   * ubuntu / __nginx__
     * `nginx_default_path`: local path to the default file copied to /etc/nginx/sites-enabled/default
     * `nginx_crt_path`: local path to the directory containing the certificates
-  * ubuntu / __pypiserver__
+  * ubuntu|debian / __pypiserver__
     * `pypiserver_htaccess_path`: local path to the htaccess file
     * `pypiserver_listen_port`: set the port to bind, defaults to 8080
     * `pypiserver_listen_address`: set the address to bind, defaults to 127.0.0.1
@@ -56,4 +56,5 @@ This is handled automatically by detecting each host platform and dynamically pu
 
 ### TODO LIST ####
 
-For pypiserver: add a htaccess generator taking a file listing user:pass records in input.
+  * For pypiserver: add a htaccess generator taking a file listing user:pass records in input.
+  * …
