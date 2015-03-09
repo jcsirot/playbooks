@@ -47,3 +47,7 @@
     - { src: dhcpd.conf, dest: /etc/dhcp/dhcpd.conf }
     notify:
     - restart dhcp server
+  - service:
+      name=isc-dhcp-server
+      state=started
+
