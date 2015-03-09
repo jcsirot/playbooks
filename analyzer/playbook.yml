@@ -17,5 +17,7 @@
       password=4da3fab397130eeab76465009a103de84e0e3bbca45259c07b07019644afdae361d0339fb1962ab09edb5da1030af25206ccce5da548171dc626cb4148758e38
   - copy:
       src=xsession
-      dest=/
+      dest=/home/wireshark/.xsession
+      mode=u=rwx,g=,o=
+
 # TODO: dhcp server setup -- https://help.ubuntu.com/community/isc-dhcp-server
