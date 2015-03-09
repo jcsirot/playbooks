@@ -39,8 +39,8 @@
     - { src: xsession, dest: /home/wireshark/.xsession }
 # configure DHCP server
   - copy:
-      src=isc-dhcp-server
-      dest=/etc/default/isc-dhcp-server
+      src={{ item.src }}
+      dest={{ item.dest }}
     with_items:
     - { src: isc-dhcp-server, dest: /etc/default/isc-dhcp-server }
     - { src: interfaces, dest: /etc/network/interfaces }
