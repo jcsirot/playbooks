@@ -1,0 +1,4 @@
+[begin](fluxbox)
+[exec] (Gnome Terminal) {/usr/bin/gnome-terminal}
+[include](/etc/X11/fluxbox/fluxbox-menu)
+[end]

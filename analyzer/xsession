@@ -1,5 +1,5 @@
 #!/bin/sh
 fbsetbg -f /usr/share/backgrounds/warty-final-ubuntu.png
 xterm&
-/usr/bin/startfluxbox
+fluxbox -log "/home/wireshark/.fluxbox/log"
 exit 0
