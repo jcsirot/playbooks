@@ -25,7 +25,7 @@
       group=wireshark
       mode=700
     with_items:
-    - {src:xsession, dest:/home/wireshark/.xsession}
-    - {src:menu, dest:/home/wireshark/.fluxbox/menu}
+    - {src: xsession, dest: /home/wireshark/.xsession}
+    - {src: menu, dest: /home/wireshark/.fluxbox/menu}
 
 # TODO: dhcp server setup -- https://help.ubuntu.com/community/isc-dhcp-server
