@@ -1,5 +1,8 @@
 ---
 - hosts: ubuntu:&simpleid
+  handlers:
+  - name: clear identities cache
+    command: find /var/cache/simpleid/cache/ -name "*.cache" -delete
   tasks:
   - get_url:
       url=http://downloads.sourceforge.net/simpleid/simpleid-0.9.1.tar.gz
@@ -24,6 +27,8 @@
       dest=/var/cache/simpleid/identities/
       owner=www-data
       group=www-data
+    notify:
+    - clear identities cache
   - file:
       dest=/var/log/simpleid
       state=directory
