@@ -1,5 +1,8 @@
 ---
 - hosts: ubuntu:&analyzer
+  vars:
+    # openssl passwd -salt salty -1 wireshark
+    wireshark_password: $1$salty$7jpBSJ1B8gIX/lHcNH/bw.
   tasks:
   - apt:
       name={{ item }}
@@ -14,10 +17,12 @@
   - user:
       name=wireshark
       state=present
-      password=4da3fab397130eeab76465009a103de84e0e3bbca45259c07b07019644afdae361d0339fb1962ab09edb5da1030af25206ccce5da548171dc626cb4148758e38
+      password={{ wireshark_password }}
   - copy:
       src=xsession
       dest=/home/wireshark/.xsession
+      owner=wireshark
+      group=wireshark
       mode=700
 
 # TODO: dhcp server setup -- https://help.ubuntu.com/community/isc-dhcp-server
