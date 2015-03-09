@@ -1,5 +1,10 @@
 ---
 - hosts: ubuntu:&analyzer
+  handlers:
+  - name: restart dhcp server
+    service:
+      name=isc-dhcp-server
+      state=restarted
   vars:
     # openssl passwd -salt salty -1 wireshark
     wireshark_password: $1$salty$7jpBSJ1B8gIX/lHcNH/bw.
@@ -32,5 +37,12 @@
       mode=700
     with_items:
     - { src: xsession, dest: /home/wireshark/.xsession }
-
-# TODO: dhcp server setup -- https://help.ubuntu.com/community/isc-dhcp-server
+# configure DHCP server
+  - copy:
+      src=isc-dhcp-server
+      dest=/etc/default/isc-dhcp-server
+    with_items:
+    - { src: isc-dhcp-server, dest: /etc/default/isc-dhcp-server }
+    - { src: dhcpd.conf, dest: /etc/dhcp/dhcpd.conf }
+    notify:
+    - restart dhcp server

@@ -1,0 +1,5 @@
+# this is a customized configuration!
+
+DHCPD_CONF=/etc/dhcp/dhcpd.conf
+DHCPD_PID=/var/run/dhcpd.pid
+INTERFACES="eth0"
