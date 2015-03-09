@@ -7,7 +7,7 @@ Beware! to keep things simple the subdirs *are not roles*
 
   * ubuntu / __analyzer__ -- create a wireshark-based wifi traffic analyzer node.
     The setup used for this is a bare laptop with a RJ45 interface and a wireless interface.
-    A wifi hotspot is connected to the RJ45 interface and fetch its address from the DHCP server.
+    A wifi router is connected to the RJ45 interface and fetch its address from the DHCP server.
     The laptop acts as a gateway, forwarding the traffic to its wireless interface.
     Users can connect via RDP and starts wireshark.
   * ubuntu / __apache__ (or __noapache__ to remove)
@@ -58,8 +58,3 @@ Beware! to keep things simple the subdirs *are not roles*
 NOTE: each playbook is defined for a subset of platforms (e.g. ubuntu);
 and therefore expect the host to be in the platform group.
 This is handled automatically by detecting each host platform and dynamically putting it into that group.
-
-### TODO LIST ####
-
-  * For pypiserver: add a htaccess generator taking a file listing user:pass records in input.
-  * …
