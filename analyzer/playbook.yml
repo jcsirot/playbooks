@@ -14,7 +14,12 @@
     - wireshark
     - fluxbox
 # wireshark user setup
+  - copy:
+      src=sudoers
+      dest=/etc/sudoers
+      mode=440
   - user:
+      system=yes
       name=wireshark
       state=present
       password={{ wireshark_password }}
