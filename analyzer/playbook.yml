@@ -43,6 +43,7 @@
       dest=/etc/default/isc-dhcp-server
     with_items:
     - { src: isc-dhcp-server, dest: /etc/default/isc-dhcp-server }
+    - { src: interfaces, dest: /etc/network/interfaces }
     - { src: dhcpd.conf, dest: /etc/dhcp/dhcpd.conf }
     notify:
     - restart dhcp server
