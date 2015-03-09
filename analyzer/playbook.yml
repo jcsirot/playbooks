@@ -1,11 +1,5 @@
 ---
 - hosts: ubuntu:&analyzer
-  - name: "password"
-      prompt: "Enter a password for the user"
-      private: yes
-      encrypt: "md5_crypt" #need to have python-passlib installed in local machine before we can use it
-      confirm: yes
-      salt_size: 7
   tasks:
   - apt:
       name={{ item }}
@@ -15,10 +9,12 @@
     - xrdp
     - wireshark
     - fluxbox
+# wireshark user setup
   - user:
-      name=analyzer
+      name=wireshark
       state=present
-      password={{ password }}
+      password={{ password }} # FIXME: password generation
   - copy:
       src=xsession
       dest=/
+# TODO: dhcp server setup -- https://help.ubuntu.com/community/isc-dhcp-server

@@ -5,6 +5,11 @@ Beware! to keep things simple the subdirs *are not roles*
 
 ### PLAYBOOKS ###
 
+  * ubuntu / __analyzer__ -- wireshark-based network analyzer node
+    The setup used for this is a base laptop with a RJ45 interface and a wireless interface.
+    A wifi hotspot is connected to the RJ45 interface and fetch its address from the DHCP server.
+    The laptop acts as a gateway, forwarding the traffic to its wireless interface.
+    Users can connect via RDP and starts wireshark.
   * ubuntu / __apache__ (or __noapache__ to remove)
   * ubuntu / __btsync__
     * `btsync_device_name`: btsync service name
