@@ -1,0 +1,7 @@
+[begin] (Network Analyzer)
+[include] (/usr/X11/fluxbox/fluxbox-menu)
+[submenu] (Keyboards)
+  [exec] (fr) {setxkbmap fr}
+  [exec] (fr) {setxkbmap en}
+[end]
+[end]

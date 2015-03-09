@@ -20,10 +20,13 @@
       password={{ wireshark_password }}
       shell=/bin/bash
   - copy:
-      src=xsession
-      dest=/home/wireshark/.xsession
+      src={{ item.src }}
+      dest={{ item.dest }}
       owner=wireshark
       group=wireshark
       mode=700
+    with_items:
+    - { src: xsession, dest: /home/wireshark/.xsession }
+    - { src: menu, dest: /home/wireshark/.fluxbox/menu }
 
 # TODO: dhcp server setup -- https://help.ubuntu.com/community/isc-dhcp-server
