@@ -18,6 +18,6 @@
   - copy:
       src=xsession
       dest=/home/wireshark/.xsession
-      mode=u=rwx,g=,o=
+      mode=700
 
 # TODO: dhcp server setup -- https://help.ubuntu.com/community/isc-dhcp-server
