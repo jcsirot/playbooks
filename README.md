@@ -8,9 +8,9 @@ Beware! to keep things simple the subdirs *are not roles*
   * ubuntu / __analyzer__ -- transform a laptop into a wifi traffic analyzer server.
     The setup used for this is a regular laptop with a RJ45 interface and a wireless interface.
     A wifi router is connected to the RJ45 interface and fetch its address from the DHCP server
-    installed on the laptop. The laptop forward the traffic from all the devices connected to
+    installed on the laptop. The laptop forwards the traffic from all the devices connected to
     the WiFi router through its wireless interface. Users can connect via RDP via the laptop
-    wireless interface and starts wireshark over the wired interface.
+    wireless interface and start network tools (wireshark, charles) over the wired interface.
   * ubuntu / __apache__ (or __noapache__ to remove)
   * ubuntu / __btsync__
     * `btsync_device_name`: btsync service name

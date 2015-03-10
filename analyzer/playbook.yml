@@ -6,8 +6,8 @@
       name=isc-dhcp-server
       state=restarted
   vars:
-    # openssl passwd -salt salty -1 watchman
-    watchman_password: $1$salty$wv8do0w7u7j2GkyAQ.81P0
+    # openssl passwd -salt salty -1 trudy
+    trudy_password: $1$salty$kWLxsVdL0n35zC6z3ejfd1
   tasks:
   - apt:
       name={{ item }}
@@ -17,25 +17,25 @@
     - vnc4server
     - xrdp
     - wireshark
-# "watchman" user setup (login: watchman, password: watchman)
+# "trudy" user setup (login: trudy, password: trudy)
   - copy:
       src=sudoers
       dest=/etc/sudoers
       mode=440
   - user:
-      name=watchman
+      name=trudy
 			group=admin
       state=present
-      password={{ watchman_password }}
+      password={{ trudy_password }}
       shell=/bin/bash
   - copy:
       src={{ item.src }}
       dest={{ item.dest }}
-      owner=watchman
-      group=watchman
+      owner=trudy
+      group=trudy
       mode=700
     with_items:
-    - { src: xsession, dest: /home/watchman/.xsession }
+    - { src: xsession, dest: /home/trudy/.xsession }
 # configure DHCP server
   - copy:
       src={{ item.src }}
