@@ -26,6 +26,7 @@ case ${1:-usage} in
 		else echo "disabled"
 		fi
 		iptables -L -t nat -t filter
+		;;
 	*)
 		echo "usage: $(basename $0) (start|stop|status)"
 esac
