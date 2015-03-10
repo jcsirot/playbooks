@@ -54,4 +54,4 @@
   - copy:
       src=nat.sh
       dest=/root/nat.sh
-  - shell: /root/nat.sh start
+  - command: /bin/bash /root/nat.sh start
