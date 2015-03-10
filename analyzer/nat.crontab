@@ -1,4 +1,4 @@
 # Keep the traffic forwarding up at 7am, bring it down at 8pm for each workday.
 
-0 7 * * mon,tue,wed,thu,fri root /bin/bash /root/nat.sh start
-0 20 * * mon,tue,wed,thu,fri root /bin/bash /root/nat.sh stop
+0 7 * * mon,tue,wed,thu,fri root /bin/bash /root/nat.sh start && /usr/bin/logger "bringing up traffic forwarding"
+0 20 * * mon,tue,wed,thu,fri root /bin/bash /root/nat.sh stop && /usr/bin/logger "bringing down traffic forwarding"
