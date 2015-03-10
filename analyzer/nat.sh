@@ -1,17 +1,31 @@
 #!/bin/bash
+# copyright (c) 2015 fclaerhout.fr, released under the MIT license.
+
+#         ---------> [input]-------
+#       /                           \
+#  [nat] -> ip_forward? ->[forward]->[output]->
 
 set -eu
 
+IPFWD=/proc/sys/net/ipv4/ip_forward
+
 case ${1:-usage} in
-  enable)
-    echo 1 > /proc/sys/net/ipv4/ip_forward
-    /sbin/iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-    /sbin/iptables -A FORWARD -i eth0 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT
-    /sbin/iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
-    ;;
-  disable)
-    echo 0 > /proc/sys/net/ipv4/ip_forward
-    ;;
-  *)
-    echo "usage: $0 (enable|disable)"
+	start)
+		echo 1 > $IPFWD
+		iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+		iptables -A FORWARD -i eth0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+		iptables -A FORWARD -i wlan0 -o eth0 -j ACCEPT
+		;;
+	stop)
+		echo 0 > $IPFWD
+		;;
+	status)
+		echo "forwarding…"
+		if test $(cat $IPFWD) = 1
+		then echo "enabled"
+		else echo "disabled"
+		fi
+		iptables -L -t nat -t filter
+	*)
+		echo "usage: $(basename $0) (start|stop|status)"
 esac
