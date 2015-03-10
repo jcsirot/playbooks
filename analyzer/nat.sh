@@ -7,6 +7,12 @@
 
 set -eu
 
+if test $EUID -ne 0
+then
+	echo "This script must be run as root"
+	exit 1
+fi
+
 IPFWD=/proc/sys/net/ipv4/ip_forward
 
 case ${1:-usage} in
