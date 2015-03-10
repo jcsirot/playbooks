@@ -18,7 +18,7 @@
     - xrdp
     - wireshark
     - fluxbox
-# wireshark user setup
+# wireshark user setup (login: wireshark, password: wireshark)
   - copy:
       src=sudoers
       dest=/etc/sudoers
