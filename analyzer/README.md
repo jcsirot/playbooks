@@ -15,15 +15,20 @@ On the target laptop:
 
 On your workstation:
 
-  1. ssh-copy-id root@$laptop
-  2. make
+  1. `ssh-copy-id root@$laptop`
+  2. create the inventory file `hosts`, e.g.:
+
+    [analyzer]
+    $LAPTOP_IP
+
+  3. `ansible-playbook -i hosts playbook.yml`
 
 Usage
 -----
 
 On ubuntu, install remina, on OS/X, install RDP from the appstore.
 
-On any RDP client, add an entry to connect to 10.201.0.209, login: trudy, pass: trudy.
+On any RDP client, add an entry to connect to $LAPTOP_IP, login: trudy, pass: trudy.
 
 Troubleshooting
 ---------------
