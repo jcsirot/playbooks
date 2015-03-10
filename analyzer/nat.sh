@@ -20,7 +20,7 @@ case ${1:-usage} in
 		echo 0 > $IPFWD
 		;;
 	status)
-		echo "forwarding…"
+		echo -n "forwarding..."
 		if test $(cat $IPFWD) = 1
 		then echo "enabled"
 		else echo "disabled"
