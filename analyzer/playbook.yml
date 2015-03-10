@@ -81,3 +81,8 @@
   - apt:
       name=charles-proxy
       state=present
+# nat manager
+  - copy:
+      src=nat.crontab
+      dest=/etc/cron.d/nat
+      mode=644

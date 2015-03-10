@@ -1,0 +1,5 @@
+# Keep the traffic forwarding up during each workday from 7am to 8pm.
+# Bring it down otherwise for security issues.
+
+*/5 7-20 * * mon,tue,wed,thu,fri root /root/nat.sh start
+*/5 0-7,20-0 * * mon,tue,wed,thu,fri root /root/nat.sh stop
