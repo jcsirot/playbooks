@@ -56,6 +56,9 @@
       dest=/root/nat.sh
   - command: /bin/bash /root/nat.sh start
 # install charles proxy
+  - apt_key:
+      url=http://www.charlesproxy.com/packages/apt/PublicKey
+      state=present
   - apt_repository:
       repo="deb http://www.charlesproxy.com/packages/apt/ charles-proxy main"
       state=present
