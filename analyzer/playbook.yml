@@ -50,4 +50,9 @@
   - service:
       name=isc-dhcp-server
       state=started
+# configure NAT
+  - copy:
+      src=nat.sh
+      dest=/root/nat.sh
+  - command: /root/nat.sh enable
 
