@@ -1,4 +1,5 @@
 #!/bin/bash
+# http://stackoverflow.com/a/137173
 
 # System-wide crontab file and cron job directory. Change these for your system.
 CRONTAB='/etc/crontab'
