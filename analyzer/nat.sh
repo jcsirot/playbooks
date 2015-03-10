@@ -29,4 +29,5 @@ case ${1:-usage} in
 		;;
 	*)
 		echo "usage: $(basename $0) (start|stop|status)"
+		exit 1
 esac
