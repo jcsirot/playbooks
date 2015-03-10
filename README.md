@@ -11,6 +11,7 @@ Beware! to keep things simple the subdirs *are not roles*
     installed on the laptop. The laptop forwards the traffic from all the devices connected to
     the WiFi router through its wireless interface. Users can connect via RDP via the laptop
     wireless interface and start network tools (wireshark, charles) over the wired interface.
+    Account login: trudy, pass: trudy.
   * ubuntu / __apache__ (or __noapache__ to remove)
   * ubuntu / __btsync__
     * `btsync_device_name`: btsync service name
