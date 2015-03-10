@@ -5,13 +5,14 @@ Beware! to keep things simple the subdirs *are not roles*
 
 ### PLAYBOOKS ###
 
-  * ubuntu / __analyzer__ -- transform a laptop into a wifi traffic analyzer server.
+  * ubuntu / __analyzer__ -- transform a laptop into a WiFi traffic analyzer server.
     The setup used for this is a regular laptop with a RJ45 interface and a wireless interface.
     A wifi router is connected to the RJ45 interface and fetch its address from the DHCP server
     installed on the laptop. The laptop forwards the traffic from all the devices connected to
-    the WiFi router through its wireless interface. Users can connect via RDP via the laptop
-    wireless interface and start network tools (wireshark, charles) over the wired interface.
-    Account login: trudy, pass: trudy.
+    the WiFi router through its wireless interface and is therefore able to intercept everything.
+    Users can connect via RDP via the laptop wireless interface and use network analysis tools
+    (wireshark, charles) over the wired interface. Account login: trudy, pass: trudy.
+    Why "trudy"? in cryptography, Trudy belongs to the cast of demo characters along Bob and Alice.
     * `help_url`: URL of the help webpage
   * ubuntu / __apache__ (or __noapache__ to remove)
   * ubuntu / __btsync__
