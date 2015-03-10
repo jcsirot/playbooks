@@ -11,8 +11,7 @@ Beware! to keep things simple the subdirs *are not roles*
     installed on the laptop. The laptop forwards the traffic from all the devices connected to
     the WiFi router through its wireless interface and is therefore able to intercept everything.
     Users can connect via RDP via the laptop wireless interface and use network analysis tools
-    (wireshark, charles) over the wired interface. Account login: trudy, pass: trudy.
-    Why "trudy"? in cryptography, Trudy belongs to the cast of demo characters along Bob and Alice.
+    (wireshark, charles) over the wired interface. For details check analyzer/README.md.
     * `analyzer_help_url`: URL of the help webpage
   * ubuntu / __apache__ (or __noapache__ to remove)
   * ubuntu / __btsync__
