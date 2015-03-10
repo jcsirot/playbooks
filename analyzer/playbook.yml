@@ -68,8 +68,8 @@
   - apt:
       name=fluxbox
       state=present
-  - copy:
-      src=menu
+  - template:
+      src=menu.j2
       dest=/home/trudy/.fluxbox/menu
       owner=trudy
       mode=664

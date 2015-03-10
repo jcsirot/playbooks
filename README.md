@@ -12,6 +12,7 @@ Beware! to keep things simple the subdirs *are not roles*
     the WiFi router through its wireless interface. Users can connect via RDP via the laptop
     wireless interface and start network tools (wireshark, charles) over the wired interface.
     Account login: trudy, pass: trudy.
+    * `help_url`: URL of the help webpage
   * ubuntu / __apache__ (or __noapache__ to remove)
   * ubuntu / __btsync__
     * `btsync_device_name`: btsync service name

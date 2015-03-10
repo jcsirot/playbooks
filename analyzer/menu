@@ -1,6 +1,0 @@
-[begin] (WiFi Traffic Analyzer)
-[exec] (wireshark) {sudo wireshark -i eth0 -k}
-[exec] (charles) {charles}
-[separator]
-[include] (/etc/X11/fluxbox/fluxbox-menu)
-[end]
