@@ -6,8 +6,8 @@
       name=isc-dhcp-server
       state=restarted
   vars:
-    # openssl passwd -salt salty -1 wireshark
-    wireshark_password: $1$salty$7jpBSJ1B8gIX/lHcNH/bw.
+    # openssl passwd -salt salty -1 watchman
+    watchman_password: $1$salty$wv8do0w7u7j2GkyAQ.81P0
   tasks:
   - apt:
       name={{ item }}
@@ -17,26 +17,25 @@
     - vnc4server
     - xrdp
     - wireshark
-    - fluxbox
-# wireshark user setup (login: wireshark, password: wireshark)
+# "watchman" user setup (login: watchman, password: watchman)
   - copy:
       src=sudoers
       dest=/etc/sudoers
       mode=440
   - user:
-      system=yes
-      name=wireshark
+      name=watchman
+			group=admin
       state=present
-      password={{ wireshark_password }}
+      password={{ watchman_password }}
       shell=/bin/bash
   - copy:
       src={{ item.src }}
       dest={{ item.dest }}
-      owner=wireshark
-      group=wireshark
+      owner=watchman
+      group=watchman
       mode=700
     with_items:
-    - { src: xsession, dest: /home/wireshark/.xsession }
+    - { src: xsession, dest: /home/watchman/.xsession }
 # configure DHCP server
   - copy:
       src={{ item.src }}
@@ -65,4 +64,8 @@
       update_cache=yes
   - apt:
       name=charles-proxy
+      state=present
+# install fluxbox last to generate menus
+  - apt:
+      name=fluxbox
       state=present
