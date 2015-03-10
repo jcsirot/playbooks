@@ -24,7 +24,6 @@
       mode=440
   - user:
       name=trudy
-      group=admin
       state=present
       password={{ trudy_password }}
       shell=/bin/bash
