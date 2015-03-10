@@ -68,3 +68,8 @@
   - apt:
       name=fluxbox
       state=present
+  - copy:
+      name=menu
+      dest=/home/trudy/.fluxbox/menu
+      owner=trudy
+      mode=664
