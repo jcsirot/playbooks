@@ -69,7 +69,7 @@
       name=fluxbox
       state=present
   - copy:
-      name=menu
+      src=menu
       dest=/home/trudy/.fluxbox/menu
       owner=trudy
       mode=664
