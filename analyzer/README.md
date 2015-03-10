@@ -18,8 +18,8 @@ On your workstation:
   1. `ssh-copy-id root@$laptop`
   2. create the inventory file `hosts`, e.g.:
 
-    [analyzer]
-    $LAPTOP_IP
+		[analyzer]
+		$LAPTOP_IP
 
   3. `ansible-playbook -i hosts playbook.yml`
 
