@@ -5,10 +5,10 @@ Beware! to keep things simple the subdirs *are not roles*
 
 ### PLAYBOOKS ###
 
-  * ubuntu / __analyzer__ -- create a wireshark-based wifi traffic analyzer node.
-    The setup used for this is a bare laptop with a RJ45 interface and a wireless interface.
+  * ubuntu / __analyzer__ -- transform a laptop into a wifi traffic analyzer server.
+    The setup used for this is a regular laptop with a RJ45 interface and a wireless interface.
     A wifi router is connected to the RJ45 interface and fetch its address from the DHCP server.
-    The laptop acts as a gateway, forwarding the traffic to its wireless interface.
+    The laptop does the NAT'ing, forwarding the traffic to its wireless interface.
     Users can connect via RDP and starts wireshark.
   * ubuntu / __apache__ (or __noapache__ to remove)
   * ubuntu / __btsync__
