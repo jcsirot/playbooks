@@ -86,3 +86,7 @@
       src=nat.crontab
       dest=/etc/cron.d/nat
       mode=644
+  - copy:
+      src=lscron.sh
+      dest=/root/lscron.sh
+      mode=700
