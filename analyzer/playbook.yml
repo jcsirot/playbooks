@@ -17,6 +17,7 @@
     - vnc4server
     - xrdp
     - wireshark
+    - fluxbox
 # "trudy" user setup (login: trudy, password: trudy)
   - copy:
       src=sudoers
@@ -28,13 +29,23 @@
       password={{ trudy_password }}
       shell=/bin/bash
   - copy:
-      src={{ item.src }}
-      dest={{ item.dest }}
+      src=xsession
+      dest=/home/trudy/.xsession
       owner=trudy
       group=trudy
       mode=700
-    with_items:
-    - { src: xsession, dest: /home/trudy/.xsession }
+  - template:
+      src=menu.j2
+      dest=/home/trudy/.fluxbox/menu
+      owner=trudy
+      mode=664
+# configure xrdp
+  - copy:
+      src=sesman.ini
+      dest=/etc/xrdp/sesman.ini
+      owner=xrdp
+      group=xrdp
+      mode=644
 # configure DHCP server
   - copy:
       src={{ item.src }}
@@ -64,12 +75,3 @@
   - apt:
       name=charles-proxy
       state=present
-# install fluxbox last to generate menus
-  - apt:
-      name=fluxbox
-      state=present
-  - template:
-      src=menu.j2
-      dest=/home/trudy/.fluxbox/menu
-      owner=trudy
-      mode=664
