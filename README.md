@@ -13,7 +13,7 @@ Beware! to keep things simple the subdirs *are not roles*
     Users can connect via RDP via the laptop wireless interface and use network analysis tools
     (wireshark, charles) over the wired interface. Account login: trudy, pass: trudy.
     Why "trudy"? in cryptography, Trudy belongs to the cast of demo characters along Bob and Alice.
-    * `help_url`: URL of the help webpage
+    * `analyzer_help_url`: URL of the help webpage
   * ubuntu / __apache__ (or __noapache__ to remove)
   * ubuntu / __btsync__
     * `btsync_device_name`: btsync service name
