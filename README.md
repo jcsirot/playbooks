@@ -51,6 +51,8 @@ Beware! to keep things simple the subdirs *are not roles*
 
   1. First, add this repository as a submodule:
 
+		$ mkdir vendor
+		$ cd vendor
 		vendor$ git submodule add $this
 
   2. In your main playbook, add:
