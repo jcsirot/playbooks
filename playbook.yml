@@ -13,5 +13,6 @@
 - include: jenkins/playbook.yml
 - include: nexus/playbook.yml
 - include: nginx/playbook.yml
+- include: osx/playbook.yml
 - include: pypiserver/playbook.yml
 - include: simpleid/playbook.yml

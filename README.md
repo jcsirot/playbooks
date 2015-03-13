@@ -35,6 +35,10 @@ Beware! to keep things simple the subdirs *are not roles*
   * ubuntu / __nginx__
     * `nginx_default_path`: local path to the default file copied to /etc/nginx/sites-enabled/default
     * `nginx_crt_path`: local path to the directory containing the certificates
+  * darwin / __osx__, set system names and cleanup user logs, user caches, system logs, system caches
+    * `osx_hostname`
+    * `osx_computername`, defaults to osx_localhost
+    * `osx_localhostname`, defaults to osx_localhost
   * ubuntu|debian / __pypiserver__
     * `pypiserver_htaccess_path`: local path to the htaccess file
     * `pypiserver_listen_port`: set the port to bind, defaults to 8080
