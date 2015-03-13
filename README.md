@@ -51,6 +51,7 @@ Beware! to keep things simple the subdirs *are not roles*
 
 Immediate use, example:
 
+	$ git clone $this
 	$ ansible-playbook -i hosts playbook.yml --extra-vars "osx_hostname=foobar" --ask-sudo-pass
 
 In another project:
