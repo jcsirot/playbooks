@@ -68,7 +68,11 @@
 # configure NAT
   - copy:
       src=nat.sh
+      dest=/usr/local/bin/nat.sh
+      mode=770
+  - file:
       dest=/root/nat.sh
+      state=absent
   - command: /bin/bash /root/nat.sh start
 # install charles proxy
   - apt_key:
@@ -83,7 +87,11 @@
       state=present
   - copy:
       src=charles.sh
+      dest=/usr/local/bin/charles.sh
+      mode=770
+  - file:
       dest=/root/charles.sh
+      state=absent
 # nat manager
   - copy:
       src=nat.crontab

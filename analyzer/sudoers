@@ -2,8 +2,8 @@ Defaults	env_reset
 Defaults	mail_badpass
 Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-root			ALL=(ALL:ALL)	ALL
-trudy			ALL=(ALL)			NOPASSWD: /usr/bin/wireshark, /bin/bash /root/charles.sh
+root			ALL=(ALL:ALL) ALL
+trudy			ALL=(root) NOPASSWD: /usr/bin/wireshark, /usr/local/bin/charles.sh
 
-%admin		ALL=(ALL)			ALL
-%sudo			ALL=(ALL:ALL)	ALL
+%admin		ALL=(ALL) ALL
+%sudo			ALL=(ALL:ALL) ALL
