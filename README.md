@@ -35,7 +35,7 @@ Beware! to keep things simple the subdirs *are not roles*
   * ubuntu / __nginx__
     * `nginx_default_path`: local path to the default file copied to /etc/nginx/sites-enabled/default
     * `nginx_crt_path`: local path to the directory containing the certificates
-  * darwin / __osx__, set system names and cleanup user logs, user caches, system logs, system caches
+  * macosx / __osx__, set system names and cleanup user logs, user caches, system logs, system caches
     * `osx_hostname`
     * `osx_computername`, defaults to osx_hostname
     * `osx_localhostname`, defaults to osx_hostname
