@@ -73,7 +73,6 @@
   - file:
       dest=/root/nat.sh
       state=absent
-  - command: /bin/bash /root/nat.sh start
 # install charles proxy
   - apt_key:
       url=http://www.charlesproxy.com/packages/apt/PublicKey
