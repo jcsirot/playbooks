@@ -3,7 +3,7 @@ Defaults	mail_badpass
 Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 root			ALL=(ALL:ALL) ALL
-trudy			ALL=(root) NOPASSWD: /usr/bin/wireshark, /usr/local/bin/nat.sh, /usr/local/bin/charles.sh
+trudy			ALL=(root) NOPASSWD: /usr/bin/wireshark, /usr/local/bin/nat.sh
 
 %admin		ALL=(ALL) ALL
 %sudo			ALL=(ALL:ALL) ALL

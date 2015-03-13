@@ -70,9 +70,6 @@
       src=nat.sh
       dest=/usr/local/bin/nat.sh
       mode=770
-  - file:
-      dest=/root/nat.sh
-      state=absent
 # install charles proxy
   - apt_key:
       url=http://www.charlesproxy.com/packages/apt/PublicKey
@@ -84,13 +81,6 @@
   - apt:
       name=charles-proxy
       state=present
-  - copy:
-      src=charles.sh
-      dest=/usr/local/bin/charles.sh
-      mode=770
-  - file:
-      dest=/root/charles.sh
-      state=absent
 # nat manager
   - copy:
       src=nat.crontab
