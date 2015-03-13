@@ -81,6 +81,9 @@
   - apt:
       name=charles-proxy
       state=present
+  - copy:
+      src=charles.sh
+      dest=/root/charles.sh
 # nat manager
   - copy:
       src=nat.crontab
