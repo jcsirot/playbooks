@@ -8,17 +8,6 @@ then
 	exit 1
 fi
 
-case ${1:-usage} in
-	start)
-		iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8888
-		;;
-	stop)
-		iptables -t nat -D PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8888
-		;;
-	status)
-		true
-		;;
-	*)
-		echo "usage: $(basename $0) (start|stop|status)"
-		exit 1
-esac
+/sbin/iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8888
+/usr/bin/charles
+/sbin/iptables -t nat -D PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8888
