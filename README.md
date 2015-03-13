@@ -49,12 +49,12 @@ Beware! to keep things simple the subdirs *are not roles*
 
 ### USAGE ###
 
-Immediate use, example:
+for immediate use, example:
 
 	$ git clone $this
 	$ ansible-playbook -i hosts playbook.yml --extra-vars "osx_hostname=foobar" --ask-sudo-pass
 
-In another project:
+Integrated into another project, example:
 
   1. First, add this repository as a submodule:
 
