@@ -23,6 +23,3 @@
   - name: clear system log archives
     command: find /var/log -type f -name "*.log.*" -delete
     sudo: yes
-  - name: clear system caches
-    command: find /Library/Logs -mindepth 1 -delete
-    sudo: yes
