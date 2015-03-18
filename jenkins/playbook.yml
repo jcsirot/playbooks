@@ -69,12 +69,6 @@
   - copy:
       src={{ jenkins_sshpath }}/
       dest=/var/lib/jenkins/.ssh/
-  # copy patched plugins
-  - copy:
-      src=plugins/
-      dest=/var/lib/jenkins/plugins/
-    notify:
-    - restart jenkins # FIXME: necessary?
   # start service
   - service:
       name=jenkins
