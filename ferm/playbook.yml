@@ -1,0 +1,19 @@
+---
+- name: enable ferm mods -- put your mods in /etc/ferm.d
+  hosts: debian:&ferm
+  handlers:
+  - name: reload ferm
+    service:
+      name=ferm
+      state=reloaded
+  tasks:
+  - file:
+      path=/etc/ferm.d
+      state=directory
+  - name: push current configuration as mod
+    shell: if test ! -e /etc/ferm.d/default; then mv /etc/ferm.conf /etc/ferm.d/default; fi
+  - copy:
+      src=ferm.conf
+      dest=/etc/ferm.conf
+    notify:
+    - reload ferm

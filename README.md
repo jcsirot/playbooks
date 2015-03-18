@@ -24,13 +24,14 @@ Just include the main playbook, put your nodes in the service groups you need, a
   * debian / __docker__
     * `docker_listen_address`, defaults to 127.0.0.1
     * `docker_listen_port`, defaults to 4243
+  * debian/ __ferm__: enable ferm mods
   * ubuntu / __gitd__
     * `gitd_authorized_keys_path`: local path to authorized_keys file setup for the remote ssh git user
   * ubuntu|debian / __jenkins__|__jenkinslts__
-    * `jenkins_memory`: set how much memory the JVM can use, defaults to 256m
-    * `jenkins_sshpath`: local path used to populate used the remote ~jenkins/.ssh directory
-    * `jenkins_listen_port`: set the port to bind, defaults to 8080
-    * `jenkins_listen_address`: set the address to bind, defaults to 127.0.0.1
+    * `jenkins_memory`: set how much memory the JVM can use, defaults to "256m"
+    * `jenkins_sshpath`: local path used to populate the remote ~jenkins/.ssh directory
+    * `jenkins_listen_port`: set the port to bind, defaults to "8080"
+    * `jenkins_listen_address`: set the address to bind, defaults to "127.0.0.1"
   * debian / __nexus__
   * ubuntu / __nginx__
     * `nginx_default_path`: local path to the default file copied to /etc/nginx/sites-enabled/default

@@ -1,4 +1,10 @@
 ---
+- name: set defaults
+  hosts: jenkins*
+  vars:
+    jenkins_memory_default: "256m"
+    jenkins_listen_port_default: "8080"
+    jenkins_listen_address_default: "127.0.0.1"
 
 ########################
 # setup LTS repository #
@@ -71,3 +77,22 @@
       name=jenkins
       state=started
       enabled=yes
+
+########################
+# add jenkins ferm mod #
+########################
+- hosts: debian:&ferm:&jenkins*
+  handlers:
+  - name: reload ferm
+    service:
+      name=ferm
+      state=reloaded
+  tasks:
+  - template:
+      src=ferm.j2
+      dest=/etc/ferm.d/jenkins
+    notify:
+    - reload ferm
+  - apt:
+      name=git
+      state=present
