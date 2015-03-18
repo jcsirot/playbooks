@@ -41,7 +41,7 @@
     notify:
     - restart pypiserver
   - copy:
-      src={{ pypiserver_htaccess_path }}
+      src={{ pypiserver_htaccess_path|default(pypiserver_htaccess_path_default) }}
       dest=/home/pypi
       owner=pypi
       group=pypi

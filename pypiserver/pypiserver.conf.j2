@@ -10,8 +10,8 @@ start on startup
 stop on shutdown
 
 exec /usr/local/bin/pypi-server\
-	--interface {{ pypiserver_listen_address }}\
-	--port {{ pypiserver_listen_port }}\
+	--interface {{ pypiserver_listen_address|default(pypiserver_listen_address_default) }}\
+	--port {{ pypiserver_listen_port|default(pypiserver_listen_port_default) }}\
 	--passwords /home/pypi/htaccess\
 	--overwrite\
 	--disable-fallback\

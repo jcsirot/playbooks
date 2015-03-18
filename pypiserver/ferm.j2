@@ -2,7 +2,7 @@
 table filter {
 	chain INPUT {
 		mod conntrack ctstate NEW ACCEPT {
-			proto tcp dport {{ pypiserver_listen_port }};
+			proto tcp dport {{ pypiserver_listen_port|default(pypiserver_listen_port_default) }};
 		}
 	}
 }
