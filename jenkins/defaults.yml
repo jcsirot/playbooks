@@ -1,6 +1,6 @@
 ---
-jenkins_memory: "256m"
-# jenkins_sshpath:
-jenkins_listen_port: "8080"
-# jenkins_archive_path:
-jenkins_listen_address: "127.0.0.1"
+jenkins_memory_default: "256m"
+# jenkins_sshpath_default:
+jenkins_listen_port_default: "8080"
+# jenkins_archive_path_default:
+jenkins_listen_address_default: "127.0.0.1"

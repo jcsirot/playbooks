@@ -1,5 +1,7 @@
 ---
 - hosts: ubuntu:&nginx
+  vars_files:
+  - defaults.yml
   handlers:
   - name: reload nginx
     service:
@@ -11,12 +13,12 @@
       state=present
   - name: copy nginx default conf
     copy:
-      src={{ nginx_default_path }}
+      src={{ nginx_default_path|default(nginx_default_path_default) }}
       dest=/etc/nginx/sites-enabled/
     notify:
     - reload nginx
   - copy:
-      src={{ nginx_crt_path }}/
+      src={{ nginx_crt_path|default(nginx_crt_path_default) }}/
       dest=/etc/nginx/crt
   - service:
       name=nginx

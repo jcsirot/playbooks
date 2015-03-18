@@ -5,7 +5,7 @@
 
 # Use DOCKER_OPTS to modify the daemon startup options.
 #DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
-DOCKER_OPTS="-H tcp://{{ docker_listen_address|default("127.0.0.1") }}:{{ docker_listen_port|default(4243) }} -H unix:///var/run/docker.sock"
+DOCKER_OPTS="-H tcp://{{ docker_listen_address|default(docker_listen_address_default) }}:{{ docker_listen_port|default(docker_listen_port_default) }} -H unix:///var/run/docker.sock"
 
 # If you need Docker to use an HTTP proxy, it can also be specified here.
 #export http_proxy="http://127.0.0.1:3128/"

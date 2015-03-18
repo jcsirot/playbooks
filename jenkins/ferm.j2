@@ -2,7 +2,7 @@
 table filter {
 	chain INPUT {
 		mod conntrack ctstate NEW ACCEPT {
-			proto tcp dport {{ jenkins_listen_port }};
+			proto tcp dport {{ jenkins_listen_port|default(jenkins_listen_port_default) }};
 		}
 	}
 }

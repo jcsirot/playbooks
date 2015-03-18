@@ -46,7 +46,7 @@
   - stat: path=/var/lib/jenkins
     register: st
   - unarchive:
-      src={{ jenkins_archive_path }}
+      src={{ jenkins_archive_path|default(jenkins_archive_path_default) }}
       dest=/var/lib/jenkins
     when: not st.stat.exists
   # install jenkins
@@ -67,7 +67,7 @@
       owner=jenkins
       group=jenkins
   - copy:
-      src={{ jenkins_sshpath }}/
+      src={{ jenkins_sshpath|default(jenkins_sshpath_default) }}/
       dest=/var/lib/jenkins/.ssh/
   # start service
   - service:
