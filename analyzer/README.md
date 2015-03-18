@@ -26,7 +26,7 @@ On your workstation:
 Usage
 -----
 
-On ubuntu, install remina, on OS/X, install RDP from the appstore.
+On ubuntu, install remmina, on OS/X, install RDP from the appstore.
 
 On any RDP client, add an entry to connect to $LAPTOP_IP, login: trudy, pass: trudy.
 
