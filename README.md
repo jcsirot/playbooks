@@ -35,8 +35,8 @@ Beware! to keep things simple the subdirs *are not roles*
     * `nginx_default_path`: local path to the default file copied to /etc/nginx/sites-enabled/default
     * `nginx_crt_path`: local path to the directory containing the certificates
   * macosx / __osx__, set system names and cleanup user logs, user caches, system logs, system caches
-    * `osx_hostname`
-    * `osx_computername`, defaults to osx_hostname
+    * `osx_computername`
+    * `osx_hostname`, defaults to osx_computername + ".local"
     * `osx_localhostname`, defaults to osx_hostname
   * ubuntu|debian / __pypiserver__
     * `pypiserver_htaccess_path`: local path to the htaccess file
@@ -51,7 +51,7 @@ Beware! to keep things simple the subdirs *are not roles*
 for immediate use, example:
 
 	$ git clone $this
-	$ ansible-playbook -i localhost playbook.yml --extra-vars "osx_hostname=foobar" --ask-sudo-pass
+	$ ansible-playbook -i localhost playbook.yml --extra-vars "osx_computername=C02" --ask-sudo-pass
 
 Integrated into another project, example:
 

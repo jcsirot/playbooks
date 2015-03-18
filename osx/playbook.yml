@@ -1,14 +1,14 @@
 ---
 - hosts: macosx
   tasks:
-  - name: set HostName
-    command: scutil --set HostName {{ osx_hostname }}
-    sudo: yes
   - name: set ComputerName
-    command: scutil --set ComputerName {{ osx_computername|default(osx_hostname) }}
+    command: scutil --set ComputerName {{ osx_computername }}
+    sudo: yes
+  - name: set HostName
+    command: scutil --set HostName {{ osx_hostname|default(osx_computername + ".local") }}
     sudo: yes
   - name: set LocalHostName -- used by Bonjour and visible through file sharing services like AirDrop
-    command: scutil --set LocalHostName {{ osx_localhostname|default(osx_hostname) }}
+    command: scutil --set LocalHostName {{ osx_localhostname|default(osx_computername) }}
     sudo: yes
   - name: clear user logs
     command: find ~/Library/Logs -mindepth 1 -delete
