@@ -42,6 +42,13 @@
   - apt:
       name=openjdk-7-jre-headless
       state=present
+  # restore jenkins data on a new installation
+  - stat: path=/var/lib/jenkins
+    register: st
+  - unarchive:
+      src={{ jenkins_archive_path }}
+      dest=/var/lib/jenkins
+    when: not st.stat.exists
   # install jenkins
   - apt:
       name=jenkins

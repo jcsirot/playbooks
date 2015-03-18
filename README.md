@@ -31,6 +31,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
     * `jenkins_memory`: set how much memory the JVM can use, defaults to "256m"
     * `jenkins_sshpath`: local path used to populate the remote ~jenkins/.ssh directory
     * `jenkins_listen_port`: set the port to bind, defaults to "8080"
+    * `jenkins_archive_path`: path to a /var/lib/jenkins backup archive to restore on a new installation
     * `jenkins_listen_address`: set the address to bind, defaults to "127.0.0.1"
   * debian / __nexus__
   * ubuntu / __nginx__
