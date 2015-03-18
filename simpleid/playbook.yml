@@ -42,3 +42,16 @@
       name=php5-fpm
       state=started
       enabled=yes
+
+- hosts: ubuntu:&nosimpleid
+  tasks:
+  - apt:
+      name=php5-pfm
+      state=absent
+  - file:
+      path={{ item }}
+      state=absent
+    with_items:
+    - /var/log/simpleid
+    - /var/cache/simpleid
+    - /root/simpleid-0.9.1.tar.gz
