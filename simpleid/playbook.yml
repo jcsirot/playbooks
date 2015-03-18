@@ -46,7 +46,7 @@
 - hosts: ubuntu:&nosimpleid
   tasks:
   - apt:
-      name=php5-pfm
+      name=php5-fpm
       state=absent
   - file:
       path={{ item }}
