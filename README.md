@@ -1,6 +1,6 @@
 A collection of simple playbooks for common services.
 
-Beware! to keep things simple the subdirs *are not roles*
+Beware! to keep things simple the subdirs *are not roles*,
 as defined [here](http://docs.ansible.com/playbooks_roles.html#roles).
 Just include the main playbook, put your nodes in the service groups you need, and you're good to go.
 
