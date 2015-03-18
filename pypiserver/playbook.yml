@@ -1,5 +1,7 @@
 ---
 - hosts: debian:ubuntu:&pypiserver
+  vars_files:
+  - defaults.yml
   handlers:
   - name: restart pypiserver
     service:
@@ -50,3 +52,24 @@
       name=pypiserver
       state=started
       enabled=yes
+
+########################
+# add jenkins ferm mod #
+########################
+- hosts: debian:&ferm:&pypiserver
+  vars_files:
+  - defaults.yml
+  handlers:
+  - name: reload ferm
+    service:
+      name=ferm
+      state=reloaded
+  tasks:
+  - template:
+      src=ferm.j2
+      dest=/etc/ferm.d/pypiserver
+    notify:
+    - reload ferm
+  - apt:
+      name=git
+      state=present

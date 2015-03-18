@@ -1,5 +1,7 @@
 ---
 - hosts: ubuntu:&btsync
+  vars_files:
+  - defaults.yml
   handlers:
   - name: restart btsync
     service:

@@ -28,7 +28,7 @@
 */
   "webui" :
   {
-    "listen" : "{{ btsync_listen_address|default('127.0.0.1') }}:{{ btsync_listen_port|default(8888) }}",
+    "listen" : "{{ btsync_listen_address }}:{{ btsync_listen_port }}",
     "login" : "{{ btsync_login }}",
     "password" : "{{ btsync_password }}"
   }

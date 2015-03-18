@@ -1,0 +1,7 @@
+---
+# btsync_device_name:
+# btsync_login:
+# btsync_password:
+# btsync_arch:
+btsync_listen_address: "127.0.0.1"
+btsync_listen_port: "8888"

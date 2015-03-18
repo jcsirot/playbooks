@@ -1,5 +1,7 @@
 ---
 - hosts: debian:&docker
+  vars_files:
+  - defaults.yml
   handlers:
   - name: reload docker
     service:
@@ -29,3 +31,24 @@
       name=docker
       state=started
       enabled=yes
+
+########################
+# add docker ferm mod #
+########################
+- hosts: debian:&ferm:&docker
+  vars_files:
+  - defaults.yml
+  handlers:
+  - name: reload ferm
+    service:
+      name=ferm
+      state=reloaded
+  tasks:
+  - template:
+      src=ferm.j2
+      dest=/etc/ferm.d/docker
+    notify:
+    - reload ferm
+  - apt:
+      name=git
+      state=present
