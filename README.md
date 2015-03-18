@@ -49,10 +49,10 @@ Just include the main playbook, put your nodes in the service groups you need, a
 
 ### USAGE ###
 
-for immediate use, example:
+For immediate use with pure platform-based playbooks (only __osx__ so far), example:
 
 	$ git clone $this
-	$ ansible-playbook -i localhost playbook.yml --extra-vars "osx_computername=C02" --ask-sudo-pass
+	$ ansible-playbook -i localhost playbook.yml --extra-vars "osx_computername=foobar" --ask-sudo-pass
 
 Integrated into another project, example:
 
