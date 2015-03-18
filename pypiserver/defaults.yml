@@ -1,4 +1,4 @@
 ---
 # pypiserver_htaccess_path:
-pypiserver_listen_port: "8080"
-pypiserver_listen_address: "127.0.0.1"
+pypiserver_listen_port: {{ pypiserver_listen_port|default("8080") }}
+pypiserver_listen_address: {{ pypiserver_listen_address|default("127.0.0.1") }}

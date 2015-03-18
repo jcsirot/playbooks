@@ -9,7 +9,7 @@
       state=started
       enabled=yes
 
-- hosts: ubuntu:&noapache
+- hosts: ubuntu:&no-apache
   tasks:
   - apt:
       name=apache2

@@ -43,7 +43,7 @@
       state=started
       enabled=yes
 
-- hosts: ubuntu:&nosimpleid
+- hosts: ubuntu:&no-simpleid
   tasks:
   - apt:
       name=php5-fpm
