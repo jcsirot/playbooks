@@ -16,5 +16,5 @@
       dest=/var/tmp
   - unarchive:
       src=/var/tmp/kibana-4.0.1-linux-x64.tar.gz
-      dest=/var/tmp/kibana
+      dest=/var/tmp/
   - command: /var/tmp/kibana/bin/kibana
