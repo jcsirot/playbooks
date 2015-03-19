@@ -14,8 +14,8 @@
   - get_url:
       url="https://download.elasticsearch.org/kibana/kibana/kibana-4.0.1-linux-x64.tar.gz"
       dest=/var/tmp
+  - command: test -e /var/tmp/kibana-4.0.1-linux-x64.tar.gz
 #  - unarchive:
 #      src=/var/tmp/kibana-4.0.1-linux-x64.tar.gz
 #      dest=/var/tmp/
   - command: tar -x -f /var/tmp/kibana-4.0.1-linux-x64.tar.gz -C /var/tmp
-  - command: /var/tmp/kibana-4.0.1-linux-x64/bin/kibana
