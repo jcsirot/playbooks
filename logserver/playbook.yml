@@ -1,0 +1,13 @@
+---
+- hosts: debian:&logserver
+  tasks:
+  - apt_key:
+      url=https://packages.elasticsearch.org/GPG-KEY-elasticsearch
+      state=present
+  - apt_repository:
+      repo="deb http://packages.elasticsearch.org/elasticsearch/1.4/debian stable main"
+      state=present
+      update_cache=yes
+  - apt:
+      name=elasticsearch
+      state=present
