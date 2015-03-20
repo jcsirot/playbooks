@@ -24,6 +24,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
   * debian / __docker__
     * `docker_listen_address`, defaults to "127.0.0.1"
     * `docker_listen_port`, defaults to "4243"
+  * debian/ __elk__: install the logstash/elasticsearch/kibana stack, you'll still need a webserver for kibana.
   * debian/ __ferm__: enable ferm "mods" (i.e. /etc/ferm.d instead of a single ferm.conf)
   * ubuntu / __gitd__
     * `gitd_authorized_keys_path`: local path to authorized_keys file setup for the remote ssh git user

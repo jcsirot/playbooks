@@ -1,5 +1,5 @@
 ---
-- hosts: ubuntu:&nginx
+- hosts: debian:ubuntu:&nginx
   vars_files:
   - defaults.yml
   handlers:
