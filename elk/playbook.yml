@@ -16,8 +16,12 @@
       state=present
       update_cache=yes
   - apt:
-      name=elasticsearch
+      name=elasticsearch=1.4.4
       state=present
+  - service:
+      name=elasticsearch
+      state=started
+      enabled=yes
   ##########
   # kibana #
   ##########
