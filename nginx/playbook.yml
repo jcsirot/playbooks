@@ -13,8 +13,8 @@
       state=present
   - name: copy nginx conf
     copy:
-      src={{ nginx_confd_path|default(nginx_confd_path_default) }}/
-      dest=/etc/nginx/conf.d/
+      src={{ nginx_sites_path|default(nginx_sites_path_default) }}/
+      dest=/etc/nginx/sites-enabled/
     notify:
     - reload nginx
   - copy:
