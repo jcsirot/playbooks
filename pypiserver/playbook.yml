@@ -56,7 +56,7 @@
       dest=/etc/pypiserver
       owner=pypiserver
       group=pypiserver
-      mode=700
+      mode=600
     notify:
     - restart pypiserver
   # start service
