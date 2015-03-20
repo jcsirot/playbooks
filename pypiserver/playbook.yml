@@ -68,7 +68,6 @@
   - template:
       src=ferm.j2
       dest=/etc/ferm.d/pypiserver
-    when:
-      {{ pypiserver_listen_address|default(pypiserver_listen_address_default) }} != "127.0.0.1"
+    when: {{ pypiserver_listen_address|default(pypiserver_listen_address_default) }} != "127.0.0.1"
     notify:
     - reload ferm
