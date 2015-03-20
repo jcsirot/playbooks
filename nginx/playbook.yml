@@ -11,10 +11,10 @@
   - apt:
       name=nginx
       state=present
-  - name: copy nginx default conf
+  - name: copy nginx conf
     copy:
-      src={{ nginx_default_path|default(nginx_default_path_default) }}
-      dest=/etc/nginx/sites-enabled/
+      src={{ nginx_confd_path|default(nginx_confd_path_default) }}/
+      dest=/etc/nginx/conf.d/
     notify:
     - reload nginx
   - copy:

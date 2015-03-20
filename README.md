@@ -36,7 +36,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
     * `jenkins_listen_address`: set the address to bind, defaults to "127.0.0.1"
   * debian / __nexus__
   * ubuntu / __nginx__
-    * `nginx_default_path`: local path to the default file copied to /etc/nginx/sites-enabled/default
+    * `nginx_confd_path`: local path to a conf.d/ directory, which content is copied into /etc/nginx/conf.d/
     * `nginx_crt_path`: local path to the directory containing the certificates
   * macosx / __osx__, set system names and cleanup user logs, user caches, system logs, system caches
     * `osx_computername`

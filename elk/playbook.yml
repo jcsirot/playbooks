@@ -25,10 +25,16 @@
   ##########
   # kibana #
   ##########
+  - file:
+      mode=755
+      path=/opt
+      owner=root
+      group=root
+      state=directory
   - get_url:
       url=https://download.elasticsearch.org/kibana/kibana/kibana-4.0.1-linux-x64.tar.gz
       dest=/var/tmp
   - unarchive:
       src=/var/tmp/kibana-4.0.1-linux-x64.tar.gz
-      dest=/var/tmp/
+      dest=/opt
       copy=no
