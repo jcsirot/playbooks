@@ -9,10 +9,10 @@
 - include: apache/playbook.yml
 - include: btsync/playbook.yml
 - include: docker/playbook.yml
+- include: elk/playbook.yml
 - include: ferm/playbook.yml
 - include: gitd/playbook.yml
 - include: jenkins/playbook.yml
-- include: logserver/playbook.yml
 - include: nexus/playbook.yml
 - include: nginx/playbook.yml
 - include: osx/playbook.yml

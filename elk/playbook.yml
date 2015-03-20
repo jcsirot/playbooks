@@ -1,6 +1,10 @@
 ---
-- hosts: debian:&logserver
+- hosts: debian:&elk
   tasks:
+  # pre-install JRE7 to bypass JRE6
+  - apt:
+      name=openjdk-7-jre-headless
+      state=present
   #################
   # elasticsearch #
   #################
