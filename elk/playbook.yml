@@ -33,6 +33,11 @@
       dest=/var/tmp/
       copy=no
   - file:
+      path=/var/www
+      owner=www-data
+      group=www-data
+      state=directory
+  - file:
       src=/var/tmp/kibana-4.0.1-linux-x64/src/public
       dest=/var/www/kibana
       state=link
