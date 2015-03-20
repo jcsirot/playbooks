@@ -2,10 +2,10 @@
 - name: enable ferm mods -- put your mods in /etc/ferm.d
   hosts: debian:&ferm
   handlers:
-  - name: reload ferm
+  - name: restart ferm
     service:
       name=ferm
-      state=reloaded
+      state=restarted
   tasks:
   - file:
       path=/etc/ferm.d
@@ -16,4 +16,4 @@
       src=ferm.conf
       dest=/etc/ferm/ferm.conf
     notify:
-    - reload ferm
+    - restart ferm

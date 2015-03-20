@@ -38,3 +38,5 @@
       src=/var/tmp/kibana-4.0.1-linux-x64.tar.gz
       dest=/opt
       copy=no
+      owner=www-data
+      group=www-data
