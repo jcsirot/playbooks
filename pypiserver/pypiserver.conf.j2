@@ -3,8 +3,8 @@
 
 description "PyPI (Python Package Index) Server"
 
-setuid pypi
-setgid pypi
+setuid pypiserver
+setgid pypiserver
 
 start on startup
 stop on shutdown
@@ -12,9 +12,9 @@ stop on shutdown
 exec /usr/local/bin/pypi-server\
 	--interface {{ pypiserver_listen_address|default(pypiserver_listen_address_default) }}\
 	--port {{ pypiserver_listen_port|default(pypiserver_listen_port_default) }}\
-	--passwords /home/pypi/htaccess\
+	--passwords /etc/pypiserver/htaccess\
 	--overwrite\
 	--disable-fallback\
-	/home/pypi/packages
+	/var/cache/pypiserver
 
 respawn

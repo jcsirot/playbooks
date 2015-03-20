@@ -17,14 +17,18 @@
     with_items:
     - pypiserver
     - passlib
+  # create user
   - user:
-      name=pypi
-      shell=/bin/false
+      name=pypiserver
+      state=present
+      system=yes
+  # create storage directory
   - file:
-      name=/home/pypi/packages
+      name=/var/cache/pypiserver
       state=directory
-      owner=pypi
-      group=pypi
+      owner=pypiserver
+      group=pypiserver
+  # create service manifests
   - template:
       src=pypiserver.conf.j2
       dest=/etc/init/pypiserver.conf
@@ -40,14 +44,22 @@
     - ansible_distribution == "Debian"
     notify:
     - restart pypiserver
+  # setup configuration
+  - file:
+      name=/etc/pypiserver
+      state=directory
+      owner=pypiserver
+      group=pypiserver
+      mode=700
   - copy:
       src={{ pypiserver_htaccess_path|default(pypiserver_htaccess_path_default) }}
-      dest=/home/pypi
-      owner=pypi
-      group=pypi
+      dest=/etc/pypiserver
+      owner=pypiserver
+      group=pypiserver
       mode=700
     notify:
     - restart pypiserver
+  # start service
   - service:
       name=pypiserver
       state=started
