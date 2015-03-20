@@ -70,6 +70,3 @@
       dest=/etc/ferm.d/pypiserver
     notify:
     - reload ferm
-  - apt:
-      name=git
-      state=present

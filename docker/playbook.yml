@@ -49,6 +49,3 @@
       dest=/etc/ferm.d/docker
     notify:
     - reload ferm
-  - apt:
-      name=git
-      state=present

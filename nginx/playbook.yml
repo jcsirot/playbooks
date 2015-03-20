@@ -42,6 +42,3 @@
       dest=/etc/ferm.d/nginx
     notify:
     - reload ferm
-  - apt:
-      name=git
-      state=present
