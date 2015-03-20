@@ -47,6 +47,6 @@
   - template:
       src=ferm.j2
       dest=/etc/ferm.d/docker
-    when: {{ docker_listen_address|default(docker_listen_address_default) }} != "127.0.0.1"
+    when: "{{ docker_listen_address|default(docker_listen_address_default) }}" != "127.0.0.1"
     notify:
     - reload ferm
