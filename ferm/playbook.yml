@@ -10,7 +10,8 @@
   - copy:
       src=ferm.conf
       dest=/etc/ferm/ferm.conf
-  - command: rm -vrf /var/cache/ferm
+  - name: clear ferm cache
+    command: rm -vrf /var/cache/ferm
   - service:
       name=ferm
       state=restarted

@@ -1,5 +1,7 @@
 ---
 - hosts: debian:&elk
+  vars:
+    kibana_version:"4.0.1-linux-x64"
   tasks:
   # pre-install JRE7 to bypass JRE6
   - apt:
@@ -32,11 +34,15 @@
       group=root
       state=directory
   - get_url:
-      url=https://download.elasticsearch.org/kibana/kibana/kibana-4.0.1-linux-x64.tar.gz
+      url="https://download.elasticsearch.org/kibana/kibana/kibana-{{ kibana_version }}.tar.gz"
       dest=/var/tmp
   - unarchive:
-      src=/var/tmp/kibana-4.0.1-linux-x64.tar.gz
+      src="/var/tmp/kibana-{{ kibana_version }}.tar.gz"
       dest=/opt
       copy=no
+  - file:
+      path="/opt/kibana-{{ kibana_version }}/src/public"
       owner=www-data
       group=www-data
+      recurse=yes
+      state=directory
