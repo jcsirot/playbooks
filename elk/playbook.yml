@@ -1,7 +1,7 @@
 ---
 - hosts: debian:&elk
   vars:
-    kibana_version:"4.0.1-linux-x64"
+    kibana_version: "4.0.1-linux-x64"
   tasks:
   # pre-install JRE7 to bypass JRE6
   - apt:
