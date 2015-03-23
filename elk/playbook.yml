@@ -49,6 +49,11 @@
       src: sysv.j2
       dest: /etc/init.d/kibana
       mode: "755"
+  - name: kibana is started
+    service:
+      name: kibana
+      state: started
+      enabled: yes
 
 ####################
 # add ELK ferm mod #
