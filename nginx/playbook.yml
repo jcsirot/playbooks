@@ -1,4 +1,7 @@
 ---
+#################
+# install nginx #
+#################
 - hosts: debian:ubuntu:&nginx
   vars_files:
   - defaults.yml
@@ -25,6 +28,20 @@
       state=started
       enabled=yes
 
+###################
+# uninstall nginx #
+###################
+- hosts: debian:ubuntu:&no-nginx
+  tasks:
+  - service:
+      name=nginx
+      state=stopped
+      enabled=no
+  - apt:
+      name=nginx
+      state=absent
+      purge=yes
+
 ######################
 # add nginx ferm mod #
 ######################
@@ -40,5 +57,21 @@
   - template:
       src=ferm.j2
       dest=/etc/ferm.d/nginx
+    notify:
+    - reload ferm
+
+#########################
+# remove nginx ferm mod #
+#########################
+- hosts: debian:&ferm:&no-nginx
+  handlers:
+  - name: reload ferm
+    service:
+      name=ferm
+      state=reloaded
+  tasks:
+  - file:
+      path=/etc/ferm.d/nginx
+      state=absent
     notify:
     - reload ferm
