@@ -2,32 +2,32 @@
 - hosts: debian:&nexus
   tasks:
   - user:
-      name=nexus
-      state=present
-      shell=/bin/bash
+      name: nexus
+      state: present
+      shell: /bin/bash
   - get_url:
-      url=http://download.sonatype.com/nexus/oss/nexus-latest-bundle.tar.gz
-      dest=/home/nexus/
+      url: http://download.sonatype.com/nexus/oss/nexus-latest-bundle.tar.gz
+      dest: /home/nexus/
     sudo: yes
     sudo_user: nexus
   - unarchive:
-      copy=no
-      src=/home/nexus/nexus-latest-bundle.tar.gz
-      dest=/home/nexus/
-      creates=/home/nexus/nexus-2.11.2-03
+      copy: no
+      src: /home/nexus/nexus-latest-bundle.tar.gz
+      dest: /home/nexus/
+      creates: /home/nexus/nexus-2.11.2-03
     sudo: yes
     sudo_user: nexus
   - file:
-      src=/home/nexus/nexus-2.11.2-03/bin/nexus
-      dest=/etc/init.d/nexus
-      state=link
+      src: /home/nexus/nexus-2.11.2-03/bin/nexus
+      dest: /etc/init.d/nexus
+      state: link
   - apt:
-      name=openjdk-7-jre
-      state=present
+      name: openjdk-7-jre
+      state: present
   - service:
-      name=nexus
-      state=started
-      enabled=yes
+      name: nexus
+      state: started
+      enabled: yes
     sudo: yes
     sudo_user: nexus # you can now access nexus at <listen_address>:<listen_port>/nexus
 

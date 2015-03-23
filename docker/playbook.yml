@@ -5,32 +5,32 @@
   handlers:
   - name: reload docker
     service:
-      name=docker
-      state=reloaded
+      name: docker
+      state: reloaded
   tasks:
 #  - apt_repository:
-#      repo='deb http://http.debian.net/debian wheezy-backports main'
-#      state=present
-#      update_cache=yes
+#      repo: "deb http://http.debian.net/debian wheezy-backports main"
+#      state: present
+#      update_cache: yes
 #  - apt:
-#      name=linux-image-amd64
-#      state=present
+#      name: linux-image-amd64
+#      state: present
   - get_url:
-      url=https://get.docker.com/
-      dest=/root/install_docker.sh
-      mode=700
+      url: https://get.docker.com/
+      dest: /root/install_docker.sh
+      mode: 700
   - command: /root/install_docker.sh
     args:
       creates: /usr/bin/docker
   - template:
-      src=settings.j2
-      dest=/etc/default/docker
+      src: settings.j2
+      dest: /etc/default/docker
     notify:
     - reload docker
   - service:
-      name=docker
-      state=started
-      enabled=yes
+      name: docker
+      state: started
+      enabled: yes
 
 #######################
 # add docker ferm mod #
@@ -41,12 +41,12 @@
   handlers:
   - name: reload ferm
     service:
-      name=ferm
-      state=reloaded
+      name: ferm
+      state: reloaded
   tasks:
   - template:
-      src=ferm.j2
-      dest=/etc/ferm.d/docker
-    when: "'{{ docker_listen_address|default(docker_listen_address_default) }}'' != '127.0.0.1'"
+      src: ferm.j2
+      dest: /etc/ferm.d/docker
+    when: "'{{ docker_listen_address|default(docker_listen_address_default) }}' !:  '127.0.0.1'"
     notify:
     - reload ferm

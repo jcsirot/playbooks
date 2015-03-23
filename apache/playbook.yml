@@ -2,16 +2,16 @@
 - hosts: ubuntu:&apache
   tasks:
   - apt:
-      name=apache2
-      state=present
+      name: apache2
+      state: present
   - service:
-      name=apache2
-      state=started
-      enabled=yes
+      name: apache2
+      state: started
+      enabled: yes
 
 - hosts: ubuntu:&no-apache
   tasks:
   - apt:
-      name=apache2
-      state=absent
-      purge=yes
+      name: apache2
+      state: absent
+      purge: yes

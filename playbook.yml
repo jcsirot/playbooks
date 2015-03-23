@@ -2,7 +2,7 @@
 - name: put nodes into their O/S group
   hosts: all
   tasks:
-  - group_by: key={{ ansible_distribution|lower }}
+  - group_by: key="{{ ansible_distribution|lower }}"
   - debug: msg="{{ ansible_distribution|lower }}"
 
 - include: analyzer/playbook.yml

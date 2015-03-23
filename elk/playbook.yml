@@ -5,49 +5,49 @@
   tasks:
   # pre-install JRE7 to bypass JRE6
   - apt:
-      name=openjdk-7-jre-headless
-      state=present
+      name: openjdk-7-jre-headless
+      state: present
   #################
   # elasticsearch #
   #################
   - apt_key:
-      url=https://packages.elasticsearch.org/GPG-KEY-elasticsearch
-      state=present
+      url: https://packages.elasticsearch.org/GPG-KEY-elasticsearch
+      state: present
   - apt_repository:
-      repo="deb http://packages.elasticsearch.org/elasticsearch/1.4/debian stable main"
-      state=present
-      update_cache=yes
+      repo: "deb http://packages.elasticsearch.org/elasticsearch/1.4/debian stable main"
+      state: present
+      update_cache: yes
   - apt:
-      name=elasticsearch=1.4.4
-      state=present
+      name: elasticsearch:1.4.4
+      state: present
   - service:
-      name=elasticsearch
-      state=started
-      enabled=yes
+      name: elasticsearch
+      state: started
+      enabled: yes
   ##########
   # kibana #
   ##########
   - file:
-      mode=755
-      path=/opt
-      owner=root
-      group=root
-      state=directory
+      mode: 755
+      path: /opt
+      owner: root
+      group: root
+      state: directory
   - get_url:
-      url="https://download.elasticsearch.org/kibana/kibana/kibana-{{ kibana_version }}.tar.gz"
-      dest=/var/tmp
+      url: "https://download.elasticsearch.org/kibana/kibana/kibana-{{ kibana_version }}.tar.gz"
+      dest: /var/tmp
   - unarchive:
-      src="/var/tmp/kibana-{{ kibana_version }}.tar.gz"
-      dest=/opt
-      copy=no
+      src: "/var/tmp/kibana-{{ kibana_version }}.tar.gz"
+      dest: /opt
+      copy: no
   - user:
-      name=kibana
-      state=present
-      system=yes
+      name: kibana
+      state: present
+      system: yes
   - template:
-      src=sysv.j2
-      dest=/etc/init.d/kibana
-      mode=755
+      src: sysv.j2
+      dest: /etc/init.d/kibana
+      mode: 755
 
 ####################
 # add ELK ferm mod #
@@ -58,12 +58,12 @@
   handlers:
   - name: reload ferm
     service:
-      name=ferm
-      state=reloaded
+      name: ferm
+      state: reloaded
   tasks:
   - template:
-      src=ferm.j2
-      dest=/etc/ferm.d/elk
-    when: "'{{ elk_listen_address|default(elk_listen_address_default) }}' != '127.0.0.1'"
+      src: ferm.j2
+      dest: /etc/ferm.d/elk
+    when: "'{{ elk_listen_address|default(elk_listen_address_default) }}' !:  '127.0.0.1'"
     notify:
     - reload ferm

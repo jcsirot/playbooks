@@ -8,25 +8,25 @@
   handlers:
   - name: reload nginx
     service:
-      name=nginx
-      state=reloaded
+      name: nginx
+      state: reloaded
   tasks:
   - apt:
-      name=nginx
-      state=present
+      name: nginx
+      state: present
   - name: copy nginx conf
     copy:
-      src={{ nginx_sites_path|default(nginx_sites_path_default) }}/
-      dest=/etc/nginx/sites-enabled/
+      src: "{{ nginx_sites_path|default(nginx_sites_path_default) }}/"
+      dest: /etc/nginx/sites-enabled/
     notify:
     - reload nginx
   - copy:
-      src={{ nginx_crt_path|default(nginx_crt_path_default) }}/
-      dest=/etc/nginx/crt
+      src: "{{ nginx_crt_path|default(nginx_crt_path_default) }}/"
+      dest: /etc/nginx/crt
   - service:
-      name=nginx
-      state=started
-      enabled=yes
+      name: nginx
+      state: started
+      enabled: yes
 
 ###################
 # uninstall nginx #
@@ -34,13 +34,13 @@
 - hosts: debian:ubuntu:&no-nginx
   tasks:
   - service:
-      name=nginx
-      state=stopped
-      enabled=no
+      name: nginx
+      state: stopped
+      enabled: no
   - apt:
-      name=nginx
-      state=absent
-      purge=yes
+      name: nginx
+      state: absent
+      purge: yes
 
 ######################
 # add nginx ferm mod #
@@ -51,12 +51,12 @@
   handlers:
   - name: reload ferm
     service:
-      name=ferm
-      state=reloaded
+      name: ferm
+      state: reloaded
   tasks:
   - template:
-      src=ferm.j2
-      dest=/etc/ferm.d/nginx
+      src: ferm.j2
+      dest: /etc/ferm.d/nginx
     notify:
     - reload ferm
 
@@ -67,11 +67,11 @@
   handlers:
   - name: reload ferm
     service:
-      name=ferm
-      state=reloaded
+      name: ferm
+      state: reloaded
   tasks:
   - file:
-      path=/etc/ferm.d/nginx
-      state=absent
+      path: /etc/ferm.d/nginx
+      state: absent
     notify:
     - reload ferm

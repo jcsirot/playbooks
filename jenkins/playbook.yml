@@ -6,25 +6,25 @@
 - hosts: debian:ubuntu:&jenkinslts
   tasks:
   - apt_key:
-      url=http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key
-      state=present
+      url: http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key
+      state: present
   - apt_repository:
-      repo='deb http://pkg.jenkins-ci.org/debian-stable binary/'
-      state=present
-      update_cache=yes
+      repo: "deb http://pkg.jenkins-ci.org/debian-stable binary/"
+      state: present
+      update_cache: yes
 
-#############################
+########################
 # setup DEV repository #
-#############################
+########################
 - hosts: debian:ubuntu:&jenkins
   tasks:
   - apt_key:
-      url=http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
-      state=present
+      url: http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
+      state: present
   - apt_repository:
-      repo='deb http://pkg.jenkins-ci.org/debian binary/'
-      state=present
-      update_cache=yes
+      repo: "deb http://pkg.jenkins-ci.org/debian binary/"
+      state: present
+      update_cache: yes
 
 ###################
 # install service #
@@ -35,45 +35,45 @@
   handlers:
   - name: restart jenkins
     service:
-      name=jenkins
-      state=restarted
+      name: jenkins
+      state: restarted
   tasks:
   # pre-install JRE7 to bypass JRE6
   - apt:
-      name=openjdk-7-jre-headless
-      state=present
+      name: openjdk-7-jre-headless
+      state: present
   # restore jenkins data on a new installation
-  - stat: path=/var/lib/jenkins
+  - stat: path: /var/lib/jenkins
     register: st
   - unarchive:
-      src={{ jenkins_archive_path|default(jenkins_archive_path_default) }}
-      dest=/var/lib/jenkins
+      src: "{{ jenkins_archive_path|default(jenkins_archive_path_default) }}"
+      dest: /var/lib/jenkins
     when: not st.stat.exists
   # install jenkins
   - apt:
-      name=jenkins
-      state=present
+      name: jenkins
+      state: present
   - template:
-      src=settings.j2
-      dest=/etc/default/jenkins
-      mode=644
+      src: settings.j2
+      dest: /etc/default/jenkins
+      mode: 644
     notify:
     - restart jenkins
   # copy jenkins keys
   - file:
-      name=/var/lib/jenkins/.ssh
-      state=directory
-      mode=700
-      owner=jenkins
-      group=jenkins
+      name: /var/lib/jenkins/.ssh
+      state: directory
+      mode: 700
+      owner: jenkins
+      group: jenkins
   - copy:
-      src={{ jenkins_sshpath|default(jenkins_sshpath_default) }}/
-      dest=/var/lib/jenkins/.ssh/
+      src: "{{ jenkins_sshpath|default(jenkins_sshpath_default) }}/"
+      dest: /var/lib/jenkins/.ssh/
   # start service
   - service:
-      name=jenkins
-      state=started
-      enabled=yes
+      name: jenkins
+      state: started
+      enabled: yes
 
 ########################
 # add jenkins ferm mod #
@@ -84,12 +84,12 @@
   handlers:
   - name: reload ferm
     service:
-      name=ferm
-      state=reloaded
+      name: ferm
+      state: reloaded
   tasks:
   - template:
-      src=ferm.j2
-      dest=/etc/ferm.d/jenkins
-    when: "'{{ jenkins_listen_address|default(jenkins_listen_address_default) }}' != '127.0.0.1'"
+      src: ferm.j2
+      dest: /etc/ferm.d/jenkins
+    when: "'{{ jenkins_listen_address|default(jenkins_listen_address_default) }}' !:  '127.0.0.1'"
     notify:
     - reload ferm

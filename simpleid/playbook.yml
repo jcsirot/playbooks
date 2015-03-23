@@ -1,56 +1,62 @@
 ---
+####################
+# install simpleid #
+####################
 - hosts: ubuntu:&simpleid
   handlers:
   - name: clear identities cache
     command: find /var/cache/simpleid/cache/ -name "*.cache" -delete
   tasks:
   - get_url:
-      url=http://downloads.sourceforge.net/simpleid/simpleid-0.9.1.tar.gz
-      dest=/root/
+      url: http://downloads.sourceforge.net/simpleid/simpleid-0.9.1.tar.gz
+      dest: /root/
   - unarchive:
-      copy=no
-      src=/root/simpleid-0.9.1.tar.gz
-      dest=/var/cache
+      copy: no
+      src: /root/simpleid-0.9.1.tar.gz
+      dest: /var/cache
   - file:
-      dest=/var/cache/simpleid
-      owner=www-data
-      group=www-data
+      dest: /var/cache/simpleid
+      owner: www-data
+      group: www-data
   - file:
-      src=/var/cache/simpleid/www
-      dest=/var/www/simpleid
-      state=link
+      src: /var/cache/simpleid/www
+      dest: /var/www/simpleid
+      state: link
   - template:
-      src=config.php.j2
-      dest=/var/cache/simpleid/www/config.php
+      src: config.php.j2
+      dest: /var/cache/simpleid/www/config.php
   - copy:
-      src={{ simpleid_identities_path }}/
-      dest=/var/cache/simpleid/identities/
-      owner=www-data
-      group=www-data
+      src: "{{ simpleid_identities_path }}/"
+      dest: /var/cache/simpleid/identities/
+      owner: www-data
+      group: www-data
     notify:
     - clear identities cache
   - file:
-      dest=/var/log/simpleid
-      state=directory
-      owner=www-data
-      group=www-data
-      mode=755
+      dest: /var/log/simpleid
+      state: directory
+      owner: www-data
+      group: www-data
+      mode: 755
   - apt:
-      name=php5-fpm
-      state=present
+      name: php5-fpm
+      state: present
   - service:
-      name=php5-fpm
-      state=started
-      enabled=yes
+      name: php5-fpm
+      state: started
+      enabled: yes
 
+######################
+# uninstall simpleid #
+######################
 - hosts: ubuntu:&no-simpleid
   tasks:
   - apt:
-      name=php5-fpm
-      state=absent
+      name: php5-fpm
+      state: absent
   - file:
-      path={{ item }}
-      state=absent
+      path: "{{ item }}"
+      state: absent
     with_items:
     - /var/log/simpleid
     - /var/cache/simpleid

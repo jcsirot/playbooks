@@ -3,19 +3,19 @@
   handlers:
   - name: restart dhcp server
     service:
-      name=isc-dhcp-server
-      state=restarted
+      name: isc-dhcp-server
+      state: restarted
   - name: restart xrdp
     service:
-      name=xrdp
-      state=restarted
+      name: xrdp
+      state: restarted
   vars:
     # openssl passwd -salt salty -1 trudy
     trudy_password: $1$salty$kWLxsVdL0n35zC6z3ejfd1
   tasks:
   - apt:
-      name={{ item }}
-      state=present
+      name: "{{ item }}"
+      state: present
     with_items:
     - isc-dhcp-server
     - vnc4server
@@ -24,38 +24,38 @@
     - fluxbox
 # "trudy" user setup (login: trudy, password: trudy)
   - copy:
-      src=sudoers
-      dest=/etc/sudoers
-      mode=440
+      src: sudoers
+      dest: /etc/sudoers
+      mode: 440
   - user:
-      name=trudy
-      state=present
-      password={{ trudy_password }}
-      shell=/bin/bash
+      name: trudy
+      state: present
+      password: "{{ trudy_password }}"
+      shell: /bin/bash
   - copy:
-      src=xsession
-      dest=/home/trudy/.xsession
-      owner=trudy
-      group=trudy
-      mode=700
+      src: xsession
+      dest: /home/trudy/.xsession
+      owner: trudy
+      group: trudy
+      mode: 700
   - template:
-      src=menu.j2
-      dest=/home/trudy/.fluxbox/menu
-      owner=trudy
-      mode=664
+      src: menu.j2
+      dest: /home/trudy/.fluxbox/menu
+      owner: trudy
+      mode: 664
 # configure xrdp
   - copy:
-      src=sesman.ini
-      dest=/etc/xrdp/sesman.ini
-      owner=xrdp
-      group=xrdp
-      mode=644
+      src: sesman.ini
+      dest: /etc/xrdp/sesman.ini
+      owner: xrdp
+      group: xrdp
+      mode: 644
     notify:
     - restart xrdp
 # configure DHCP server
   - copy:
-      src={{ item.src }}
-      dest={{ item.dest }}
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
     with_items:
     - { src: isc-dhcp-server, dest: /etc/default/isc-dhcp-server }
     - { src: interfaces, dest: /etc/network/interfaces }
@@ -63,30 +63,30 @@
     notify:
     - restart dhcp server
   - service:
-      name=isc-dhcp-server
-      state=started
+      name: isc-dhcp-server
+      state: started
 # configure NAT
   - copy:
-      src=nat.sh
-      dest=/usr/local/bin/nat.sh
-      mode=770
+      src: nat.sh
+      dest: /usr/local/bin/nat.sh
+      mode: 770
 # install charles proxy
   - apt_key:
-      url=http://www.charlesproxy.com/packages/apt/PublicKey
-      state=present
+      url: http://www.charlesproxy.com/packages/apt/PublicKey
+      state: present
   - apt_repository:
-      repo="deb http://www.charlesproxy.com/packages/apt/ charles-proxy main"
-      state=present
-      update_cache=yes
+      repo: "deb http://www.charlesproxy.com/packages/apt/ charles-proxy main"
+      state: present
+      update_cache: yes
   - apt:
-      name=charles-proxy
-      state=present
+      name: charles-proxy
+      state: present
 # nat manager
   - copy:
-      src=nat.crontab
-      dest=/etc/cron.d/nat
-      mode=644
+      src: nat.crontab
+      dest: /etc/cron.d/nat
+      mode: 644
   - copy:
-      src=lscron.sh
-      dest=/root/lscron.sh
-      mode=700
+      src: lscron.sh
+      dest: /root/lscron.sh
+      mode: 700

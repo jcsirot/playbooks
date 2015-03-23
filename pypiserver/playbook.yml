@@ -5,65 +5,65 @@
   handlers:
   - name: restart pypiserver
     service:
-      name=pypiserver
-      state=restarted
+      name: pypiserver
+      state: restarted
   tasks:
   - apt:
-      name=python-pip
-      state=present
+      name: python-pip
+      state: present
   - pip:
-      name={{ item }}
-      state=present
+      name: "{{ item }}"
+      state: present
     with_items:
     - pypiserver
     - passlib
   # create user
   - user:
-      name=pypiserver
-      state=present
-      system=yes
+      name: pypiserver
+      state: present
+      system: yes
   # create storage directory
   - file:
-      name=/var/cache/pypiserver
-      state=directory
-      owner=pypiserver
-      group=pypiserver
+      name: /var/cache/pypiserver
+      state: directory
+      owner: pypiserver
+      group: pypiserver
   # create service manifests
   - template:
-      src=upstart.j2
-      dest=/etc/init/pypiserver.conf
+      src: upstart.j2
+      dest: /etc/init/pypiserver.conf
     when:
     - ansible_distribution == "Ubuntu"
     notify:
     - restart pypiserver
   - template:
-      src=sysv.j2
-      dest=/etc/init.d/pypiserver
-      mode=755
+      src: sysv.j2
+      dest: /etc/init.d/pypiserver
+      mode: 755
     when:
     - ansible_distribution == "Debian"
     notify:
     - restart pypiserver
   # setup configuration
   - file:
-      name=/etc/pypiserver
-      state=directory
-      owner=pypiserver
-      group=pypiserver
-      mode=700
+      name: /etc/pypiserver
+      state: directory
+      owner: pypiserver
+      group: pypiserver
+      mode: 700
   - copy:
-      src={{ pypiserver_htaccess_path|default(pypiserver_htaccess_path_default) }}
-      dest=/etc/pypiserver
-      owner=pypiserver
-      group=pypiserver
-      mode=600
+      src: "{{ pypiserver_htaccess_path|default(pypiserver_htaccess_path_default) }}"
+      dest: /etc/pypiserver
+      owner: pypiserver
+      group: pypiserver
+      mode: 600
     notify:
     - restart pypiserver
   # start service
   - service:
-      name=pypiserver
-      state=started
-      enabled=yes
+      name: pypiserver
+      state: started
+      enabled: yes
 
 #####################
 # add pypi ferm mod #
@@ -74,12 +74,12 @@
   handlers:
   - name: reload ferm
     service:
-      name=ferm
-      state=reloaded
+      name: ferm
+      state: reloaded
   tasks:
   - template:
-      src=ferm.j2
-      dest=/etc/ferm.d/pypiserver
-    when: "'{{ pypiserver_listen_address|default(pypiserver_listen_address_default) }}' != '127.0.0.1'"
+      src: ferm.j2
+      dest: /etc/ferm.d/pypiserver
+    when: "'{{ pypiserver_listen_address|default(pypiserver_listen_address_default) }}' !:  '127.0.0.1'"
     notify:
     - reload ferm

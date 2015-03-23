@@ -5,30 +5,30 @@
   tasks:
   # install git
   - apt:
-      name=git
-      state=present
+      name: git
+      state: present
   # copy upstart service manifest
   - template:
-      src=upstart.j2
-      dest=/etc/init/gitd.conf
+      src: upstart.j2
+      dest: /etc/init/gitd.conf
   # add git user for ssh access
   - user:
-      name=git
-      shell=/usr/bin/git-shell
+      name: git
+      shell: /usr/bin/git-shell
   # copy authorized_keys for passwordless login
   - file:
-      name=/home/git/.ssh
-      state=directory
-      mode=700
-      owner=git
-      group=git
+      name: /home/git/.ssh
+      state: directory
+      mode: 700
+      owner: git
+      group: git
   - copy:
-      src={{ gitd_authorized_keys_path|default(gitd_authorized_keys_path_default) }}
-      dest=/home/git/.ssh/authorized_keys
-      owner=git
-      group=git
+      src: "{{ gitd_authorized_keys_path|default(gitd_authorized_keys_path_default) }}"
+      dest: /home/git/.ssh/authorized_keys
+      owner: git
+      group: git
   # start service
   - service:
-      name=gitd
-      state=started
-      enabled=yes
+      name: gitd
+      state: started
+      enabled: yes
