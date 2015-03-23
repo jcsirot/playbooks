@@ -1,5 +1,10 @@
 ---
 - hosts: debian:&elk
+  handlers:
+  - name: restart kibana
+    service:
+      name: kibana
+      state: restarted
   vars_files:
   - defaults.yml
   tasks:
@@ -49,6 +54,8 @@
       src: sysv.j2
       dest: /etc/init.d/kibana
       mode: "755"
+    notify:
+    - restart kibana
   - name: kibana is started
     service:
       name: kibana
