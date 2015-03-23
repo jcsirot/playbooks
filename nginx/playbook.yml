@@ -39,6 +39,7 @@
       name: nginx
       state: stopped
       enabled: no
+    ignore_errors: yes
   - apt:
       name: nginx
       state: absent

@@ -13,7 +13,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
     the WiFi router through its wireless interface and is therefore able to intercept everything.
     Users can connect via RDP via the laptop wireless interface and use network analysis tools
     (wireshark, charles) over the wired interface. For details check analyzer/README.md.
-  * ubuntu / __apache__ (or __noapache__ to remove)
+  * ubuntu / __apache__ (or __no-apache__ to remove)
   * ubuntu / __btsync__
     * `btsync_device_name`: btsync service name
     * `btsync_login`: web interface login
@@ -35,7 +35,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
     * `jenkins_archive_path`: path to a /var/lib/jenkins backup archive to restore on a new installation
     * `jenkins_listen_address`: set the address to bind, defaults to "127.0.0.1"
   * debian / __nexus__
-  * ubuntu / __nginx__
+  * ubuntu / __nginx__ (or __no-nginx__ to remove)
     * `nginx_sites_path`: local directory which content is copied into /etc/nginx/sites-enabled/
     * `nginx_crt_path`: local path to the directory containing the certificates
   * macosx / __osx__, set system names and cleanup user logs, user caches, system logs, system caches
@@ -46,7 +46,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
     * `pypiserver_htaccess_path`: local path to the htaccess file
     * `pypiserver_listen_port`: set the port to bind, defaults to "8080"
     * `pypiserver_listen_address`: set the address to bind, defaults to "127.0.0.1"
-  * ubuntu / __simpleid__
+  * ubuntu / __simpleid__ (or __no-simpleid__ to remove)
     * `simpleid_base_url`: simpleid site URL
     * `simpleid_identities_path`: path to identity files
 

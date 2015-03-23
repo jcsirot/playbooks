@@ -12,6 +12,20 @@
   - apt:
       name: openjdk-7-jre-headless
       state: present
+  ############
+  # logstash #
+  ############
+  - get_url:
+      url: "https://download.elasticsearch.org/logstash/logstash/logstash-{{ logstash_version }}.tar.gz"
+      dest: /var/tmp
+  - unarchive:
+      src: "/var/tmp/logstash-{{ logstash_version }}.tar.gz"
+      dest: "/opt/logstash-{{ logstash_version }}"
+      copy: no
+  - user:
+      name: logstash
+      state: present
+      system: yes
   #################
   # elasticsearch #
   #################
