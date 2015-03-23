@@ -36,7 +36,8 @@
       owner: btsync
       group: btsync
       mode: "700"
-  - service:
+  - name: btsync is started
+    service:
       name: btsync
       state: started
       enabled: yes

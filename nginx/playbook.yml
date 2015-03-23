@@ -23,7 +23,8 @@
   - copy:
       src: "{{ nginx_crt_path|default(nginx_crt_path_default) }}/"
       dest: /etc/nginx/crt
-  - service:
+  - name: nginx is started
+    service:
       name: nginx
       state: started
       enabled: yes
@@ -33,7 +34,8 @@
 ###################
 - hosts: debian:ubuntu:&no-nginx
   tasks:
-  - service:
+  - name: nginx is stopped
+    service:
       name: nginx
       state: stopped
       enabled: no

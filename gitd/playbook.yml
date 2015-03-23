@@ -28,7 +28,8 @@
       owner: git
       group: git
   # start service
-  - service:
+  - name: gitd is started
+    service:
       name: gitd
       state: started
       enabled: yes

@@ -24,7 +24,8 @@
   - apt:
       name: openjdk-7-jre
       state: present
-  - service:
+  - name: nexus is started
+    service:
       name: nexus
       state: started
       enabled: yes

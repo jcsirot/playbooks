@@ -27,7 +27,8 @@
       dest: /etc/default/docker
     notify:
     - reload docker
-  - service:
+  - name: docker is started
+    service:
       name: docker
       state: started
       enabled: yes

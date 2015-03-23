@@ -20,7 +20,8 @@
   - apt:
       name: elasticsearch:1.4.4
       state: present
-  - service:
+  - name: elasticsearch is started
+    service:
       name: elasticsearch
       state: started
       enabled: yes

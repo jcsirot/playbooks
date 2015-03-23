@@ -4,13 +4,19 @@
   - apt:
       name: apache2
       state: present
-  - service:
+  - name: apache is started
+    service:
       name: apache2
       state: started
       enabled: yes
 
 - hosts: ubuntu:&no-apache
   tasks:
+  - name: apache is stopped
+    service:
+      name: apache2
+      state: stopped
+      enabled: no
   - apt:
       name: apache2
       state: absent

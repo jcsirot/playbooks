@@ -60,7 +60,8 @@
     notify:
     - restart pypiserver
   # start service
-  - service:
+  - name: pypiserver is started
+    service:
       name: pypiserver
       state: started
       enabled: yes

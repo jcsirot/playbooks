@@ -41,7 +41,8 @@
   - apt:
       name: php5-fpm
       state: present
-  - service:
+  - name: php5-fpm is started
+    service:
       name: php5-fpm
       state: started
       enabled: yes
