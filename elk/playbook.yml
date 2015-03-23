@@ -47,3 +47,4 @@
   - template:
       src=kibana.j2
       dest=/etc/init.d/kibana
+      mode=755
