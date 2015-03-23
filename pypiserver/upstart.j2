@@ -12,7 +12,7 @@ stop on shutdown
 exec /usr/local/bin/pypi-server\
 	--interface {{ pypiserver_listen_address|default(pypiserver_listen_address_default) }}\
 	--port {{ pypiserver_listen_port|default(pypiserver_listen_port_default) }}\
-	--passwords {{ pypiserver_htaccess_path|default(pypiserver_htaccess_path_default) }}\
+	--passwords /etc/pypiserver/htaccess\
 	--overwrite\
 	--disable-fallback\
 	/var/cache/pypiserver
