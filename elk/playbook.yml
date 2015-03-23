@@ -34,8 +34,8 @@
   # kibana #
   ##########
   - file:
-      mode: "755"
       path: /opt
+      mode: "755"
       owner: root
       group: root
       state: directory
