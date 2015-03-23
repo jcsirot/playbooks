@@ -44,6 +44,6 @@
       name=kibana
       state=present
       system=yes
-  # TODO: service manifest, copy from pypi
-
- 
+  - template:
+      src=kibana.j2
+      dest=/etc/init.d/kibana
