@@ -1,7 +1,7 @@
 ---
 - hosts: debian:&elk
-  vars:
-    kibana_version: "4.0.1-linux-x64"
+  vars_files:
+  - defaults.yml
   tasks:
   # pre-install JRE7 to bypass JRE6
   - apt:
@@ -45,6 +45,25 @@
       state=present
       system=yes
   - template:
-      src=kibana.j2
+      src=sysv.j2
       dest=/etc/init.d/kibana
       mode=755
+
+####################
+# add ELK ferm mod #
+####################
+- hosts: debian:&ferm:&elk
+  vars_files:
+  - defaults.yml
+  handlers:
+  - name: reload ferm
+    service:
+      name=ferm
+      state=reloaded
+  tasks:
+  - template:
+      src=ferm.j2
+      dest=/etc/ferm.d/elk
+    when: "'{{ elk_listen_address|default(elk_listen_address_default) }}' != '127.0.0.1'"
+    notify:
+    - reload ferm

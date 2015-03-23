@@ -8,8 +8,8 @@
       name=git
       state=present
   # copy upstart service manifest
-  - copy:
-      src=gitd.conf
+  - template:
+      src=upstart.j2
       dest=/etc/init/gitd.conf
   # add git user for ssh access
   - user:

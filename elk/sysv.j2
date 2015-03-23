@@ -10,7 +10,7 @@
 
 PIDFILE="/var/run/kibana.pid"
 DAEMON="/opt/kibana-{{ kibana_version }}/bin/kibana"
-ARGV="-H 0.0.0.0 -p 5601"
+ARGV="-H {{ elk_listen_address|default(elk_listen_address_default) }} -p {{ elk_listen_port|default(elk_listen_port_default) }}"
 UID="kibana"
 
 status() {

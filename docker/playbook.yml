@@ -23,7 +23,7 @@
     args:
       creates: /usr/bin/docker
   - template:
-      src=docker.j2
+      src=settings.j2
       dest=/etc/default/docker
     notify:
     - reload docker

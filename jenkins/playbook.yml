@@ -54,7 +54,7 @@
       name=jenkins
       state=present
   - template:
-      src=jenkins.j2
+      src=settings.j2
       dest=/etc/default/jenkins
       mode=644
     notify:

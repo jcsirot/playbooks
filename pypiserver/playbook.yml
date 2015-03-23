@@ -30,14 +30,14 @@
       group=pypiserver
   # create service manifests
   - template:
-      src=pypiserver.conf.j2
+      src=upstart.j2
       dest=/etc/init/pypiserver.conf
     when:
     - ansible_distribution == "Ubuntu"
     notify:
     - restart pypiserver
   - template:
-      src=pypiserver.j2
+      src=sysv.j2
       dest=/etc/init.d/pypiserver
       mode=755
     when:
@@ -65,9 +65,9 @@
       state=started
       enabled=yes
 
-########################
-# add jenkins ferm mod #
-########################
+#####################
+# add pypi ferm mod #
+#####################
 - hosts: debian:&ferm:&pypiserver
   vars_files:
   - defaults.yml
