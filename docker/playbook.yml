@@ -18,7 +18,7 @@
   - get_url:
       url: https://get.docker.com/
       dest: /root/install_docker.sh
-      mode: 700
+      mode: "700"
   - command: /root/install_docker.sh
     args:
       creates: /usr/bin/docker

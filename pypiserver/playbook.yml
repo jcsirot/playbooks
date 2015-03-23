@@ -39,7 +39,7 @@
   - template:
       src: sysv.j2
       dest: /etc/init.d/pypiserver
-      mode: 755
+      mode: "755"
     when:
     - ansible_distribution == "Debian"
     notify:
@@ -50,13 +50,13 @@
       state: directory
       owner: pypiserver
       group: pypiserver
-      mode: 700
+      mode: "700"
   - copy:
       src: "{{ pypiserver_htaccess_path|default(pypiserver_htaccess_path_default) }}"
       dest: /etc/pypiserver
       owner: pypiserver
       group: pypiserver
-      mode: 600
+      mode: "600"
     notify:
     - restart pypiserver
   # start service

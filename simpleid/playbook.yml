@@ -37,7 +37,7 @@
       state: directory
       owner: www-data
       group: www-data
-      mode: 755
+      mode: "755"
   - apt:
       name: php5-fpm
       state: present

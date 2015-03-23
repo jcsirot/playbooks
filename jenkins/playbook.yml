@@ -39,7 +39,8 @@
       state: restarted
   tasks:
   # pre-install JRE7 to bypass JRE6
-  - apt:
+  - name: install JRE 7
+    apt:
       name: openjdk-7-jre-headless
       state: present
   # restore jenkins data on a new installation
@@ -51,27 +52,29 @@
       dest: /var/lib/jenkins
     when: not st.stat.exists
   # install jenkins
-  - apt:
+  - name: install jenkins
+    apt:
       name: jenkins
       state: present
   - template:
       src: settings.j2
       dest: /etc/default/jenkins
-      mode: 644
+      mode: "644"
     notify:
     - restart jenkins
   # copy jenkins keys
   - file:
       name: /var/lib/jenkins/.ssh
       state: directory
-      mode: 700
+      mode: "700"
       owner: jenkins
       group: jenkins
   - copy:
       src: "{{ jenkins_sshpath|default(jenkins_sshpath_default) }}/"
       dest: /var/lib/jenkins/.ssh/
   # start service
-  - service:
+  - name: jenkins is started
+    service:
       name: jenkins
       state: started
       enabled: yes

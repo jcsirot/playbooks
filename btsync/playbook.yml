@@ -16,7 +16,7 @@
       dest: /etc/btsyncrc
       owner: btsync
       group: btsync
-      mode: 400
+      mode: "400"
   # create service manifest
   - template:
       src: upstart.j2
@@ -35,7 +35,7 @@
       state: directory
       owner: btsync
       group: btsync
-      mode: 700
+      mode: "700"
   - service:
       name: btsync
       state: started

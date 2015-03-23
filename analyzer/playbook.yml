@@ -26,7 +26,7 @@
   - copy:
       src: sudoers
       dest: /etc/sudoers
-      mode: 440
+      mode: "440"
   - user:
       name: trudy
       state: present
@@ -37,19 +37,19 @@
       dest: /home/trudy/.xsession
       owner: trudy
       group: trudy
-      mode: 700
+      mode: "700"
   - template:
       src: menu.j2
       dest: /home/trudy/.fluxbox/menu
       owner: trudy
-      mode: 664
+      mode: "664"
 # configure xrdp
   - copy:
       src: sesman.ini
       dest: /etc/xrdp/sesman.ini
       owner: xrdp
       group: xrdp
-      mode: 644
+      mode: "644"
     notify:
     - restart xrdp
 # configure DHCP server
@@ -69,7 +69,7 @@
   - copy:
       src: nat.sh
       dest: /usr/local/bin/nat.sh
-      mode: 770
+      mode: "770"
 # install charles proxy
   - apt_key:
       url: http://www.charlesproxy.com/packages/apt/PublicKey
@@ -85,8 +85,8 @@
   - copy:
       src: nat.crontab
       dest: /etc/cron.d/nat
-      mode: 644
+      mode: "644"
   - copy:
       src: lscron.sh
       dest: /root/lscron.sh
-      mode: 700
+      mode: "700"

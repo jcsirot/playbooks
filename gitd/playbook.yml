@@ -19,7 +19,7 @@
   - file:
       name: /home/git/.ssh
       state: directory
-      mode: 700
+      mode: "700"
       owner: git
       group: git
   - copy:
