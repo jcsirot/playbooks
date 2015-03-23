@@ -14,7 +14,7 @@
     command: find ~/Library/Logs -mindepth 1 -delete
   - name: clear user caches
     command: find ~/Library/Caches -mindepth 1 -delete
-  - name: clean empty folders in ~/Libray
+  - name: clean empty folders in ~/Library
     command: find ~/Library -mindepth 4 -type d -empty
     ignore_errors: yes
   - name: clear system logs
@@ -23,3 +23,7 @@
   - name: clear system log archives
     command: find /var/log -type f -name "*.log.*" -delete
     sudo: yes
+  - name: set the icon size of Dock items to 50px
+    command: defaults write com.apple.dock tilesize -int 50
+  - name: show indicator lights for open applications in the Dock
+    command: defaults write com.apple.dock show-process-indicators -bool true
