@@ -43,7 +43,8 @@
       name: openjdk-7-jre-headless
       state: present
   # restore jenkins data on a new installation
-  - stat: path: /var/lib/jenkins
+  - stat:
+      path: /var/lib/jenkins
     register: st
   - unarchive:
       src: "{{ jenkins_archive_path|default(jenkins_archive_path_default) }}"
