@@ -1,16 +1,16 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-# Provides:          kibana
+# Provides:          logstash
 # Required-Start:    $local_fs $network $named $time $syslog
 # Required-Stop:     $local_fs $network $named $time $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Description:       Open source analytics and visualization platform designed to work with Elasticsearch.
+# Description:       logstash is a tool for managing events and logs.
 ### END INIT INFO
 
-PIDFILE="/var/run/kibana.pid"
-DAEMON="/opt/kibana-{{ kibana_version }}/bin/kibana"
-ARGV="-H {{ elk_listen_address|default(elk_listen_address_default) }} -p {{ elk_listen_port|default(elk_listen_port_default) }}"
+PIDFILE="/var/run/logstash.pid"
+DAEMON="/opt/logstas-{{ logstash_version }}/bin/logstash"
+ARGV="-e {{ kibana_listen_address|default(kibana_listen_address_default) }} -p {{ kibana_listen_port|default(kibana_listen_port_default) }}"
 UID="kibana"
 
 status() {

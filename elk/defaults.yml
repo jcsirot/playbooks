@@ -1,5 +1,4 @@
 ---
-elk_listen_address_default: "127.0.0.1"
-elk_listen_port_default: "5601"
+kibana_listen_address_default: "127.0.0.1"
+kibana_listen_port_default: "5601"
 kibana_version: "4.0.1-linux-x64"
-logstash_version: 1.4.2

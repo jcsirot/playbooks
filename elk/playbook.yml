@@ -12,26 +12,26 @@
   - apt:
       name: openjdk-7-jre-headless
       state: present
+  # add ELK key for both logstash and elasticsearch
+  - apt_key:
+      url: http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+      state: present
   ############
   # logstash #
   ############
-  - get_url:
-      url: "https://download.elasticsearch.org/logstash/logstash/logstash-{{ logstash_version }}.tar.gz"
-      dest: /var/tmp
-  - unarchive:
-      src: "/var/tmp/logstash-{{ logstash_version }}.tar.gz"
-      dest: "/opt/logstash-{{ logstash_version }}"
-      copy: no
-  - user:
-      name: logstash
+  - apt_repository:
+      repo: "deb http://packages.elasticsearch.org/logstash/1.4/debian stable main"
       state: present
-      system: yes
+  - apt:
+      name: logstash=1.4.2
+      state: present
+  - service:
+      name: logstash
+      state: started
+      enabled: yes
   #################
   # elasticsearch #
   #################
-  - apt_key:
-      url: https://packages.elasticsearch.org/GPG-KEY-elasticsearch
-      state: present
   - apt_repository:
       repo: "deb http://packages.elasticsearch.org/elasticsearch/1.4/debian stable main"
       state: present
@@ -64,7 +64,7 @@
       state: present
       system: yes
   - template:
-      src: sysv.j2
+      src: kibana.sysv.j2
       dest: /etc/init.d/kibana
       mode: "755"
     notify:
@@ -74,9 +74,9 @@
       state: started
       enabled: yes
 
-####################
-# add ELK ferm mod #
-####################
+#####################
+# add ELK ferm mods #
+#####################
 - hosts: debian:&ferm:&elk
   vars_files:
   - defaults.yml
@@ -87,8 +87,13 @@
       state: reloaded
   tasks:
   - template:
-      src: ferm.j2
-      dest: /etc/ferm.d/elk
-    when: "'{{ elk_listen_address|default(elk_listen_address_default) }}' !=  '127.0.0.1'"
+      src: kibana.ferm.j2
+      dest: /etc/ferm.d/kibana
+    when: "'{{ kibana_listen_address|default(kibana_listen_address_default) }}' !=  '127.0.0.1'"
+    notify:
+    - reload ferm
+  - copy:
+      src: logstash.ferm
+      dest: /etc/ferm.d/logstash
     notify:
     - reload ferm

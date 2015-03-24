@@ -1,0 +1,8 @@
+
+table filter {
+	chain INPUT {
+		mod conntrack ctstate NEW ACCEPT {
+			proto tcp dport {{ kibana_listen_port|default(kibana_listen_port_default) }};
+		}
+	}
+}

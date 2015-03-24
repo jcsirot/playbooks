@@ -2,7 +2,7 @@
 table filter {
 	chain INPUT {
 		mod conntrack ctstate NEW ACCEPT {
-			proto tcp dport {{ elk_listen_port|default(elk_listen_port_default) }};
+			proto udp dport 514;
 		}
 	}
 }
