@@ -5,12 +5,14 @@
   - group_by: key="{{ ansible_distribution|lower }}"
   - debug: msg="{{ ansible_distribution|lower }}"
 
+# do ferm first, as other playbooks depends on it.
+- include: ferm/playbook.yml
+
 - include: analyzer/playbook.yml
 - include: apache/playbook.yml
 - include: btsync/playbook.yml
 - include: docker/playbook.yml
 - include: elk/playbook.yml
-- include: ferm/playbook.yml
 - include: gitd/playbook.yml
 - include: jenkins/playbook.yml
 - include: nexus/playbook.yml
