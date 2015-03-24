@@ -1,5 +1,7 @@
 ---
-- hosts: ubuntu:&btsync
+
+- name: install btsync
+  hosts: ubuntu:&btsync
   vars_files:
   - defaults.yml
   handlers:
@@ -10,34 +12,47 @@
   tasks:
   - user:
       name: btsync
-      shell: /bin/false
+      system: yes
   - template:
       src: settings.j2
       dest: /etc/btsyncrc
       owner: btsync
       group: btsync
       mode: "400"
-  # create service manifest
   - template:
       src: upstart.j2
       dest: /etc/init/btsync.conf
     notify:
     - restart btsync
-  # copy binaries
   - copy:
       src: "btsync_{{ btsync_arch|default(btsync_arch_default) }}"
       dest: /usr/local/sbin/btsync
     notify:
     - restart btsync
-  # create log directory
   - file:
       name: /var/log/btsync
       state: directory
       owner: btsync
       group: btsync
       mode: "700"
-  - name: btsync is started
-    service:
+  - service:
       name: btsync
       state: started
       enabled: yes
+
+- name: uninstall btsync
+  hosts: ubuntu:&no-btsync
+  tasks:
+  - service:
+      name: btsync
+      state: absent
+      enabled: no
+    ignore_errors: yes
+  - file:
+      path: {{ item }}
+      state: absent
+    with_items:
+    - /etc/btsyncrc
+    - /etc/init/btsync.conf
+    - /usr/local/sbin/btsync
+  - command: rm -vrf /var/log/btsync

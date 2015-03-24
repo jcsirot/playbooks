@@ -39,8 +39,7 @@
   - apt:
       name: elasticsearch=1.4.4
       state: present
-  - name: elasticsearch is started
-    service:
+  - service:
       name: elasticsearch
       state: started
       enabled: yes
@@ -70,8 +69,7 @@
       mode: "755"
     notify:
     - restart kibana
-  - name: kibana is started
-    service:
+  - service:
       name: kibana
       state: started
       enabled: yes

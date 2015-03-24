@@ -1,21 +1,18 @@
 ---
-- hosts: ubuntu:&gitd
+- name: install gitd
+  hosts: ubuntu:&gitd
   vars_files:
   - defaults.yml
   tasks:
-  # install git
   - apt:
       name: git
       state: present
-  # copy upstart service manifest
   - template:
       src: upstart.j2
       dest: /etc/init/gitd.conf
-  # add git user for ssh access
   - user:
       name: git
       shell: /usr/bin/git-shell
-  # copy authorized_keys for passwordless login
   - file:
       name: /home/git/.ssh
       state: directory
@@ -27,9 +24,7 @@
       dest: /home/git/.ssh/authorized_keys
       owner: git
       group: git
-  # start service
-  - name: gitd is started
-    service:
+  - service:
       name: gitd
       state: started
       enabled: yes

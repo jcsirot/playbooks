@@ -1,5 +1,6 @@
 ---
-- hosts: ubuntu:&analyzer
+- name: install traffic analyzer
+  hosts: ubuntu:&analyzer
   handlers:
   - name: restart dhcp server
     service:
@@ -13,7 +14,8 @@
     # openssl passwd -salt salty -1 trudy
     trudy_password: $1$salty$kWLxsVdL0n35zC6z3ejfd1
   tasks:
-  - apt:
+  - name: install packages
+    apt:
       name: "{{ item }}"
       state: present
     with_items:

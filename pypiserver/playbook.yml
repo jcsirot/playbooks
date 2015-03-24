@@ -1,5 +1,7 @@
 ---
-- hosts: debian:ubuntu:&pypiserver
+
+- name: install pypiserver
+  hosts: debian:ubuntu:&pypiserver
   vars_files:
   - defaults.yml
   handlers:
@@ -17,18 +19,15 @@
     with_items:
     - pypiserver
     - passlib
-  # create user
   - user:
       name: pypiserver
       state: present
       system: yes
-  # create storage directory
   - file:
       name: /var/cache/pypiserver
       state: directory
       owner: pypiserver
       group: pypiserver
-  # create service manifests
   - template:
       src: upstart.j2
       dest: /etc/init/pypiserver.conf
@@ -44,7 +43,6 @@
     - ansible_distribution == "Debian"
     notify:
     - restart pypiserver
-  # setup configuration
   - file:
       name: /etc/pypiserver
       state: directory
@@ -59,17 +57,13 @@
       mode: "600"
     notify:
     - restart pypiserver
-  # start service
-  - name: pypiserver is started
-    service:
+  - service:
       name: pypiserver
       state: started
       enabled: yes
 
-#####################
-# add pypi ferm mod #
-#####################
-- hosts: debian:&ferm:&pypiserver
+- name: install pypi ferm mod
+  hosts: debian:&ferm:&pypiserver
   vars_files:
   - defaults.yml
   handlers:

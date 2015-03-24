@@ -1,5 +1,6 @@
 ---
-- hosts: debian:&nexus
+- name: INSTALL NEXUS
+  hosts: debian:&nexus
   tasks:
   - user:
       name: nexus
@@ -24,8 +25,7 @@
   - apt:
       name: openjdk-7-jre
       state: present
-  - name: nexus is started
-    service:
+  - service:
       name: nexus
       state: started
       enabled: yes

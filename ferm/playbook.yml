@@ -5,13 +5,11 @@
   - file:
       path: /etc/ferm.d
       state: directory
-  - name: push current configuration as mod
-    shell: if test ! -e /etc/ferm.d/default; then mv /etc/ferm/ferm.conf /etc/ferm.d/default; fi
+  - shell: if test ! -e /etc/ferm.d/default; then mv /etc/ferm/ferm.conf /etc/ferm.d/default; fi
   - copy:
       src: ferm.conf
       dest: /etc/ferm/ferm.conf
-  - name: clear ferm cache
-    command: rm -vrf /var/cache/ferm
+  - command: rm -vrf /var/cache/ferm
   - service:
       name: ferm
       state: restarted

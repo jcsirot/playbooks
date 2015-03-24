@@ -1,19 +1,19 @@
 ---
-- hosts: ubuntu:&apache
+- name: install apache
+  hosts: ubuntu:&apache
   tasks:
   - apt:
       name: apache2
       state: present
-  - name: apache is started
-    service:
+  - service:
       name: apache2
       state: started
       enabled: yes
 
-- hosts: ubuntu:&no-apache
+- name: uninstall apache
+  hosts: ubuntu:&no-apache
   tasks:
-  - name: apache is stopped
-    service:
+  - service:
       name: apache2
       state: stopped
       enabled: no

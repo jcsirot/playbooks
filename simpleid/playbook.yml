@@ -1,8 +1,7 @@
 ---
-####################
-# install simpleid #
-####################
-- hosts: ubuntu:&simpleid
+
+- name: install simpleid
+  hosts: ubuntu:&simpleid
   handlers:
   - name: clear identities cache
     command: find /var/cache/simpleid/cache/ -name "*.cache" -delete
@@ -41,16 +40,13 @@
   - apt:
       name: php5-fpm
       state: present
-  - name: php5-fpm is started
-    service:
+  - service:
       name: php5-fpm
       state: started
       enabled: yes
 
-######################
-# uninstall simpleid #
-######################
-- hosts: ubuntu:&no-simpleid
+- name: uninstall simpleid
+  hosts: ubuntu:&no-simpleid
   tasks:
   - apt:
       name: php5-fpm

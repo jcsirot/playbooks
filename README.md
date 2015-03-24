@@ -6,7 +6,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
 
 ### PLAYBOOKS ###
 
-  * ubuntu / __analyzer__ -- transform a laptop into a WiFi traffic analyzer server.
+  * ubuntu / __analyzer__ — transform a laptop into a WiFi traffic analyzer server.
     The setup used for this is a regular laptop with a RJ45 interface and a wireless interface.
     A wifi router is connected to the RJ45 interface and fetch its address from the DHCP server
     installed on the laptop. The laptop forwards the traffic from all the devices connected to
@@ -14,7 +14,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
     Users can connect via RDP via the laptop wireless interface and use network analysis tools
     (wireshark, charles) over the wired interface. For details check analyzer/README.md.
   * ubuntu / __apache__ (or __no-apache__ to remove)
-  * ubuntu / __btsync__
+  * ubuntu / __btsync__ (no __no-btsync__ to remove)
     * `btsync_device_name`: btsync service name
     * `btsync_login`: web interface login
     * `btsync_password`: web interface password
@@ -35,7 +35,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
     * `jenkins_archive_path`: path to a /var/lib/jenkins backup archive to restore on a new installation
     * `jenkins_listen_address`: set the address to bind, defaults to "127.0.0.1"
   * debian / __nexus__
-  * ubuntu / __nginx__ (or __no-nginx__ to remove)
+  * ubuntu|debian / __nginx__ (or __no-nginx__ to remove)
     * `nginx_sites_path`: local directory which content is copied into /etc/nginx/sites-enabled/
     * `nginx_crt_path`: local path to the directory containing the certificates
   * macosx / __osx__, set system names and cleanup user logs, user caches, system logs, system caches

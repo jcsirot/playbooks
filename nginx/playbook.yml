@@ -1,8 +1,7 @@
 ---
-#################
-# install nginx #
-#################
-- hosts: debian:ubuntu:&nginx
+
+- name: install nginx
+  hosts: debian:ubuntu:&nginx
   vars_files:
   - defaults.yml
   handlers:
@@ -14,8 +13,7 @@
   - apt:
       name: nginx
       state: present
-  - name: copy nginx conf
-    copy:
+  - copy:
       src: "{{ nginx_sites_path|default(nginx_sites_path_default) }}/"
       dest: /etc/nginx/sites-enabled/
     notify:
@@ -23,19 +21,15 @@
   - copy:
       src: "{{ nginx_crt_path|default(nginx_crt_path_default) }}/"
       dest: /etc/nginx/crt
-  - name: nginx is started
-    service:
+  - service:
       name: nginx
       state: started
       enabled: yes
 
-###################
-# uninstall nginx #
-###################
-- hosts: debian:ubuntu:&no-nginx
+- name: uninstall nginx
+  hosts: debian:ubuntu:&no-nginx
   tasks:
-  - name: nginx is stopped
-    service:
+  - service:
       name: nginx
       state: stopped
       enabled: no
@@ -45,10 +39,8 @@
       state: absent
       purge: yes
 
-######################
-# add nginx ferm mod #
-######################
-- hosts: debian:&ferm:&nginx
+- name: install nginx ferm mod
+  hosts: debian:&ferm:&nginx
   vars_files:
   - defaults.yml
   handlers:
@@ -63,10 +55,8 @@
     notify:
     - reload ferm
 
-#########################
-# remove nginx ferm mod #
-#########################
-- hosts: debian:&ferm:&no-nginx
+- name: uninstall nginx ferm mod
+  hosts: debian:&ferm:&no-nginx
   handlers:
   - name: reload ferm
     service:
