@@ -22,6 +22,7 @@
   - apt_repository:
       repo: "deb http://packages.elasticsearch.org/logstash/1.4/debian stable main"
       state: present
+      update_cache: yes
   - apt:
       name: logstash=1.4.2
       state: present
