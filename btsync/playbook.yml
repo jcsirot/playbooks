@@ -49,7 +49,7 @@
       enabled: no
     ignore_errors: yes
   - file:
-      path: {{ item }}
+      path: "{{ item }}"
       state: absent
     with_items:
     - /etc/btsyncrc
