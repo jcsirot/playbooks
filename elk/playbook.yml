@@ -34,8 +34,8 @@
   - apt:
       name: logstash=1.4.2*
       state: present
-  - copy:
-      src: logstash.settings
+  - template:
+      src: logstash.settings.j2
       dest: /etc/logstash/conf.d/syslog_to_elasticsearch.conf
     notify:
     - restart logstash
@@ -43,8 +43,8 @@
       name: logstash
       state: started
       enabled: yes
-  - copy:
-      src: logstash.rsyslog.conf
+  - template:
+      src: rsyslog.logstash.conf.j2
       dest: /etc/rsyslog.d/logstash.conf
     notify:
     - restart rsyslog
@@ -106,13 +106,14 @@
       state: reloaded
   tasks:
   - template:
-      src: kibana.ferm.j2
+      src: ferm.kibana.j2
       dest: /etc/ferm.d/kibana
     when: "'{{ kibana_listen_address|default(kibana_listen_address_default) }}' !=  '127.0.0.1'"
     notify:
     - reload ferm
-  - copy:
-      src: logstash.ferm
+  - template:
+      src: ferm.logstash.j2
       dest: /etc/ferm.d/logstash
+    when: "'{{ logstash_listen_address|default(logstash_listen_address_default) }}' !=  '127.0.0.1'"
     notify:
     - reload ferm

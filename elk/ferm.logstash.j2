@@ -1,0 +1,9 @@
+
+table filter {
+	chain INPUT {
+		mod conntrack ctstate NEW ACCEPT {
+			proto tcp dport {{ logstash_listen_port|default(logstash_listen_port_default) }};
+			proto udp dport {{ logstash_listen_port|default(logstash_listen_port_default) }};
+		}
+	}
+}

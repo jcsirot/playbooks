@@ -1,0 +1,2 @@
+# make local syslog forward logs to logstash
+*.* @127.0.0.1:{{ logstash_listen_port|default(logstash_listen_port_default) }}

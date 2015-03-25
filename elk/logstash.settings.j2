@@ -1,6 +1,6 @@
 input {
 	syslog {
-		port => 5140
+		port => {{ logstash_listen_port|default(logstash_listen_port_default) }}
 		charset => "ISO-8859-15"
 	}
 }
