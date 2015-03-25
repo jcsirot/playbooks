@@ -9,6 +9,10 @@
     service:
       name: kibana
       state: restarted
+  - name: reload rsyslog
+    service:
+      name: rsyslog
+      state: reloaded
   vars_files:
   - defaults.yml
   tasks:
@@ -39,6 +43,11 @@
       name: logstash
       state: started
       enabled: yes
+  - copy:
+      src: logstash.rsyslog.conf
+      dest: /etc/rsyslog.d/logstash.conf
+    notify:
+    - reload rsyslog
   #################
   # elasticsearch #
   #################
