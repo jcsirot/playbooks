@@ -1,6 +1,7 @@
 input {
 	syslog {
 		port => 5140
+		charset => "ISO-8859-15"
 	}
 }
 

@@ -2,7 +2,7 @@
 table filter {
 	chain INPUT {
 		mod conntrack ctstate NEW ACCEPT {
-			proto udp dport 514;
+			proto udp dport 5140;
 		}
 	}
 }
