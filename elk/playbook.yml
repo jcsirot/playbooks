@@ -26,6 +26,9 @@
   - apt:
       name: logstash=1.4.2*
       state: present
+  - copy:
+      src: logstash.settings
+      dest: /etc/logstash/conf.d/syslog_to_elasticsearch.conf
   - service:
       name: logstash
       state: started
