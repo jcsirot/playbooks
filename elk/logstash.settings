@@ -8,4 +8,5 @@ output {
 	elasticsearch {
 		host => localhost
 	}
+	stdout {}
 }
