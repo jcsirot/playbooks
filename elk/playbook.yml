@@ -1,6 +1,10 @@
 ---
 - hosts: debian:&elk
   handlers:
+  - name: restart logstash
+    service:
+      name: logstash
+      state: restarted
   - name: restart kibana
     service:
       name: kibana
@@ -29,6 +33,8 @@
   - copy:
       src: logstash.settings
       dest: /etc/logstash/conf.d/syslog_to_elasticsearch.conf
+    notify:
+    - restart logstash
   - service:
       name: logstash
       state: started
