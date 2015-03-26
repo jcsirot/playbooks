@@ -1,7 +1,7 @@
 Acquire {
 	http {
 		Proxy {{ aptproxy_http }};
-		{% for item in aptproxy_direct %}
+		{% for item in aptproxy_direct.split(",") %}
 		Proxy::{{item}} "DIRECT"
 		{% endfor %}
 	}
