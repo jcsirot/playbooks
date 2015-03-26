@@ -24,6 +24,8 @@
   - apt_key:
       url: http://packages.elasticsearch.org/GPG-KEY-elasticsearch
       state: present
+    environment:
+      http_proxy: http://proxy.fr.lan.arkena.net:3128
   ############
   # logstash #
   ############
