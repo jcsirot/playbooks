@@ -1,0 +1,7 @@
+---
+- name: setup apt proxy
+  hosts: debian:&aptproxy
+  tasks:
+  - template:
+      src: apt.proxy.conf.j2
+      dest: /etc/apt/apt.conf.d/proxy

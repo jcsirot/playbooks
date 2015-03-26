@@ -14,6 +14,10 @@ Just include the main playbook, put your nodes in the service groups you need, a
     Users can connect via RDP via the laptop wireless interface and use network analysis tools
     (wireshark, charles) over the wired interface. For details check analyzer/README.md.
   * ubuntu / __apache__ (or __no-apache__ to remove)
+  * debian / __aptproxy__
+    * `aptproxy_http`
+    * `aptproxy_https`
+    * `aptproxy_direct`: list of hostnames
   * ubuntu / __btsync__ (no __no-btsync__ to remove)
     * `btsync_device_name`: btsync service name
     * `btsync_login`: web interface login

@@ -5,8 +5,9 @@
   - group_by: key="{{ ansible_distribution|lower }}"
   - debug: msg="{{ ansible_distribution|lower }}"
 
-# play ferm first, as other playbooks depend on it.
+# play those first as other playbooks depend on it.
 - include: ferm/playbook.yml
+- include: aptproxy/playbook.yml
 
 - include: analyzer/playbook.yml
 - include: apache/playbook.yml
