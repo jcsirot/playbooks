@@ -25,8 +25,7 @@
   - apt_key:
       url: http://packages.elasticsearch.org/GPG-KEY-elasticsearch
       state: present
-    environment:
-      http_proxy: "{{ elk_http_proxy|default(elk_http_proxy_default) }}"
+    environment: "{{ elk_environment|default(elk_environment_default) }}"
   ############
   # logstash #
   ############
@@ -74,11 +73,14 @@
       owner: root
       group: root
       state: directory
+  - set_fact:
+      get_url_environment:
+        https_proxy: elk_https_proxy
+    when: elk_https_proxy is defined
   - get_url:
       url: "https://download.elasticsearch.org/kibana/kibana/kibana-{{ kibana_version }}.tar.gz"
       dest: /var/tmp
-    environment:
-      https_proxy: "{{ elk_https_proxy|default(elk_https_proxy_default) }}"
+    environment: "{{ elk_environment|default(elk_environment_default) }}"
   - unarchive:
       src: "/var/tmp/kibana-{{ kibana_version }}.tar.gz"
       dest: /opt

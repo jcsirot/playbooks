@@ -2,12 +2,13 @@
 
 - name: setup LTS repository
   hosts: debian:ubuntu:&jenkinslts
+  vars_files:
+  - defaults.yml
   tasks:
   - apt_key:
       url: http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key
       state: present
-    environment:
-      http_proxy: "{{ jenkins_http_proxy|default(jenkins_http_proxy_default) }}"
+    environment: "{{ jenkins_environment|default(jenkins_environment_default) }}"
   - apt_repository:
       repo: "deb http://pkg.jenkins-ci.org/debian-stable binary/"
       state: present
@@ -15,12 +16,13 @@
 
 - name: setup standard repository
   hosts: debian:ubuntu:&jenkins
+  vars_files:
+  - defaults.yml
   tasks:
   - apt_key:
       url: http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
       state: present
-    environment:
-      http_proxy: "{{ jenkins_http_proxy|default(jenkins_http_proxy_default) }}"
+    environment: "{{ jenkins_environment|default(jenkins_environment_default) }}"
   - apt_repository:
       repo: "deb http://pkg.jenkins-ci.org/debian binary/"
       state: present
