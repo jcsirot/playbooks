@@ -6,7 +6,8 @@
   - apt_key:
       url: http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key
       state: present
-    environment: "{{ jenkins_environment|default(jenkins_environment_default) }}"
+    environment:
+      http_proxy: "{{ jenkins_http_proxy|default(jenkins_http_proxy_default) }}"
   - apt_repository:
       repo: "deb http://pkg.jenkins-ci.org/debian-stable binary/"
       state: present
@@ -18,7 +19,8 @@
   - apt_key:
       url: http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
       state: present
-    environment: "{{ jenkins_environment|default(jenkins_environment_default) }}"
+    environment:
+      http_proxy: "{{ jenkins_http_proxy|default(jenkins_http_proxy_default) }}"
   - apt_repository:
       repo: "deb http://pkg.jenkins-ci.org/debian binary/"
       state: present

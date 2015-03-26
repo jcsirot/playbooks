@@ -21,7 +21,8 @@
       url: https://get.docker.com/
       dest: /var/tmp/install_docker.sh
       mode: "700"
-    environment: "{{ docker_environment|default(docker_environment_default) }}"
+    environment:
+      https_proxy: "{{ docker_https_proxy|default(docker_https_proxy_default) }}"
   - command: /var/tmp/install_docker.sh
     args:
       creates: /usr/bin/docker

@@ -24,13 +24,14 @@ Just include the main playbook, put your nodes in the service groups you need, a
   * debian / __docker__
     * `docker_listen_address`, defaults to "127.0.0.1"
     * `docker_listen_port`, defaults to "4243"
-    * `docker_environment`, set web proxy settings here if needed
+    * `docker_https_proxy`
   * debian/ __elk__: install the logstash/elasticsearch/kibana stack.
     * `kibana_listen_address`: defaults to "127.0.0.1"
     * `kibana_listen_port`: defaults to "5601"
     * `logstash_listen_address`: defaults to "127.0.0.1"
     * `logstash_listen_port`: defaults to "10514"
-    * `elk_environment`: set web proxy settings here if needed
+    * `elk_https_proxy`
+    * `elk_http_proxy`
   * debian/ __ferm__: enable ferm "mods" (i.e. /etc/ferm.d instead of a single ferm.conf)
   * ubuntu / __gitd__
     * `gitd_authorized_keys_path`: local path to authorized_keys file setup for the remote ssh git user
@@ -40,7 +41,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
     * `jenkins_listen_port`: set the port to bind, defaults to "8080"
     * `jenkins_archive_path`: path to a /var/lib/jenkins backup archive to restore on a new installation
     * `jenkins_listen_address`: set the address to bind, defaults to "127.0.0.1"
-    * `jenkins_environment`: set web proxy settings here if needed
+    * `jenkins_http_proxy`: set web proxy settings here if needed
   * debian / __nexus__
   * ubuntu|debian / __nginx__ (or __no-nginx__ to remove)
     * `nginx_sites_path`: local directory which content is copied into /etc/nginx/sites-enabled/
@@ -52,8 +53,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
   * ubuntu|debian / __pypiserver__
     * `pypiserver_htaccess_path`: local path to the htaccess file
     * `pypiserver_listen_port`: set the port to bind, defaults to "8080"
-    * `pypiserver_listen_address`: set the address to bind, defaults to "127.0.0.1"
-    * `pypiserver_environment`: set web proxy settings here if needed
+    * `pypiserver_listen_address`: set the address to bind, defaults to "127.0.0.1"d
   * ubuntu / __simpleid__ (or __no-simpleid__ to remove)
     * `simpleid_base_url`: simpleid site URL
     * `simpleid_identities_path`: path to identity files

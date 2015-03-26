@@ -16,7 +16,6 @@
   - pip:
       name: "{{ item }}"
       state: present
-    environment: "{{ pypiserver_environment|default(pypiserver_environment_default) }}"
     with_items:
     - pypiserver
     - passlib
