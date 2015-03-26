@@ -8,7 +8,7 @@ Acquire {
 	https {
 		Proxy {{ aptproxy_https }};
 {% for item in aptproxy_direct.split(",") %}
-		Proxy::{{ item }} "DIRECT"
+		Proxy::{{ item }} "DIRECT";
 {% endfor %}
 	}
 }
