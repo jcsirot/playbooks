@@ -17,7 +17,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
   * debian / __aptproxy__
     * `aptproxy_http`
     * `aptproxy_https`
-    * `aptproxy_direct`: list of hostnames
+    * `aptproxy_direct`: comma-separated list of hostnames
   * ubuntu / __btsync__ (no __no-btsync__ to remove)
     * `btsync_device_name`: btsync service name
     * `btsync_login`: web interface login
