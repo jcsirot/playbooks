@@ -73,10 +73,6 @@
       owner: root
       group: root
       state: directory
-  - set_fact:
-      get_url_environment:
-        https_proxy: elk_https_proxy
-    when: elk_https_proxy is defined
   - get_url:
       url: "https://download.elasticsearch.org/kibana/kibana/kibana-{{ kibana_version }}.tar.gz"
       dest: /var/tmp
