@@ -21,6 +21,7 @@
       url: https://get.docker.com/
       dest: /var/tmp/install_docker.sh
       mode: "700"
+    environment: "{{ docker_environment|default(docker_environment_default) }}"
   - command: /var/tmp/install_docker.sh
     args:
       creates: /usr/bin/docker
@@ -51,7 +52,7 @@
 #    - /var/tmp/install_docker.sh
 #  - to be continued…
 
-- name: install docker ferm mod
+- name: manage docker ferm mod
   hosts: debian:&ferm:&docker
   vars_files:
   - defaults.yml
@@ -61,9 +62,34 @@
       name: ferm
       state: reloaded
   tasks:
-  - template:
+  - name: add docker ferm mod if non-local
+    template:
       src: ferm.j2
       dest: /etc/ferm.d/docker
     when: "'{{ docker_listen_address|default(docker_listen_address_default) }}' !=  '127.0.0.1'"
+    notify:
+    - reload ferm
+  - name: remove docker ferm mod if local
+    file:
+      path: /etc/ferm.d/docker
+      state: absent
+    when: "'{{ docker_listen_address|default(docker_listen_address_default) }}' ==  '127.0.0.1'"
+    notify:
+    - reload ferm
+
+- name: uninstall docker ferm mod
+  hosts: debian:&ferm:&no-docker
+  vars_files:
+  - defaults.yml
+  handlers:
+  - name: reload ferm
+    service:
+      name: ferm
+      state: reloaded
+  tasks:
+  - name: remove docker ferm mod
+    file:
+      path: /etc/ferm.d/docker
+      state: absent
     notify:
     - reload ferm

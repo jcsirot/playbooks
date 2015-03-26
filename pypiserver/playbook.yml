@@ -16,6 +16,7 @@
   - pip:
       name: "{{ item }}"
       state: present
+    environment: "{{ pypiserver_environment|default(pypiserver_environment_default) }}"
     with_items:
     - pypiserver
     - passlib
@@ -62,7 +63,7 @@
       state: started
       enabled: yes
 
-- name: install pypi ferm mod
+- name: manage pypiserver ferm mod
   hosts: debian:&ferm:&pypiserver
   vars_files:
   - defaults.yml
@@ -72,9 +73,17 @@
       name: ferm
       state: reloaded
   tasks:
-  - template:
+  - name: add pypiserver ferm mod if non-local
+    template:
       src: ferm.j2
       dest: /etc/ferm.d/pypiserver
     when: "'{{ pypiserver_listen_address|default(pypiserver_listen_address_default) }}' !=  '127.0.0.1'"
+    notify:
+    - reload ferm
+  - name: remove pypiserver ferm mod if local
+    file:
+      path: /etc/ferm.d/pypiserver
+      state: absent
+    when: "'{{ pypiserver_listen_address|default(pypiserver_listen_address_default) }}' ==  '127.0.0.1'"
     notify:
     - reload ferm

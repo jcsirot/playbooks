@@ -1,5 +1,5 @@
 ---
-- name: INSTALL NEXUS
+- name: install nexus
   hosts: debian:&nexus
   tasks:
   - user:

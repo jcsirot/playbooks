@@ -1,5 +1,6 @@
 ---
-- hosts: debian:&elk
+- name: install ELK
+  hosts: debian:&elk
   handlers:
   - name: restart logstash
     service:
@@ -24,7 +25,8 @@
   - apt_key:
       url: http://packages.elasticsearch.org/GPG-KEY-elasticsearch
       state: present
-    environment: "{{ elk_environment|default(elk_environment_default) }}"
+    environment:
+      http_proxy: "{{ elk_http_proxy|default(elk_http_proxy_default) }}"
   ############
   # logstash #
   ############
@@ -75,7 +77,8 @@
   - get_url:
       url: "https://download.elasticsearch.org/kibana/kibana/kibana-{{ kibana_version }}.tar.gz"
       dest: /var/tmp
-    environment: "{{ elk_environment|default(elk_environment_default) }}"
+    environment:
+      https_proxy: "{{ elk_https_proxy|default(elk_https_proxy_default) }}"
   - unarchive:
       src: "/var/tmp/kibana-{{ kibana_version }}.tar.gz"
       dest: /opt
@@ -95,10 +98,8 @@
       state: started
       enabled: yes
 
-#####################
-# add ELK ferm mods #
-#####################
-- hosts: debian:&ferm:&elk
+- name: manage ELK ferm mods
+  hosts: debian:&ferm:&elk
   vars_files:
   - defaults.yml
   handlers:
@@ -107,15 +108,31 @@
       name: ferm
       state: reloaded
   tasks:
-  - template:
+  - name: add kibana ferm mod if non-local
+    template:
       src: ferm.kibana.j2
       dest: /etc/ferm.d/kibana
     when: "'{{ kibana_listen_address|default(kibana_listen_address_default) }}' !=  '127.0.0.1'"
     notify:
     - reload ferm
-  - template:
+  - name: remove kibana ferm mod if local
+    file:
+      path: /etc/ferm.d/kibana
+      state: absent
+    when: "'{{ kibana_listen_address|default(kibana_listen_address_default) }}' ==  '127.0.0.1'"
+    notify:
+    - reload ferm
+  - name: add logstash ferm mod if non-local
+    template:
       src: ferm.logstash.j2
       dest: /etc/ferm.d/logstash
     when: "'{{ logstash_listen_address|default(logstash_listen_address_default) }}' !=  '127.0.0.1'"
+    notify:
+    - reload ferm
+  - name: remove logstash ferm mod if local
+    file:
+      path: /etc/ferm.d/logstash
+      state: absent
+    when: "'{{ logstash_listen_address|default(logstash_listen_address_default) }}' ==  '127.0.0.1'"
     notify:
     - reload ferm

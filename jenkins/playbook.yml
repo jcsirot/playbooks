@@ -1,35 +1,31 @@
 ---
 
-########################
-# setup LTS repository #
-########################
-- hosts: debian:ubuntu:&jenkinslts
+- name: setup LTS repository
+  hosts: debian:ubuntu:&jenkinslts
   tasks:
   - apt_key:
       url: http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key
       state: present
+    environment: "{{ jenkins_environment|default(jenkins_environment_default) }}"
   - apt_repository:
       repo: "deb http://pkg.jenkins-ci.org/debian-stable binary/"
       state: present
       update_cache: yes
 
-########################
-# setup DEV repository #
-########################
-- hosts: debian:ubuntu:&jenkins
+- name: setup standard repository
+  hosts: debian:ubuntu:&jenkins
   tasks:
   - apt_key:
       url: http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
       state: present
+    environment: "{{ jenkins_environment|default(jenkins_environment_default) }}"
   - apt_repository:
       repo: "deb http://pkg.jenkins-ci.org/debian binary/"
       state: present
       update_cache: yes
 
-###################
-# install service #
-###################
-- hosts: debian:ubuntu:&jenkins*
+- name: install jenkins
+  hosts: debian:ubuntu:&jenkins*
   vars_files:
   - defaults.yml
   handlers:
@@ -76,10 +72,8 @@
       state: started
       enabled: yes
 
-########################
-# add jenkins ferm mod #
-########################
-- hosts: debian:&ferm:&jenkins*
+- name: manage jenkins ferm mod
+  hosts: debian:&ferm:&jenkins*
   vars_files:
   - defaults.yml
   handlers:
@@ -88,9 +82,17 @@
       name: ferm
       state: reloaded
   tasks:
-  - template:
+  - name: add jenkins ferm mod if non-local
+    template:
       src: ferm.j2
       dest: /etc/ferm.d/jenkins
     when: "'{{ jenkins_listen_address|default(jenkins_listen_address_default) }}' !=  '127.0.0.1'"
+    notify:
+    - reload ferm
+  - name: remove jenkins ferm mod if local
+    file:
+      path: /etc/ferm.d/jenkins
+      state: absent
+    when: "'{{ jenkins_listen_address|default(jenkins_listen_address_default) }}' ==  '127.0.0.1'"
     notify:
     - reload ferm
