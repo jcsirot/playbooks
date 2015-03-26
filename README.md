@@ -24,13 +24,13 @@ Just include the main playbook, put your nodes in the service groups you need, a
   * debian / __docker__
     * `docker_listen_address`: defaults to "127.0.0.1"
     * `docker_listen_port`: defaults to "4243"
-    * `docker_environment`: set web proxy settings here if needed
+    * `docker_environment`: specify web proxy settings, see below
   * debian/ __elk__: install the logstash/elasticsearch/kibana stack.
     * `kibana_listen_address`: defaults to "127.0.0.1"
     * `kibana_listen_port`: defaults to "5601"
     * `logstash_listen_address`: defaults to "127.0.0.1"
     * `logstash_listen_port`: defaults to "10514"
-    * `elk_environment`: set web proxy settings here if needed
+    * `elk_environment`: specify web proxy settings, see below
   * debian/ __ferm__: enable ferm "mods" (i.e. /etc/ferm.d instead of a single ferm.conf)
   * ubuntu / __gitd__
     * `gitd_authorized_keys_path`: local path to authorized_keys file setup for the remote ssh git user
@@ -40,7 +40,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
     * `jenkins_listen_port`: set the port to bind, defaults to "8080"
     * `jenkins_archive_path`: path to a /var/lib/jenkins backup archive to restore on a new installation
     * `jenkins_listen_address`: set the address to bind, defaults to "127.0.0.1"
-    * `jenkins_environment`: set web proxy settings here if needed
+    * `jenkins_environment`: specify web proxy settings, see below
   * debian / __nexus__
   * ubuntu|debian / __nginx__ (or __no-nginx__ to remove)
     * `nginx_sites_path`: local directory which content is copied into /etc/nginx/sites-enabled/
@@ -84,3 +84,10 @@ Integrated into another project, example:
 NOTE: each playbook is defined for a subset of platforms (e.g. ubuntu);
 and therefore expect the host to be in the platform group.
 This is handled automatically by detecting each host platform and dynamically putting it into that group.
+
+### WEB PROXY ###
+
+Example:
+
+	[somegroup]
+	somehost xyz_environment="{{ {'http_proxy': 'http://someproxy:3128', 'https_proxy': 'http://someproxy:3128'} }}"
