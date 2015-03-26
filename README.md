@@ -4,7 +4,7 @@ Beware! to keep things simple the subdirs *are not roles*,
 as defined [here](http://docs.ansible.com/playbooks_roles.html#roles).
 Just include the main playbook, put your nodes in the service groups you need, and you're good to go.
 
-PLAYBOOKS
+Playbooks
 ---------
 
   * ubuntu / __analyzer__ — transform a laptop into a WiFi traffic analyzer server.
@@ -58,7 +58,7 @@ PLAYBOOKS
     * `simpleid_base_url`: simpleid site URL
     * `simpleid_identities_path`: path to identity files
 
-USAGE
+Usage
 -----
 
 For immediate use with pure platform-based playbooks (only __osx__ so far), example:
@@ -87,7 +87,7 @@ NOTE: each playbook is defined for a subset of platforms (e.g. ubuntu);
 and therefore expect the host to be in the platform group.
 This is handled automatically by detecting each host platform and dynamically putting it into that group.
 
-WEB PROXY
+Web Proxy
 ---------
 
 Example:
