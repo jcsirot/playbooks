@@ -57,7 +57,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
     * `simpleid_base_url`: simpleid site URL
     * `simpleid_identities_path`: path to identity files
 
-####### USAGE #######
+###### USAGE ######
 
 For immediate use with pure platform-based playbooks (only __osx__ so far), example:
 
