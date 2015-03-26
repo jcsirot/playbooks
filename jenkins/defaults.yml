@@ -4,4 +4,4 @@ jenkins_memory_default: "256m"
 jenkins_listen_port_default: "8080"
 # jenkins_archive_path_default:
 jenkins_listen_address_default: "127.0.0.1"
-jenkins_environment_default: False
+jenkins_environment_default: {}
