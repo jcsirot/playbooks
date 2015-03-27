@@ -9,5 +9,10 @@ output {
 	elasticsearch {
 		host => localhost
 	}
-	stdout {}
+	# DEBUG:
+	#   * sudo service logstash stop
+	#   * sudo /opt/logstash/bin/logstash -f /etc/logstash/conf.d --verbose
+	stdout {
+		codec => "rubydebug"
+	}
 }
