@@ -16,6 +16,7 @@
   - synchronize:
       src: "{{ nginx_sites_path|default(nginx_sites_path_default) }}/"
       dest: /etc/nginx/sites-enabled/
+      delete: yes
     notify:
     - reload nginx
   - copy:
