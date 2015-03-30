@@ -19,9 +19,12 @@
       delete: yes
     notify:
     - reload nginx
-  - copy:
+  - synchronize:
       src: "{{ nginx_crt_path|default(nginx_crt_path_default) }}/"
       dest: /etc/nginx/crt
+      delete: yes
+    notify:
+    - reload nginx
   - service:
       name: nginx
       state: started
