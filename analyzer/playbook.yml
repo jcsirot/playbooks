@@ -49,8 +49,8 @@
       mode: "664"
 # configure xrdp
   - copy:
-      src: sesman.ini
-      dest: /etc/xrdp/sesman.ini
+      src: "{{ item }}"
+      dest: "/etc/xrdp/{{ item }}"
       owner: xrdp
       group: xrdp
       mode: "644"
