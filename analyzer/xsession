@@ -1,4 +1,3 @@
 #!/bin/sh
 fbsetbg -f /usr/share/backgrounds/warty-final-ubuntu.png
 /usr/bin/startfluxbox
-exit 0

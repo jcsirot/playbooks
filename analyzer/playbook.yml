@@ -92,3 +92,8 @@
       src: lscron.sh
       dest: /root/lscron.sh
       mode: "700"
+# xvnc manager
+  - copy:
+      src: xvnc.crontab
+      dest: /etc/cron.d/xvnc
+      mode: "644"

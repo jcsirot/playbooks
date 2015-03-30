@@ -1,0 +1,3 @@
+# Kill all sessions on evening
+
+30 19 * * * root /usr/bin/killall Xvnc && /usr/bin/logger "Killed all Xvnc sessions"

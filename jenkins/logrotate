@@ -1,0 +1,8 @@
+# keep 100M of logs, delete otherwise
+
+/var/log/jenkins/jenkins.log {
+	missingok
+	copytruncate
+	size 100M
+	rotate 0
+}

@@ -75,6 +75,14 @@
       name: jenkins
       state: started
       enabled: yes
+  # logrotate
+  - stat:
+      path: /etc/logrotate.d
+    register: st
+  - copy:
+      src: logrotate
+      dest: /etc/logrotate.d/jenkins
+    when: st.stat.exists
 
 - name: manage jenkins ferm mod
   hosts: debian:&ferm:&jenkins*
