@@ -10,6 +10,8 @@
     service:
       name: xrdp
       state: restarted
+  - name: killall xvnc
+    command: killall Xvnc
   vars:
     # openssl passwd -salt salty -1 trudy
     trudy_password: $1$salty$kWLxsVdL0n35zC6z3ejfd1
@@ -57,6 +59,7 @@
     - xrdp.ini
     notify:
     - restart xrdp
+    - killall xvnc
 # configure DHCP server
   - copy:
       src: "{{ item.src }}"
