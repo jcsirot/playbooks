@@ -52,6 +52,9 @@
       owner: xrdp
       group: xrdp
       mode: "644"
+    with_items:
+    - sesman.ini
+    - xrdp.ini
     notify:
     - restart xrdp
 # configure DHCP server
@@ -92,8 +95,3 @@
       src: lscron.sh
       dest: /root/lscron.sh
       mode: "700"
-# xvnc manager
-  - copy:
-      src: xvnc.crontab
-      dest: /etc/cron.d/xvnc
-      mode: "644"
