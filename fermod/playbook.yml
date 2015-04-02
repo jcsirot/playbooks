@@ -1,6 +1,6 @@
 ---
 - name: enable ferm mods -- put your mods in /etc/ferm.d
-  hosts: debian:&ferm
+  hosts: debian:&fermod
   tasks:
   - file:
       path: /etc/ferm.d

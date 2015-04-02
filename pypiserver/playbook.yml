@@ -63,7 +63,7 @@
       enabled: yes
 
 - name: manage pypiserver ferm mod
-  hosts: debian:&ferm:&pypiserver
+  hosts: debian:&fermod:&pypiserver
   vars_files:
   - defaults.yml
   handlers:

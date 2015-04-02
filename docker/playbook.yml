@@ -53,7 +53,7 @@
 #  - to be continued…
 
 - name: manage docker ferm mod
-  hosts: debian:&ferm:&docker
+  hosts: debian:&fermod:&docker
   vars_files:
   - defaults.yml
   handlers:
@@ -78,7 +78,7 @@
     - reload ferm
 
 - name: uninstall docker ferm mod
-  hosts: debian:&ferm:&no-docker
+  hosts: debian:&fermod:&no-docker
   vars_files:
   - defaults.yml
   handlers:

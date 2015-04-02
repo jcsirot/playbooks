@@ -44,7 +44,7 @@
       purge: yes
 
 - name: install nginx ferm mod
-  hosts: debian:&ferm:&nginx
+  hosts: debian:&fermod:&nginx
   vars_files:
   - defaults.yml
   handlers:
@@ -60,7 +60,7 @@
     - reload ferm
 
 - name: uninstall nginx ferm mod
-  hosts: debian:&ferm:&no-nginx
+  hosts: debian:&fermod:&no-nginx
   handlers:
   - name: reload ferm
     service:

@@ -5,10 +5,15 @@
   - group_by: key="{{ ansible_distribution|lower }}"
   - debug: msg="{{ ansible_distribution|lower }}"
 
-# play those first as other playbooks depend on it.
-- include: ferm/playbook.yml
+###########################
+# playbooks depended upon #
+###########################
+- include: fermod/playbook.yml
 - include: aptproxy/playbook.yml
 
+###############################
+# order-independent playbooks #
+###############################
 - include: analyzer/playbook.yml
 - include: apache/playbook.yml
 - include: btsync/playbook.yml

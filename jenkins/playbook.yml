@@ -85,7 +85,7 @@
     when: st.stat.exists
 
 - name: manage jenkins ferm mod
-  hosts: debian:&ferm:&jenkins*
+  hosts: debian:&fermod:&jenkins*
   vars_files:
   - defaults.yml
   handlers:

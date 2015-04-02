@@ -97,7 +97,7 @@
       enabled: yes
 
 - name: manage ELK ferm mods
-  hosts: debian:&ferm:&elk
+  hosts: debian:&fermod:&elk
   vars_files:
   - defaults.yml
   handlers:
