@@ -1,13 +1,13 @@
 Acquire {
 	http {
 		Proxy "{{ aptproxy_http }}";
-{% for item in aptproxy_direct.split(",") %}
+{% for item in aptproxy_direct %}
 		Proxy::{{item}} "DIRECT";
 {% endfor %}
 	}
 	https {
 		Proxy "{{ aptproxy_https }}";
-{% for item in aptproxy_direct.split(",") %}
+{% for item in aptproxy_direct %}
 		Proxy::{{ item }} "DIRECT";
 {% endfor %}
 	}

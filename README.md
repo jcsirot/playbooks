@@ -17,7 +17,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
   * debian / __aptproxy__
     * `aptproxy_http`
     * `aptproxy_https`
-    * `aptproxy_direct`: comma-separated list of hostnames
+    * `aptproxy_direct`: list of hostnames
   * ubuntu / __btsync__ (no __no-btsync__ to remove)
     * `btsync_device_name`: btsync service name
     * `btsync_login`: web interface login
@@ -49,7 +49,7 @@ Just include the main playbook, put your nodes in the service groups you need, a
   * ubuntu|debian / __nginx__ (or __no-nginx__ to remove)
     * `nginx_sites_path`: local directory which content is copied into /etc/nginx/sites-enabled/
     * `nginx_crt_path`: local path to the directory containing the certificates
-  * macosx / __osx__, set system names and cleanup user logs, user caches, system logs, system caches
+  * macosx / __osx__, setup system variables
     * `osx_computername`
     * `osx_hostname`, defaults to osx_computername + ".local"
     * `osx_localhostname`, defaults to osx_hostname
