@@ -3,5 +3,5 @@
   hosts: debian:&aptproxy
   tasks:
   - template:
-      src: apt.proxy.conf.j2
+      src: apt.proxy.j2
       dest: /etc/apt/apt.conf.d/proxy
