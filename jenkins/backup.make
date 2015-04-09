@@ -11,10 +11,10 @@
 HOSTSTRING ?= root@fclaerhout.fr
 
 # remote jenkins parent directory
-LIBDIR := /var/lib
+LIBDIR ?= /var/lib
 
 # local directory storing archives
-STOREDIR := .
+STOREDIR ?= .
 
 ##################
 # implementation #
