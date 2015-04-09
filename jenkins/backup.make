@@ -31,8 +31,8 @@ backup: NAME:=jenkins_$(shell date +%Y%m%d%H%M%S).tgz
 backup:
 	$(SSH) -- find /var/lib/jenkins/jobs -name workspace -type d -exec rm -rf {} +
 	$(SSH) -- tar zcvf $(NAME) -C /var/lib/ jenkins
-	scp $(HOSTSTRING):~/$(NAME) $(STOREDIR)
-	$(SSH) -- rm ~/$(NAME)
+	scp $(HOSTSTRING):$(NAME) $(STOREDIR)
+	$(SSH) -- rm $(NAME)
 
 # BEWARE: change LIBDIR into /var/lib once validated!
 restore: LATEST:=$(shell find $(STOREDIR) -name 'jenkins_*.tgz' | sort | tail -n 1)
