@@ -37,9 +37,8 @@ backup:
 	scp $(HOSTSTRING):$(NAME) $(STOREDIR)
 	$(SSH) -- rm $(NAME)
 
-# BEWARE: change LIBDIR into /var/lib once validated!
-restore: LATEST:=$(shell find $(STOREDIR) -name 'jenkins_*.tgz' | sort | tail -n 1)
+restore: LATESTPATH:=$(shell find $(STOREDIR) -name 'jenkins_*.tgz' | sort | tail -n 1)
 restore:
-	scp $(STOREDIR)/$(LATEST) $(HOSTSTRING):$(LIBDIR)
-	$(SSH) -- tar xvf $(LIBDIR)/$(LATEST) -C $(LIBDIR)
-	$(SSH) -- rm $(LIBDIR)/$(LATEST)
+	scp $(LATESTPATH) $(HOSTSTRING):$(LIBDIR)
+	$(SSH) -- tar xvf $(LIBDIR)/$(notdir $(LATESTPATH)) -C $(LIBDIR)
+	$(SSH) -- rm $(LIBDIR)/$(notdir $(LATESTPATH))
