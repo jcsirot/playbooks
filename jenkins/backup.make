@@ -1,5 +1,5 @@
 # copyright (c) 2015 fclaerhout.fr, released under the MIT license.
-# KISS implementation of a jenkins backup/restore system.
+# KISS implementation to backup/restore jenkins
 
 .PHONY: usage backup restore
 
@@ -39,5 +39,5 @@ restore: LATEST:=$(shell find $(STOREDIR) -name 'jenkins_*.tgz' | sort | tail -n
 restore: LIBDIR:=/tmp
 restore:
 	scp $(STOREDIR)/$(LATEST) $(HOSTSTRING):$(LIBDIR)
-	$(SSH) -- tar xvf $(LATEST) -C $(LIBDIR)
+	$(SSH) -- tar xvf $(LIBDIR)/$(LATEST) -C $(LIBDIR)
 	$(SSH) -- rm $(LIBDIR)/$(LATEST)
