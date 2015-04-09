@@ -14,3 +14,6 @@
 #    command: defaults write com.apple.dock tilesize -int 50
 #  - name: show indicator lights for open applications in the Dock
 #    command: defaults write com.apple.dock show-process-indicators -bool true
+
+
+# ref: https://github.com/mathiasbynens/dotfiles/blob/master/.osx
