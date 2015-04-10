@@ -1,7 +1,14 @@
+# NOTE TO THE ADMIN, TO DEBUG LOGSTASH:
+#   * stop the service:
+#     sudo service logstash stop
+#   * run it in console mode:
+#     sudo /opt/logstash/bin/logstash -f /etc/logstash/conf.d --verbose
+
 input {
 	syslog {
 		port => {{ logstash_listen_port|default(logstash_listen_port_default) }}
-		charset => "ISO-8859-15"
+		host => "{{ logstash_listen_address|default(logstash_listen_address_default) }}"
+#		charset => "ISO-8859-15"
 	}
 }
 
@@ -9,9 +16,6 @@ output {
 	elasticsearch {
 		host => localhost
 	}
-	# DEBUG:
-	#   * sudo service logstash stop
-	#   * sudo /opt/logstash/bin/logstash -f /etc/logstash/conf.d --verbose
 	stdout {
 		codec => "rubydebug"
 	}
