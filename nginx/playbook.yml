@@ -48,6 +48,7 @@
     template:
       src: ferm.j2
       dest: /etc/ferm.d/nginx
+    when: st.stat.exists
     notify:
     - clear ferm cache
     - reload ferm
