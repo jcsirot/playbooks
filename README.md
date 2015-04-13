@@ -2,7 +2,7 @@ A collection of simple playbooks for common services.
 
 **QUICK START**
 
-  1. First, check the playbooks, e.g. add this repository as a submodule:
+  1. First, get the playbooks, e.g. add this repository as a submodule:
 
 		$ mkdir vendor
 		$ cd vendor
