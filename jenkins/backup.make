@@ -7,8 +7,9 @@
 # configuration #
 #################
 
-# remote hoststring
-HOSTSTRING ?= root@fclaerhout.fr
+ifndef HOSTSTRING
+	$(error HOSTSTRING: remote hoststring not defined)
+endif
 
 # remote jenkins parent directory
 LIBDIR ?= /var/lib
@@ -20,6 +21,7 @@ STOREDIR ?= .
 # implementation #
 ##################
 
+LASTPATH := $(shell find $(STOREDIR) -name 'jenkins_*.tgz' | sort | tail -n 1)
 SSH := ssh $(HOSTSTRING)
 
 usage:
@@ -27,7 +29,7 @@ usage:
 	@echo "  make <target>"
 	@echo
 	@echo targets:
-	@echo "  backup: archive remote /var/lib/jenkins directory locally"
+	@echo "  backup: archive $(HOSTSTRING):$(LIBDIR)/jenkins directory locally"
 	@echo "  restore: push and expand latest archive"
 
 backup: NAME:=jenkins_$(shell date +%Y%m%d%H%M%S).tgz
@@ -37,8 +39,7 @@ backup:
 	scp $(HOSTSTRING):$(NAME) $(STOREDIR)
 	$(SSH) -- rm $(NAME)
 
-restore: LATESTPATH:=$(shell find $(STOREDIR) -name 'jenkins_*.tgz' | sort | tail -n 1)
 restore:
-	scp $(LATESTPATH) $(HOSTSTRING):$(LIBDIR)
-	$(SSH) -- tar xvf $(LIBDIR)/$(notdir $(LATESTPATH)) -C $(LIBDIR)
-	$(SSH) -- rm $(LIBDIR)/$(notdir $(LATESTPATH))
+	scp $(LASTPATH) $(HOSTSTRING):$(LIBDIR)
+	$(SSH) -- tar xvf $(LIBDIR)/$(notdir $(LASTPATH)) -C $(LIBDIR)
+	$(SSH) -- rm $(LIBDIR)/$(notdir $(LASTPATH))

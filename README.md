@@ -78,6 +78,13 @@ as defined [here](http://docs.ansible.com/playbooks_roles.html#roles).
     * `simpleid_base_url`: simpleid site URL
     * `simpleid_identities_path`: path to identity files
 
+EXTRA
+-----
+
+Jenkins backup/restore tool, usage details:
+
+	$ HOSTSTRING=jdoe@example.com make -C jenkins backup.make
+
 WEB PROXY
 ---------
 
