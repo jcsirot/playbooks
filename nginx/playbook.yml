@@ -9,7 +9,16 @@
     service:
       name: nginx
       state: reloaded
+  - name: clear ferm cache
+    command: find /var/cache/ferm -mindepth 1 -delete
+  - name: reload ferm
+    service:
+      name: ferm
+      state: reloaded
   tasks:
+  #########
+  # nginx #
+  #########
   - apt:
       name: nginx
       state: present
@@ -29,10 +38,33 @@
       name: nginx
       state: started
       enabled: yes
+  ########
+  # ferm #
+  ########
+  - stat:
+      path: /etc/ferm.d
+    register: st
+  - name: add nginx ferm mod
+    template:
+      src: ferm.j2
+      dest: /etc/ferm.d/nginx
+    notify:
+    - clear ferm cache
+    - reload ferm
 
 - name: uninstall nginx
   hosts: debian:ubuntu:&no-nginx
+  handlers:
+  - name: clear ferm cache
+    command: find /var/cache/ferm -mindepth 1 -delete
+  - name: reload ferm
+    service:
+      name: ferm
+      state: reloaded
   tasks:
+  #########
+  # nginx #
+  #########
   - service:
       name: nginx
       state: stopped
@@ -42,33 +74,13 @@
       name: nginx
       state: absent
       purge: yes
-
-- name: install nginx ferm mod
-  hosts: debian:&fermod:&nginx
-  vars_files:
-  - defaults.yml
-  handlers:
-  - name: reload ferm
-    service:
-      name: ferm
-      state: reloaded
-  tasks:
-  - template:
-      src: ferm.j2
-      dest: /etc/ferm.d/nginx
-    notify:
-    - reload ferm
-
-- name: uninstall nginx ferm mod
-  hosts: debian:&fermod:&no-nginx
-  handlers:
-  - name: reload ferm
-    service:
-      name: ferm
-      state: reloaded
-  tasks:
-  - file:
+  ########
+  # ferm #
+  ########
+  - name: remove nginx ferm mod
+    file:
       path: /etc/ferm.d/nginx
       state: absent
     notify:
+    - clear ferm cache
     - reload ferm

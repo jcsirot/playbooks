@@ -9,7 +9,16 @@
     service:
       name: docker
       state: reloaded
+  - name: clear ferm cache
+    command: find /var/cache/ferm -mindepth 1 -delete
+  - name: reload ferm
+    service:
+      name: ferm
+      state: reloaded
   tasks:
+  ##########
+  # docker #
+  ##########
 #  - apt_repository:
 #      repo: "deb http://http.debian.net/debian wheezy-backports main"
 #      state: present
@@ -34,62 +43,62 @@
       name: docker
       state: started
       enabled: yes
-
-#- name: uninstall docker
-#  hosts: debian:&docker
-#  tasks:
-#  - name: docker is stopped
-#    service:
-#      name: docker
-#      state: stopped
-#      enabled: no
-#    ignore_errors: yes
-#  - file:
-#      path: {{ item }}
-#      state: absent
-#    with_items:
-#    - /etc/default/docker
-#    - /var/tmp/install_docker.sh
-#  - to be continued…
-
-- name: manage docker ferm mod
-  hosts: debian:&fermod:&docker
-  vars_files:
-  - defaults.yml
-  handlers:
-  - name: reload ferm
-    service:
-      name: ferm
-      state: reloaded
-  tasks:
-  - name: add docker ferm mod if non-local
+  ########
+  # ferm #
+  ########
+  - stat:
+      path: /etc/ferm.d
+    register: st
+  - name: add docker ferm mod on non-local listen address
     template:
       src: ferm.j2
       dest: /etc/ferm.d/docker
-    when: "'{{ docker_listen_address|default(docker_listen_address_default) }}' !=  '127.0.0.1'"
+    when: "st.stat.exists and '{{ docker_listen_address|default(docker_listen_address_default) }}' != '127.0.0.1'"
     notify:
+    - clear ferm cache
     - reload ferm
-  - name: remove docker ferm mod if local
+  - name: remove docker ferm mod on local listen address
     file:
       path: /etc/ferm.d/docker
       state: absent
-    when: "'{{ docker_listen_address|default(docker_listen_address_default) }}' ==  '127.0.0.1'"
+    when: "st.stat.exists and '{{ docker_listen_address|default(docker_listen_address_default) }}' == '127.0.0.1'"
     notify:
+    - clear ferm cache
     - reload ferm
 
-- name: uninstall docker ferm mod
-  hosts: debian:&fermod:&no-docker
-  vars_files:
-  - defaults.yml
+- name: uninstall docker
+  hosts: debian:&no-docker
   handlers:
+  - name: clear ferm cache
+    command: find /var/cache/ferm -mindepth 1 -delete
   - name: reload ferm
     service:
       name: ferm
       state: reloaded
   tasks:
+  ##########
+  # docker #
+  ##########
+  - name: docker is stopped
+    service:
+      name: docker
+      state: stopped
+      enabled: no
+    ignore_errors: yes
+  # to be completed…
+  - file:
+      path: "{{ item }}"
+      state: absent
+    with_items:
+    - /etc/default/docker
+    - /var/tmp/install_docker.sh
+  ########
+  # ferm #
+  ########
   - name: remove docker ferm mod
     file:
       path: /etc/ferm.d/docker
       state: absent
     notify:
+    - clear ferm cache
     - reload ferm

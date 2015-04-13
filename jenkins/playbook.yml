@@ -37,7 +37,16 @@
     service:
       name: jenkins
       state: restarted
+  - name: clear ferm cache
+    command: find /var/cache/ferm -mindepth 1 -delete
+  - name: reload ferm
+    service:
+      name: ferm
+      state: reloaded
   tasks:
+  ###########
+  # jenkins #
+  ###########
   # pre-install JRE7 to bypass JRE6
   - apt:
       name: openjdk-7-jre-headless
@@ -67,7 +76,9 @@
       name: jenkins
       state: started
       enabled: yes
-  # logrotate
+  #############
+  # logrotate #
+  #############
   - stat:
       path: /etc/logrotate.d
     register: st
@@ -75,28 +86,25 @@
       src: logrotate
       dest: /etc/logrotate.d/jenkins
     when: st.stat.exists
-
-- name: manage jenkins ferm mod
-  hosts: debian:&fermod:&jenkins*
-  vars_files:
-  - defaults.yml
-  handlers:
-  - name: reload ferm
-    service:
-      name: ferm
-      state: reloaded
-  tasks:
-  - name: add jenkins ferm mod if non-local
+  ########
+  # ferm #
+  ########
+  - stat:
+      path: /etc/ferm.d
+    register: st
+  - name: add jenkins ferm mod on non-local listen address
     template:
       src: ferm.j2
       dest: /etc/ferm.d/jenkins
-    when: "'{{ jenkins_listen_address|default(jenkins_listen_address_default) }}' !=  '127.0.0.1'"
+    when: "st.stat.exists and '{{ jenkins_listen_address|default(jenkins_listen_address_default) }}' != '127.0.0.1'"
     notify:
+    - clear ferm cache
     - reload ferm
-  - name: remove jenkins ferm mod if local
+  - name: remove jenkins ferm mod on local listen address
     file:
       path: /etc/ferm.d/jenkins
       state: absent
-    when: "'{{ jenkins_listen_address|default(jenkins_listen_address_default) }}' ==  '127.0.0.1'"
+    when: "st.stat.exists and '{{ jenkins_listen_address|default(jenkins_listen_address_default) }}' == '127.0.0.1'"
     notify:
+    - clear ferm cache
     - reload ferm

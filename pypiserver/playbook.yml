@@ -9,7 +9,16 @@
     service:
       name: pypiserver
       state: restarted
+  - name: clear ferm cache
+    command: find /var/cache/ferm -mindepth 1 -delete
+  - name: reload ferm
+    service:
+      name: ferm
+      state: reloaded
   tasks:
+  ##############
+  # pypiserver #
+  ##############
   - apt:
       name: python-pip
       state: present
@@ -61,28 +70,25 @@
       name: pypiserver
       state: started
       enabled: yes
-
-- name: manage pypiserver ferm mod
-  hosts: debian:&fermod:&pypiserver
-  vars_files:
-  - defaults.yml
-  handlers:
-  - name: reload ferm
-    service:
-      name: ferm
-      state: reloaded
-  tasks:
-  - name: add pypiserver ferm mod if non-local
+  ########
+  # ferm #
+  ########
+  - stat:
+      path: /etc/ferm.d
+    register: st
+  - name: add pypiserver ferm mod on non-local listen address
     template:
       src: ferm.j2
       dest: /etc/ferm.d/pypiserver
-    when: "'{{ pypiserver_listen_address|default(pypiserver_listen_address_default) }}' !=  '127.0.0.1'"
+    when: "st.stat.exists and '{{ pypiserver_listen_address|default(pypiserver_listen_address_default) }}' != '127.0.0.1'"
     notify:
+    - clear ferm cache
     - reload ferm
-  - name: remove pypiserver ferm mod if local
+  - name: remove pypiserver ferm mod on local listen address
     file:
       path: /etc/ferm.d/pypiserver
       state: absent
-    when: "'{{ pypiserver_listen_address|default(pypiserver_listen_address_default) }}' ==  '127.0.0.1'"
+    when: "st.stat.exists and '{{ pypiserver_listen_address|default(pypiserver_listen_address_default) }}' == '127.0.0.1'"
     notify:
+    - clear ferm cache
     - reload ferm

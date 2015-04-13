@@ -13,4 +13,4 @@
     command: find /var/cache/ferm -mindepth 1 -delete
   - service:
       name: ferm
-      state: restarted
+      state: reloaded

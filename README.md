@@ -71,7 +71,7 @@ as defined [here](http://docs.ansible.com/playbooks_roles.html#roles).
   * ubuntu|debian / __pypiserver__
     * `pypiserver_htaccess_path`: local path to the htaccess file
     * `pypiserver_listen_port`: set the port to bind, defaults to "8080"
-    * `pypiserver_listen_address`: set the address to bind, defaults to "127.0.0.1"d
+    * `pypiserver_listen_address`: set the address to bind, defaults to "127.0.0.1"
   * ubuntu / __simpleid__ (or __no-simpleid__ to remove)
     * `simpleid_base_url`: simpleid site URL
     * `simpleid_identities_path`: path to identity files
