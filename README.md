@@ -1,6 +1,6 @@
 A collection of simple playbooks for common services.
 
-### QUICK START ###
+### QUICK START
 
   1. First, get the playbooks, e.g. add this repository as a submodule:
 
@@ -21,7 +21,7 @@ NOTE: each playbook is defined for a subset of platforms (e.g. ubuntu);
 and therefore expect the host to be in the platform group.
 This is handled automatically by detecting each host platform and dynamically putting it into that group.
 
-### PLAYBOOKS ###
+### PLAYBOOKS
 
 Beware! to keep things simple the subdirs *are not roles*,
 as defined [here](http://docs.ansible.com/playbooks_roles.html#roles).
@@ -76,7 +76,7 @@ as defined [here](http://docs.ansible.com/playbooks_roles.html#roles).
     * `simpleid_base_url`: simpleid site URL
     * `simpleid_identities_path`: path to identity files
 
-### WEB PROXY ###
+### WEB PROXY
 
 If you need to go through a web proxy, check the playbook has a dedicated `_environment` variable then set it as follows:
 
