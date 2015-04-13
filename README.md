@@ -83,7 +83,7 @@ EXTRA
 
 Jenkins backup/restore tool, usage details:
 
-	$ HOSTSTRING=jdoe@example.com make -C jenkins backup.make
+	$ HOSTSTRING=jdoe@example.com make -C jenkins -f backup.make
 
 WEB PROXY
 ---------
