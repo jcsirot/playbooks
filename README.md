@@ -1,10 +1,30 @@
 A collection of simple playbooks for common services.
 
-Beware! to keep things simple the subdirs *are not roles*,
-as defined [here](http://docs.ansible.com/playbooks_roles.html#roles).
-Just include the main playbook, put your nodes in the service groups you need, and you're good to go.
+**QUICK START**
+
+  1. First, check the playbooks, e.g. add this repository as a submodule:
+
+		$ mkdir vendor
+		$ cd vendor
+		vendor$ git submodule add $this
+
+  2. In your main playbook, add:
+
+		- include vendor/playbooks/playbook.yml
+
+  3. In your inventory, simply put your hosts in its service groups and set the configuration keys e.g.:
+
+		[jenkins]
+		foo jenkins_memory=3G jenkins_listen_port=9999
+
+NOTE: each playbook is defined for a subset of platforms (e.g. ubuntu);
+and therefore expect the host to be in the platform group.
+This is handled automatically by detecting each host platform and dynamically putting it into that group.
 
 **PLAYBOOKS**
+
+Beware! to keep things simple the subdirs *are not roles*,
+as defined [here](http://docs.ansible.com/playbooks_roles.html#roles).
 
   * ubuntu / __analyzer__ — transform a laptop into a WiFi traffic analyzer server.
     The setup used for this is a regular laptop with a RJ45 interface and a wireless interface.
@@ -48,10 +68,6 @@ Just include the main playbook, put your nodes in the service groups you need, a
   * ubuntu|debian / __nginx__ (or __no-nginx__ to remove)
     * `nginx_sites_path`: local directory which content is copied into /etc/nginx/sites-enabled/
     * `nginx_crt_path`: local path to the directory containing the certificates
-  * macosx / __osx__, setup system variables
-    * `osx_computername`
-    * `osx_hostname`, defaults to osx_computername + ".local"
-    * `osx_localhostname`, defaults to osx_hostname
   * ubuntu|debian / __pypiserver__
     * `pypiserver_htaccess_path`: local path to the htaccess file
     * `pypiserver_listen_port`: set the port to bind, defaults to "8080"
@@ -60,37 +76,9 @@ Just include the main playbook, put your nodes in the service groups you need, a
     * `simpleid_base_url`: simpleid site URL
     * `simpleid_identities_path`: path to identity files
 
-**USAGE**
-
-For immediate use with pure platform-based playbooks (only __osx__ so far), example:
-
-	$ git clone $this
-	$ ansible-playbook -i localhost playbook.yml --extra-vars "osx_computername=foobar" --ask-sudo-pass
-
-Integrated into another project, example:
-
-  1. First, add this repository as a submodule:
-
-		$ mkdir vendor
-		$ cd vendor
-		vendor$ git submodule add $this
-
-  2. In your main playbook, add:
-
-		- include vendor/playbooks/playbook.yml
-
-  3. In your inventory, put your hosts in the appropriate service groups and set the configuration keys e.g.:
-
-		[jenkins]
-		foo jenkins_memory=3G jenkins_listen_port=9999
-
-NOTE: each playbook is defined for a subset of platforms (e.g. ubuntu);
-and therefore expect the host to be in the platform group.
-This is handled automatically by detecting each host platform and dynamically putting it into that group.
-
 **WEB PROXY**
 
-Example:
+If you need to go through a web proxy, check the playbook has a dedicated _environment variable then set it as follows:
 
 	[somegroup]
 	somehost xyz_environment="{{ {'http_proxy': 'http://someproxy:3128', 'https_proxy': 'http://someproxy:3128'} }}"
