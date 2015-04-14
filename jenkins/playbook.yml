@@ -27,7 +27,7 @@
       state: present
   # install jenkins
   - apt_key:
-      url: "http://pkg.jenkins-ci.org/{{ debian }} /jenkins-ci.org.key"
+      url: "http://pkg.jenkins-ci.org/{{ debian }}/jenkins-ci.org.key"
       state: present
     environment: "{{ jenkins_environment|default(jenkins_environment_default) }}"
   - apt_repository:
