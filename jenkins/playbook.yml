@@ -29,7 +29,11 @@
       update_cache: yes
 
 - name: install jenkins
-  hosts: debian:ubuntu:&jenkins:jenkinslts
+  hosts:
+  - debian:&jenkins
+  - ubuntu:&jenkins
+  - debian:&jenkinslts
+  - ubuntu:&jenkinslts
   vars_files:
   - defaults.yml
   handlers:
