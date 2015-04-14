@@ -60,7 +60,8 @@ as defined [here](http://docs.ansible.com/playbooks_roles.html#roles).
   * debian/ __fermod__: enable ferm (debian firewall wrapper) "mods" (i.e. /etc/ferm.d instead of a single ferm.conf)
   * ubuntu / __gitd__
     * `gitd_authorized_keys_path`: local path to authorized_keys file setup for the remote ssh git user
-  * ubuntu|debian / __jenkins__|__jenkinslts__
+  * ubuntu|debian / __jenkins__
+    * `jenkins_stable`: set to use LTS, defaults to no
     * `jenkins_memory`: set how much memory the JVM can use, defaults to "256m"
     * `jenkins_sshpath`: local path used to populate the remote ~jenkins/.ssh directory
     * `jenkins_listen_port`: set the port to bind, defaults to "8080"

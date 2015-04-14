@@ -1,41 +1,11 @@
 ---
 
-- name: setup LTS repository
-  hosts: debian:ubuntu:&jenkinslts
-  vars_files:
-  - defaults.yml
-  tasks:
-  - apt_key:
-      url: http://pkg.jenkins-ci.org/debian-stable/jenkins-ci.org.key
-      state: present
-    environment: "{{ jenkins_environment|default(jenkins_environment_default) }}"
-  - apt_repository:
-      repo: "deb http://pkg.jenkins-ci.org/debian-stable binary/"
-      state: present
-      update_cache: yes
-
-- name: setup standard repository
+- name: install jenkins
   hosts: debian:ubuntu:&jenkins
   vars_files:
   - defaults.yml
-  tasks:
-  - apt_key:
-      url: http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
-      state: present
-    environment: "{{ jenkins_environment|default(jenkins_environment_default) }}"
-  - apt_repository:
-      repo: "deb http://pkg.jenkins-ci.org/debian binary/"
-      state: present
-      update_cache: yes
-
-- name: install jenkins
-  hosts:
-  - debian:&jenkins
-  - ubuntu:&jenkins
-  - debian:&jenkinslts
-  - ubuntu:&jenkinslts
-  vars_files:
-  - defaults.yml
+  vars:
+    debian: "{{ 'debian-stable' if jenkins_stable|default(jenkins_stable_default) else 'debian' }}"
   handlers:
   - name: restart jenkins
     service:
@@ -56,6 +26,14 @@
       name: openjdk-7-jre-headless
       state: present
   # install jenkins
+  - apt_key:
+      url: "http://pkg.jenkins-ci.org/{{ debian }} /jenkins-ci.org.key"
+      state: present
+    environment: "{{ jenkins_environment|default(jenkins_environment_default) }}"
+  - apt_repository:
+      repo: "deb http://pkg.jenkins-ci.org/{{ debian }} binary/"
+      state: present
+      update_cache: yes
   - apt:
       name: jenkins
       state: present
