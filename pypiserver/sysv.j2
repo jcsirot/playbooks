@@ -10,7 +10,7 @@
 
 PIDFILE="/var/run/pypiserver.pid"
 DAEMON="/usr/local/bin/pypi-server"
-ARGV="--interface {{ pypiserver_listen_address|default(pypiserver_listen_address_default) }} --port {{ pypiserver_listen_port|default(pypiserver_listen_port_default) }} --passwords /etc/pypiserver/htaccess --overwrite --disable-fallback /var/cache/pypiserver"
+ARGV="--interface {{ pypiserver_listen_address|default(pypiserver_listen_address_default) }} --port {{ pypiserver_listen_port|default(pypiserver_listen_port_default) }} --passwords /etc/pypiserver/htaccess --overwrite /var/cache/pypiserver"
 UID="pypiserver"
 
 status() {
