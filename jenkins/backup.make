@@ -25,10 +25,10 @@ LASTPATH := $(shell find $(STOREDIR) -name 'jenkins_*.tgz' | sort | tail -n 1)
 SSH := ssh $(HOSTSTRING)
 
 usage:
-	@echo "usage:"
+	@echo "Usage:"
 	@echo "  make <target>"
 	@echo
-	@echo targets:
+	@echo "Targets:"
 	@echo "  backup: archive $(HOSTSTRING):$(LIBDIR)/jenkins directory in $(STOREDIR)"
 	@echo "  restore: unarchive $(LASTPATH) at $(HOSTSTRING):$(LIBDIR)"
 
