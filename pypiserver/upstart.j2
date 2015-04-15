@@ -14,6 +14,7 @@ exec /usr/local/bin/pypi-server\
 	--port {{ pypiserver_listen_port|default(pypiserver_listen_port_default) }}\
 	--passwords /etc/pypiserver/htaccess\
 	--overwrite\
+	--disable-fallback\
 	/var/cache/pypiserver
 
 respawn
