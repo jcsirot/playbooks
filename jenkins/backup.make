@@ -7,7 +7,7 @@
 # configuration #
 #################
 
-ifndef HOSTSTRING
+ifndef $(HOSTSTRING)
 	$(error HOSTSTRING: remote hoststring not defined)
 endif
 
@@ -29,8 +29,8 @@ usage:
 	@echo "  make <target>"
 	@echo
 	@echo targets:
-	@echo "  backup: archive $(HOSTSTRING):$(LIBDIR)/jenkins directory locally"
-	@echo "  restore: push and expand latest archive"
+	@echo "  backup: archive $(HOSTSTRING):$(LIBDIR)/jenkins directory in $(STOREDIR)"
+	@echo "  restore: unarchive $(LASTPATH) at $(HOSTSTRING):$(LIBDIR)"
 
 backup: NAME:=jenkins_$(shell date +%Y%m%d%H%M%S).tgz
 backup:
