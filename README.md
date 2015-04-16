@@ -1,5 +1,11 @@
 A collection of simple playbooks for common services.
 
+NOTICE
+------
+
+Beware: the subdirs are regular simple playbooks, *not ansible roles* (see [definition](http://docs.ansible.com/playbooks_roles.html#roles)).
+
+
 USAGE
 -----
 
@@ -24,9 +30,6 @@ This is handled automatically by detecting each host platform and dynamically pu
 
 PLAYBOOKS
 ---------
-
-Beware! to keep things simple the subdirs *are not roles*,
-as defined [here](http://docs.ansible.com/playbooks_roles.html#roles).
 
   * ubuntu / __analyzer__ — transform a laptop into a WiFi traffic analyzer server.
     The setup used for this is a regular laptop with a RJ45 interface and a wireless interface.
@@ -61,7 +64,7 @@ as defined [here](http://docs.ansible.com/playbooks_roles.html#roles).
   * ubuntu / __gitd__
     * `gitd_authorized_keys_path`: local path to authorized_keys file setup for the remote ssh git user
   * ubuntu|debian / __jenkins__
-    * `jenkins_stable`: set to use LTS, defaults to no
+    * `jenkins_stable`: set "yes" to use LTS, defaults to "no"
     * `jenkins_memory`: set how much memory the JVM can use, defaults to "256m"
     * `jenkins_sshpath`: local path used to populate the remote ~jenkins/.ssh directory
     * `jenkins_listen_port`: set the port to bind, defaults to "8080"
@@ -82,9 +85,14 @@ as defined [here](http://docs.ansible.com/playbooks_roles.html#roles).
 EXTRA
 -----
 
-Jenkins backup/restore tool, usage details:
+Jenkins backup/restore tool.
 
+Usage:
+
+	# set HOSTSTRING before calling the tool
 	$ HOSTSTRING=jdoe@example.com make -C jenkins -f backup.make
+
+You can also customize STOREDIR, LIBDIR.
 
 WEB PROXY
 ---------
